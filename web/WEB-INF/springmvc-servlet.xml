@@ -42,7 +42,7 @@
         <!-- 注入sqlSessionFactory -->
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
         <!-- mapper所在的包名 -->
-        <property name="basePackage" value="com.passport.dao"/>
+        <property name="basePackage" value="com.oa.dao"/>
     </bean>
 
     <!--4.事务  -->
