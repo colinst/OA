@@ -20,13 +20,13 @@ public class UserManagerController {
     @Resource
     private UserManagerService service;
 
-    @RequestMapping("insert.do")
+    @RequestMapping("/insert.do")
     public String addUser(User user){
         System.out.println(user + "_" + service.insert(user));
         return "done.jsp";
     }
 
-    @RequestMapping("insertSelective.do")
+    @RequestMapping("/insertSelective.do")
     public String insertUser(User user) {
         System.out.println(user + "_" + service.insertSelective(user));
         return "done.jsp";
