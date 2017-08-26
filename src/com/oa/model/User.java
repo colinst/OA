@@ -1,11 +1,11 @@
 package com.oa.model;
 
 public class User {
-    private Integer userId;
+    private Integer userid;
 
     private String account;
 
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -13,12 +13,12 @@ public class User {
 
     private Integer role;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     public String getAccount() {
@@ -29,12 +29,12 @@ public class User {
         this.account = account == null ? null : account.trim();
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {

@@ -3,26 +3,26 @@ package com.oa.model;
 import java.util.Date;
 
 public class Assessment {
-    private Integer assessmentId;
+    private Integer assessmentid;
 
-    private String assessmentName;
+    private String assessmentname;
 
     private Date createtime;
 
-    public Integer getAssessmentId() {
-        return assessmentId;
+    public Integer getAssessmentid() {
+        return assessmentid;
     }
 
-    public void setAssessmentId(Integer assessmentId) {
-        this.assessmentId = assessmentId;
+    public void setAssessmentid(Integer assessmentid) {
+        this.assessmentid = assessmentid;
     }
 
-    public String getAssessmentName() {
-        return assessmentName;
+    public String getAssessmentname() {
+        return assessmentname;
     }
 
-    public void setAssessmentName(String assessmentName) {
-        this.assessmentName = assessmentName == null ? null : assessmentName.trim();
+    public void setAssessmentname(String assessmentname) {
+        this.assessmentname = assessmentname == null ? null : assessmentname.trim();
     }
 
     public Date getCreatetime() {

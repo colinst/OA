@@ -1,23 +1,23 @@
 package com.oa.model;
 
 public class Column {
-    private Integer columnId;
+    private Integer columnid;
 
-    private String columnName;
+    private String columnname;
 
-    public Integer getColumnId() {
-        return columnId;
+    public Integer getColumnid() {
+        return columnid;
     }
 
-    public void setColumnId(Integer columnId) {
-        this.columnId = columnId;
+    public void setColumnid(Integer columnid) {
+        this.columnid = columnid;
     }
 
-    public String getColumnName() {
-        return columnName;
+    public String getColumnname() {
+        return columnname;
     }
 
-    public void setColumnName(String columnName) {
-        this.columnName = columnName == null ? null : columnName.trim();
+    public void setColumnname(String columnname) {
+        this.columnname = columnname == null ? null : columnname.trim();
     }
 }

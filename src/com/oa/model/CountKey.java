@@ -1,7 +1,9 @@
 package com.oa.model;
 
-public class TableModel {
+public class CountKey {
     private Integer assessmentid;
+
+    private Integer userid;
 
     private Integer columnid;
 
@@ -11,6 +13,14 @@ public class TableModel {
 
     public void setAssessmentid(Integer assessmentid) {
         this.assessmentid = assessmentid;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     public Integer getColumnid() {
