@@ -3,13 +3,13 @@ package com.oa.dao;
 import com.oa.model.Column;
 
 public interface ColumnMapper {
-    int deleteByPrimaryKey(Integer columnid);
+    int deleteByPrimaryKey(Integer columnId);
 
     int insert(Column record);
 
     int insertSelective(Column record);
 
-    Column selectByPrimaryKey(Integer columnid);
+    Column selectByPrimaryKey(Integer columnId);
 
     int updateByPrimaryKeySelective(Column record);
 

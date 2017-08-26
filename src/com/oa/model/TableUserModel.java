@@ -1,26 +1,26 @@
 package com.oa.model;
 
 public class TableUserModel {
-    private Integer assessmentid;
+    private Integer assessmentId;
 
-    private Integer userid;
+    private Integer userId;
 
     private Integer type;
 
-    public Integer getAssessmentid() {
-        return assessmentid;
+    public Integer getAssessmentId() {
+        return assessmentId;
     }
 
-    public void setAssessmentid(Integer assessmentid) {
-        this.assessmentid = assessmentid;
+    public void setAssessmentId(Integer assessmentId) {
+        this.assessmentId = assessmentId;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getType() {

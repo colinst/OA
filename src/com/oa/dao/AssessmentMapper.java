@@ -3,13 +3,13 @@ package com.oa.dao;
 import com.oa.model.Assessment;
 
 public interface AssessmentMapper {
-    int deleteByPrimaryKey(Integer assessmentid);
+    int deleteByPrimaryKey(Integer assessmentId);
 
     int insert(Assessment record);
 
     int insertSelective(Assessment record);
 
-    Assessment selectByPrimaryKey(Integer assessmentid);
+    Assessment selectByPrimaryKey(Integer assessmentId);
 
     int updateByPrimaryKeySelective(Assessment record);
 

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
  * @author 郭宏禧
  * @createTime 2017/8/16
  * @context **
+ * java -jar mybatis-generator-core-1.3.5.jar -configfile generator.xml -overwrite
  */
 @Controller
 @RequestMapping("/user")
@@ -19,13 +20,13 @@ public class UserManagerController {
     @Resource
     private UserManagerService service;
 
-    @RequestMapping("adduser.do")
+    @RequestMapping("insert.do")
     public String addUser(User user){
         System.out.println(user + "_" + service.insert(user));
         return "done.jsp";
     }
 
-    @RequestMapping("insert.do")
+    @RequestMapping("insertSelective.do")
     public String insertUser(User user) {
         System.out.println(user + "_" + service.insertSelective(user));
         return "done.jsp";

@@ -1,125 +1,281 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oa.dao.CountMapper">
-    <resultMap id="BaseResultMap" type="com.oa.model.Count">
-        <id column="assessmentid" jdbcType="INTEGER" property="assessmentid"/>
-        <id column="userid" jdbcType="INTEGER" property="userid"/>
-        <id column="columnid" jdbcType="INTEGER" property="columnid"/>
-        <result column="count" jdbcType="INTEGER" property="count"/>
-    </resultMap>
-    <sql id="Base_Column_List">
+  <resultMap id="BaseResultMap" type="com.oa.model.Count">
+    <id column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="column_id" jdbcType="INTEGER" property="columnId" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    assessment_id, user_id, column_id, count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.oa.model.CountKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from count
+    where assessment_id = #{assessmentId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and column_id = #{columnId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.oa.model.CountKey">
+    delete from count
+    where assessment_id = #{assessmentId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and column_id = #{columnId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oa.model.Count">
+    insert into count (assessment_id, user_id, column_id, 
+      count)
+    values (#{assessmentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{columnId,jdbcType=INTEGER}, 
+      #{count,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oa.model.Count">
+    insert into count
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assessmentId != null">
+        assessment_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="columnId != null">
+        column_id,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assessmentId != null">
+        #{assessmentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="columnId != null">
+        #{columnId,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.Count">
+    update count
+    <set>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+    </set>
+    where assessment_id = #{assessmentId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and column_id = #{columnId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oa.model.Count">
+    update count
+    set count = #{count,jdbcType=INTEGER}
+    where assessment_id = #{assessmentId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and column_id = #{columnId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.oa.model.Count">
+    <id column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="column_id" jdbcType="INTEGER" property="columnId" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    assessment_id, user_id, column_id, count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.oa.model.CountKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from count
+    where assessment_id = #{assessmentId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and column_id = #{columnId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.oa.model.CountKey">
+    delete from count
+    where assessment_id = #{assessmentId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and column_id = #{columnId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oa.model.Count">
+    insert into count (assessment_id, user_id, column_id, 
+      count)
+    values (#{assessmentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{columnId,jdbcType=INTEGER}, 
+      #{count,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oa.model.Count">
+    insert into count
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assessmentId != null">
+        assessment_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="columnId != null">
+        column_id,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assessmentId != null">
+        #{assessmentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="columnId != null">
+        #{columnId,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.Count">
+    update count
+    <set>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+    </set>
+    where assessment_id = #{assessmentId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and column_id = #{columnId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oa.model.Count">
+    update count
+    set count = #{count,jdbcType=INTEGER}
+    where assessment_id = #{assessmentId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+      and column_id = #{columnId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.oa.model.Count">
+    <id column="assessmentid" jdbcType="INTEGER" property="assessmentid" />
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <id column="columnid" jdbcType="INTEGER" property="columnid" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+  <sql id="Base_Column_List">
     assessmentid, userid, columnid, count
   </sql>
-    <select id="selectByPrimaryKey" parameterType="com.oa.model.CountKey" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from count
-        where assessmentid = #{assessmentid,jdbcType=INTEGER}
-        and userid = #{userid,jdbcType=INTEGER}
-        and columnid = #{columnid,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="com.oa.model.CountKey">
+  <select id="selectByPrimaryKey" parameterType="com.oa.model.CountKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from count
+    where assessmentid = #{assessmentid,jdbcType=INTEGER}
+      and userid = #{userid,jdbcType=INTEGER}
+      and columnid = #{columnid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.oa.model.CountKey">
     delete from count
     where assessmentid = #{assessmentid,jdbcType=INTEGER}
       and userid = #{userid,jdbcType=INTEGER}
       and columnid = #{columnid,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.oa.model.Count">
+  <insert id="insert" parameterType="com.oa.model.Count">
     insert into count (assessmentid, userid, columnid, 
       count)
     values (#{assessmentid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{columnid,jdbcType=INTEGER}, 
       #{count,jdbcType=INTEGER})
   </insert>
-    <insert id="insertSelective" parameterType="com.oa.model.Count">
-        insert into count
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="assessmentid != null">
-                assessmentid,
-            </if>
-            <if test="userid != null">
-                userid,
-            </if>
-            <if test="columnid != null">
-                columnid,
-            </if>
-            <if test="count != null">
-                count,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="assessmentid != null">
-                #{assessmentid,jdbcType=INTEGER},
-            </if>
-            <if test="userid != null">
-                #{userid,jdbcType=INTEGER},
-            </if>
-            <if test="columnid != null">
-                #{columnid,jdbcType=INTEGER},
-            </if>
-            <if test="count != null">
-                #{count,jdbcType=INTEGER},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.Count">
-        update count
-        <set>
-            <if test="count != null">
-                count = #{count,jdbcType=INTEGER},
-            </if>
-        </set>
-        where assessmentid = #{assessmentid,jdbcType=INTEGER}
-        and userid = #{userid,jdbcType=INTEGER}
-        and columnid = #{columnid,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.oa.model.Count">
+  <insert id="insertSelective" parameterType="com.oa.model.Count">
+    insert into count
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assessmentid != null">
+        assessmentid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="columnid != null">
+        columnid,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assessmentid != null">
+        #{assessmentid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="columnid != null">
+        #{columnid,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.Count">
+    update count
+    <set>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+    </set>
+    where assessmentid = #{assessmentid,jdbcType=INTEGER}
+      and userid = #{userid,jdbcType=INTEGER}
+      and columnid = #{columnid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oa.model.Count">
     update count
     set count = #{count,jdbcType=INTEGER}
     where assessmentid = #{assessmentid,jdbcType=INTEGER}
       and userid = #{userid,jdbcType=INTEGER}
       and columnid = #{columnid,jdbcType=INTEGER}
   </update>
-    <resultMap id="BaseResultMap" type="com.oa.model.Count">
-        <result column="assessment_id" jdbcType="INTEGER" property="assessmentId"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
-        <result column="column_id" jdbcType="INTEGER" property="columnId"/>
-        <result column="count" jdbcType="INTEGER" property="count"/>
-    </resultMap>
-    <insert id="insert" parameterType="com.oa.model.Count">
+  <resultMap id="BaseResultMap" type="com.oa.model.Count">
+    <result column="assessment_id" jdbcType="INTEGER" property="assessmentId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="column_id" jdbcType="INTEGER" property="columnId" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+  <insert id="insert" parameterType="com.oa.model.Count">
     insert into count (assessment_id, user_id, column_id, 
       count)
     values (#{assessmentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{columnId,jdbcType=INTEGER}, 
       #{count,jdbcType=INTEGER})
   </insert>
-    <insert id="insertSelective" parameterType="com.oa.model.Count">
-        insert into count
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="assessmentId != null">
-                assessment_id,
-            </if>
-            <if test="userId != null">
-                user_id,
-            </if>
-            <if test="columnId != null">
-                column_id,
-            </if>
-            <if test="count != null">
-                count,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="assessmentId != null">
-                #{assessmentId,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="columnId != null">
-                #{columnId,jdbcType=INTEGER},
-            </if>
-            <if test="count != null">
-                #{count,jdbcType=INTEGER},
-            </if>
-        </trim>
-    </insert>
+  <insert id="insertSelective" parameterType="com.oa.model.Count">
+    insert into count
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assessmentId != null">
+        assessment_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="columnId != null">
+        column_id,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assessmentId != null">
+        #{assessmentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="columnId != null">
+        #{columnId,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
 </mapper>

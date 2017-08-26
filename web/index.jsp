@@ -11,7 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
-  <form action="/user/insert.do" method="post">
+  <form action="/user/insertSelective.do" method="post">
 
     <input type="text" placeholder="user_id" name="userId"/>
     <input type="text" placeholder="account" name="account" />
@@ -21,8 +21,6 @@
     <input type="text" placeholder="role" name="role" />
 
     <input type="submit" name="添加用户" />
-
-
 
 
 

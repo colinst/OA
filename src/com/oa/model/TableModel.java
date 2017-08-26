@@ -1,23 +1,23 @@
 package com.oa.model;
 
 public class TableModel {
-    private Integer assessmentid;
+    private Integer assessmentId;
 
-    private Integer columnid;
+    private Integer columnId;
 
-    public Integer getAssessmentid() {
-        return assessmentid;
+    public Integer getAssessmentId() {
+        return assessmentId;
     }
 
-    public void setAssessmentid(Integer assessmentid) {
-        this.assessmentid = assessmentid;
+    public void setAssessmentId(Integer assessmentId) {
+        this.assessmentId = assessmentId;
     }
 
-    public Integer getColumnid() {
-        return columnid;
+    public Integer getColumnId() {
+        return columnId;
     }
 
-    public void setColumnid(Integer columnid) {
-        this.columnid = columnid;
+    public void setColumnId(Integer columnId) {
+        this.columnId = columnId;
     }
 }
