@@ -10,8 +10,16 @@ import com.oa.model.User;
  */
 public interface IUserManagerService {
 
-    //添加User
-    public int addUser(User user);
-    //添加UserRole
+    int deleteByPrimaryKey(Integer userId);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    User selectByPrimaryKey(Integer userId);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 
 }

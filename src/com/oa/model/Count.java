@@ -1,11 +1,13 @@
 package com.oa.model;
 
-public class CountKey {
+public class Count {
     private Integer assessmentId;
 
     private Integer userId;
 
     private Integer columnId;
+
+    private Integer count;
 
     public Integer getAssessmentId() {
         return assessmentId;
@@ -29,5 +31,13 @@ public class CountKey {
 
     public void setColumnId(Integer columnId) {
         this.columnId = columnId;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

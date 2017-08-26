@@ -2,14 +2,16 @@ package com.oa.dao;
 
 import com.oa.model.User;
 
-/**
- * @author 郭宏禧
- * @createTime 2017/8/15
- * @context **
- */
 public interface UserMapper {
+    int deleteByPrimaryKey(Integer userId);
 
-    //添加User
-    public int addUser(User user);
+    int insert(User record);
 
+    int insertSelective(User record);
+
+    User selectByPrimaryKey(Integer userId);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

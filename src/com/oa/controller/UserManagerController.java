@@ -21,9 +21,17 @@ public class UserManagerController {
 
     @RequestMapping("adduser.do")
     public String addUser(User user){
-        System.out.println(user+"_"+service.addUser(user));
+        System.out.println(user + "_" + service.insert(user));
         return "done.jsp";
     }
+
+    @RequestMapping("insert.do")
+    public String insertUser(User user) {
+        System.out.println(user + "_" + service.insertSelective(user));
+        return "done.jsp";
+    }
+
+
 
     public UserManagerService getService() {
         return service;

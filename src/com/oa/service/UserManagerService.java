@@ -19,16 +19,38 @@ public class UserManagerService  implements IUserManagerService {
     @Resource
     private UserMapper userMapper;
 
-
-    //添加用户
-    public int addUser(User user) {
-        int i = userMapper.addUser(user);
-        return i;
+    @Override
+    public int deleteByPrimaryKey(Integer userId) {
+        int i = userMapper.deleteByPrimaryKey(userId);
+        return 0;
     }
 
+    @Override
+    public int insert(User record) {
+        int i = userMapper.insert(record);
+        return 0;
+    }
 
+    @Override
+    public int insertSelective(User record) {
+        int i = userMapper.insertSelective(record);
+        return 0;
+    }
 
+    @Override
+    public User selectByPrimaryKey(Integer userId) {
+        return null;
+    }
 
+    @Override
+    public int updateByPrimaryKeySelective(User record) {
+        return 0;
+    }
+
+    @Override
+    public int updateByPrimaryKey(User record) {
+        return 0;
+    }
 
     //Mapper调用
     public UserMapper getUserMapper() {
@@ -38,5 +60,4 @@ public class UserManagerService  implements IUserManagerService {
     public void setUserMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
-
 }

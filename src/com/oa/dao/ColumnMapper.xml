@@ -15,9 +15,9 @@
         where column_id = #{columnId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from column
-        where column_id = #{columnId,jdbcType=INTEGER}
-    </delete>
+    delete from column
+    where column_id = #{columnId,jdbcType=INTEGER}
+  </delete>
     <insert id="insert" parameterType="com.oa.model.Column">
         insert into column (column_id, column_name)
         values (#{columnId,jdbcType=INTEGER}, #{columnName,jdbcType=VARCHAR})
@@ -51,8 +51,8 @@
         where column_id = #{columnId,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.oa.model.Column">
-        update column
-        set column_name = #{columnName,jdbcType=VARCHAR}
-        where column_id = #{columnId,jdbcType=INTEGER}
-    </update>
+    update column
+    set column_name = #{columnName,jdbcType=VARCHAR}
+    where column_id = #{columnId,jdbcType=INTEGER}
+  </update>
 </mapper>
