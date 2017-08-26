@@ -1,4 +1,4 @@
-package com.oa.util.src.com.oa.model;
+package com.oa.model;
 
 public class CountKey {
     private Integer assessmentId;
