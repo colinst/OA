@@ -1,0 +1,17 @@
+package com.oa.util.src.com.oa.dao;
+
+import com.oa.model.User;
+
+public interface UserMapper {
+    int deleteByPrimaryKey(Integer userId);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    User selectByPrimaryKey(Integer userId);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
+}
