@@ -11,7 +11,7 @@
  Target Server Version : 50520
  File Encoding         : 65001
 
- Date: 23/08/2017 19:06:32
+ Date: 23/08/2017 20:15:47
 */
 
 SET NAMES utf8mb4;
@@ -44,9 +44,10 @@ CREATE TABLE `column`  (
 DROP TABLE IF EXISTS `count`;
 CREATE TABLE `count`  (
   `assessment_id` int(255) NOT NULL,
-  `user_id` int(255) DEFAULT NULL,
-  `column_id` int(255) DEFAULT NULL,
-  `count` int(255) DEFAULT NULL
+  `user_id` int(255) NOT NULL,
+  `column_id` int(255) NOT NULL,
+  `count` int(255) DEFAULT NULL,
+  PRIMARY KEY (`assessment_id`, `user_id`, `column_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
@@ -56,6 +57,16 @@ DROP TABLE IF EXISTS `tablemodel`;
 CREATE TABLE `tablemodel`  (
   `assessment_id` int(255) NOT NULL,
   `column_id` int(255) DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for tableusermodel
+-- ----------------------------
+DROP TABLE IF EXISTS `tableusermodel`;
+CREATE TABLE `tableusermodel`  (
+  `assessment_id` int(255) NOT NULL,
+  `user_id` int(255) NOT NULL,
+  `type` int(255) NOT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------

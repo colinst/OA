@@ -1,24 +1,24 @@
 package com.oa.model;
 
-/**
- * @author 郭宏禧
- * @createTime 2017/8/15
- * @context **
- */
 public class User {
-    private String user_id;
-    private String account;
-    private String user_name;
-    private String password;
-    private String dep;
-    private String role;
+    private Integer userId;
 
-    public String getUser_id() {
-        return user_id;
+    private String account;
+
+    private String userName;
+
+    private String password;
+
+    private String dep;
+
+    private Integer role;
+
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getAccount() {
@@ -26,15 +26,15 @@ public class User {
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.account = account == null ? null : account.trim();
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -42,7 +42,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getDep() {
@@ -50,26 +50,14 @@ public class User {
     }
 
     public void setDep(String dep) {
-        this.dep = dep;
+        this.dep = dep == null ? null : dep.trim();
     }
 
-    public String getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Integer role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "user_id='" + user_id + '\'' +
-                ", account='" + account + '\'' +
-                ", user_name='" + user_name + '\'' +
-                ", password='" + password + '\'' +
-                ", dep='" + dep + '\'' +
-                ", role='" + role + '\'' +
-                '}';
     }
 }
