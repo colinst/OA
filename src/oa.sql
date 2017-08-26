@@ -11,7 +11,7 @@
  Target Server Version : 50520
  File Encoding         : 65001
 
- Date: 23/08/2017 20:15:47
+ Date: 26/08/2017 16:58:49
 */
 
 SET NAMES utf8mb4;
@@ -22,10 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `assessment`;
 CREATE TABLE `assessment`  (
-  `assessment_id` int(255) NOT NULL,
-  `assessment_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `assessmentid` int(255) NOT NULL,
+  `assessmentname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `createtime` datetime NOT NULL,
-  PRIMARY KEY (`assessment_id`) USING BTREE
+  PRIMARY KEY (`assessmentid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
@@ -33,21 +33,21 @@ CREATE TABLE `assessment`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `column`;
 CREATE TABLE `column`  (
-  `column_id` int(255) NOT NULL,
-  `column_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+  `columnid` int(255) NOT NULL AUTO_INCREMENT,
+  `columnname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`columnid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for count
 -- ----------------------------
 DROP TABLE IF EXISTS `count`;
 CREATE TABLE `count`  (
-  `assessment_id` int(255) NOT NULL,
-  `user_id` int(255) NOT NULL,
-  `column_id` int(255) NOT NULL,
+  `assessmentid` int(255) NOT NULL,
+  `userid` int(255) NOT NULL,
+  `columnid` int(255) NOT NULL,
   `count` int(255) DEFAULT NULL,
-  PRIMARY KEY (`assessment_id`, `user_id`, `column_id`) USING BTREE
+  PRIMARY KEY (`assessmentid`, `userid`, `columnid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
@@ -55,8 +55,8 @@ CREATE TABLE `count`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `tablemodel`;
 CREATE TABLE `tablemodel`  (
-  `assessment_id` int(255) NOT NULL,
-  `column_id` int(255) DEFAULT NULL
+  `assessmentid` int(255) NOT NULL,
+  `columnid` int(255) DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
@@ -64,8 +64,8 @@ CREATE TABLE `tablemodel`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `tableusermodel`;
 CREATE TABLE `tableusermodel`  (
-  `assessment_id` int(255) NOT NULL,
-  `user_id` int(255) NOT NULL,
+  `assessmentid` int(255) NOT NULL,
+  `userid` int(255) NOT NULL,
   `type` int(255) NOT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
@@ -74,18 +74,13 @@ CREATE TABLE `tableusermodel`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `user_id` int(255) NOT NULL,
+  `userid` int(255) NOT NULL AUTO_INCREMENT,
   `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `dep` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `role` int(3) NOT NULL,
-  PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (1234, '33', '33', '55', '66', 77);
+  PRIMARY KEY (`userid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1235 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
