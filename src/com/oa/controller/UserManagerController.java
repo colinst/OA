@@ -1,11 +1,14 @@
 package com.oa.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.oa.model.SysUser;
 import com.oa.service.UserManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 郭宏禧
@@ -24,6 +27,16 @@ public class UserManagerController {
     public String addUser(SysUser user) {
         System.out.println(user + "_" + service.insert(user));
         return "done.jsp";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/selectall.do", produces = "text/plain;charset=utf8")
+    public String getUsers() {
+
+        List list = service.selectAll();
+        System.out.println(list);
+        String str = JSONArray.toJSONString(list);
+        return str;
     }
 
     @RequestMapping("/insertSelective.do")

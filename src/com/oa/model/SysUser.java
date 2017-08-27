@@ -90,4 +90,19 @@ public class SysUser {
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "userId=" + userId +
+                ", account='" + account + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", dep='" + dep + '\'' +
+                ", role=" + role +
+                ", number=" + number +
+                ", email='" + email + '\'' +
+                ", groupId=" + groupId +
+                '}';
+    }
 }

@@ -7,6 +7,7 @@ import com.oa.service.impl.IUserManagerService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 郭宏禧
@@ -50,6 +51,10 @@ public class UserManagerService  implements IUserManagerService {
         return 0;
     }
 
+    @Override
+    public List selectAll() {
+        return sysUserMapper.selectAll();
+    }
 
     //Mapper调用
     public SysUserMapper getSysUserMapper() {

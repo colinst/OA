@@ -28,6 +28,30 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/themify-icons.css" rel="stylesheet">
+    <script type="text/javascript">
+        function getUsers() {
+
+            $.ajax({
+                url: 'user/selectall.do',
+                type: 'post',
+                //data: {dba_name:"pass"},
+                dataType: 'json',
+                success: function (data) {
+
+                    $("#context").children().remove();//删除
+                    $.each(data, function (ci, c) {
+
+                        if (c['role'] == 1) c['role'] = '用户'
+                        else if (c['role'] == 0) c['role'] = '管理员'
+
+                        $("#context").append("<tr><td>" + c['userId'] + "</td><td>" + c['account'] + "</td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default'>修改</button><button type='button' class='btn btn-default'>删除</button></div></td></tr>");
+
+                    });
+                }
+            });
+        }
+
+    </script>
 
 </head>
 <body>
@@ -217,25 +241,52 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">Table on Plain Background</h4>
-                                <p class="category">Here is a subtitle for this table</p>
+                                <h4 class="title">用户综合管理</h4>
+                                <p class="category">公司所有的用户将显示在此表中</p>
+                                <div class="btn-group-sm">
+                                    <button type="button" class="btn btn-default">
+                                        新增
+                                    </button>
+                                    <button type="button" class="btn btn-default">
+                                        打印
+                                    </button>
+                                    <button type="button" class="btn btn-default">
+                                        导入
+                                    </button>
+                                    <button type="button" class="btn btn-default">
+                                        导出
+                                    </button>
+                                </div>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">
                                     <thead>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Salary</th>
-                                    <th>Country</th>
-                                    <th>City</th>
+                                    <th>账号</th>
+                                    <th>姓名</th>
+                                    <th>部门</th>
+                                    <th>权限</th>
+                                    <th>手机</th>
+                                    <th>操作</th>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="context">
                                     <tr>
                                         <td>1</td>
                                         <td>Dakota Rice</td>
                                         <td>$36,738</td>
                                         <td>Niger</td>
                                         <td>Oud-Turnhout</td>
+                                        <td>Oud-Turnhout</td>
+                                        <td>
+                                            <div class="btn-group-sm">
+                                                <button type="button" class="btn btn-default">
+                                                    修改
+                                                </button>
+                                                <button type="button" class="btn btn-default">
+                                                    删除
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -243,6 +294,7 @@
                                         <td>$23,789</td>
                                         <td>Curaçao</td>
                                         <td>Sinaai-Waas</td>
+                                        <td>Oud-Turnhout</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -259,13 +311,6 @@
                                         <td>Overland Park</td>
                                     </tr>
                                     <tr>
-                                        <td>5</td>
-                                        <td>Doris Greene</td>
-                                        <td>$63,542</td>
-                                        <td>Malawi</td>
-                                        <td>Feldkirchen in Kärnten</td>
-                                    </tr>
-                                    <tr>
                                         <td>6</td>
                                         <td>Mason Porter</td>
                                         <td>$78,615</td>
@@ -273,6 +318,23 @@
                                         <td>Gloucester</td>
                                     </tr>
                                     </tbody>
+                                    <div class="btn-group-sm">
+                                        <!--<button type="button" class="btn btn-default" >-->
+                                        <span class="ti-control-skip-backward"/>
+                                        <!--</button>
+                                        <button type="button" class="btn btn-default">-->
+                                        <span class="ti-control-backward"/>
+                                        <!--</button>
+                                        <button type="button" class="btn btn-default">-->
+                                        <span class="ti-control-record" onclick="getUsers()"/>
+                                        <!--</button>
+                                        <button type="button" class="btn btn-default">-->
+                                        <span class="ti-control-forward"/>
+                                        <!--</button>
+                                        <button type="button" class="btn btn-default">-->
+                                        <span class="ti-control-skip-forward"/>
+                                        <!--</button>-->
+                                    </div>
                                 </table>
 
                             </div>
