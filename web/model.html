@@ -28,6 +28,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/themify-icons.css" rel="stylesheet">
+    <link href="assets/css/model.css" rel="stylesheet">
 
 </head>
 <body>
@@ -148,11 +149,11 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="custom">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Striped Table</h4>
-                                <p class="category">Here is a subtitle for this table</p>
+                                <h4 class="title">自定义表格</h4>
+                                <p class="category">您可以自定义表格或者<a onclick="hide()">使用已有表格</a></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-striped">
@@ -214,20 +215,20 @@
                     </div>
 
 
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="model">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">Table on Plain Background</h4>
-                                <p class="category">Here is a subtitle for this table</p>
+                                <h4 class="title">表格模板</h4>
+                                <p class="category">您可以使用以下表格或者<a onclick="show()">自定义表格</a></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">
                                     <thead>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Salary</th>
-                                    <th>Country</th>
-                                    <th>City</th>
+                                    <th>编号</th>
+                                    <th>名称</th>
+                                    <th>创建人员</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
                                     </thead>
                                     <tbody>
                                     <tr>
@@ -341,6 +342,6 @@
 
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
-
+<script src="assets/js/model.js"></script>
 
 </html>
