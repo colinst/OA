@@ -21,11 +21,11 @@
         <!-- 数据驱动 -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!-- 数据库的连接 -->
-        <property name="url" value="jdbc:mysql://localhost:3306/oa"/>
+        <property name="url" value="jdbc:mysql://rm-uf6y70f8z4zrabhvro.mysql.rds.aliyuncs.com:3306/oa"/>
         <!-- 账号 -->
         <property name="username" value="root"/>
         <!-- 密码 -->
-        <property name="password" value="admin"/>
+        <property name="password" value="1800438578Zz"/>
         <!-- 最大连接数 -->
         <property name="maxActive" value="40"/>
         <!-- 最大空闲数 -->
