@@ -11,7 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
-  <form action="/user/insertSelective.do" method="post">
+  <form action="/user/insert.do" method="post">
 
     <input type="text" placeholder="user_id" name="userId"/>
     <input type="text" placeholder="account" name="account" />
