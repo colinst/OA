@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oa.dao.ModelMapper">
+    <resultMap id="BaseResultMap" type="com.oa.model.Model">
+        <id column="model_id" jdbcType="INTEGER" property="modelId"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        model_id, model_name, create_user_id, createtime
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from model
+        where model_id = #{modelId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from model
+        where model_id = #{modelId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.oa.model.Model">
+        insert into model (model_id, model_name, create_user_id,
+        createtime)
+        values (#{modelId,jdbcType=INTEGER}, #{modelName,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER},
+        #{createtime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.oa.model.Model">
+        insert into model
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modelId != null">
+                model_id,
+            </if>
+            <if test="modelName != null">
+                model_name,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modelId != null">
+                #{modelId,jdbcType=INTEGER},
+            </if>
+            <if test="modelName != null">
+                #{modelName,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.Model">
+        update model
+        <set>
+            <if test="modelName != null">
+                model_name = #{modelName,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where model_id = #{modelId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.oa.model.Model">
+        update model
+        set model_name = #{modelName,jdbcType=VARCHAR},
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+        createtime = #{createtime,jdbcType=TIMESTAMP}
+        where model_id = #{modelId,jdbcType=INTEGER}
+    </update>
+</mapper>

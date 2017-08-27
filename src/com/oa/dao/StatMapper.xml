@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oa.dao.StatMapper">
+    <resultMap id="BaseResultMap" type="com.oa.model.Stat">
+        <id column="stat_id" jdbcType="INTEGER" property="statId"/>
+        <result column="stat_name" jdbcType="VARCHAR" property="statName"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId"/>
+        <result column="createtime" jdbcType="VARCHAR" property="createtime"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        stat_id, stat_name, user_id, create_user_id, createtime, type
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stat
+        where stat_id = #{statId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from stat
+        where stat_id = #{statId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.oa.model.Stat">
+        insert into stat (stat_id, stat_name, user_id,
+        create_user_id, createtime, type
+        )
+        values (#{statId,jdbcType=INTEGER}, #{statName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+        #{createUserId,jdbcType=INTEGER}, #{createtime,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.oa.model.Stat">
+        insert into stat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="statId != null">
+                stat_id,
+            </if>
+            <if test="statName != null">
+                stat_name,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="statId != null">
+                #{statId,jdbcType=INTEGER},
+            </if>
+            <if test="statName != null">
+                #{statName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.Stat">
+        update stat
+        <set>
+            <if test="statName != null">
+                stat_name = #{statName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+        </set>
+        where stat_id = #{statId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.oa.model.Stat">
+        update stat
+        set stat_name = #{statName,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=INTEGER},
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+        createtime = #{createtime,jdbcType=VARCHAR},
+        type = #{type,jdbcType=INTEGER}
+        where stat_id = #{statId,jdbcType=INTEGER}
+    </update>
+</mapper>
