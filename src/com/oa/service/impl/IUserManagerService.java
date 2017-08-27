@@ -1,7 +1,7 @@
 package com.oa.service.impl;
 
 
-import com.oa.model.User;
+import com.oa.model.SysUser;
 
 /**
  * @author 郭宏禧
@@ -12,15 +12,15 @@ public interface IUserManagerService {
 
     int deleteByPrimaryKey(Integer userId);
 
-    int insert(User record);
+    int insert(SysUser record);
 
-    int insertSelective(User record);
+    int insertSelective(SysUser record);
 
-    User selectByPrimaryKey(Integer userId);
+    SysUser selectByPrimaryKey(Integer userId);
 
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(SysUser record);
 
-    int updateByPrimaryKey(User record);
+    int updateByPrimaryKey(SysUser record);
 
 
 }

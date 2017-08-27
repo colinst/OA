@@ -1,6 +1,6 @@
 package com.oa.controller;
 
-import com.oa.model.User;
+import com.oa.model.SysUser;
 import com.oa.service.UserManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +21,13 @@ public class UserManagerController {
     private UserManagerService service;
 
     @RequestMapping("/insert.do")
-    public String addUser(User user){
+    public String addUser(SysUser user) {
         System.out.println(user + "_" + service.insert(user));
         return "done.jsp";
     }
 
     @RequestMapping("/insertSelective.do")
-    public String insertUser(User user) {
+    public String insertUser(SysUser user) {
         System.out.println(user + "_" + service.insertSelective(user));
         return "done.jsp";
     }
