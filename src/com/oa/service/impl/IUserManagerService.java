@@ -26,6 +26,8 @@ public interface IUserManagerService {
 
     List selectAll();
 
+    List getUsers(Integer numbera, Integer numberb);
+
     int getCount();
 
 

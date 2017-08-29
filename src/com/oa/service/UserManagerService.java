@@ -61,6 +61,11 @@ public class UserManagerService  implements IUserManagerService {
         return sysUserMapper.getCount();
     }
 
+    @Override
+    public List getUsers(Integer numbera, Integer numberb) {
+        return sysUserMapper.getUsers(numbera, numberb);
+    }
+
     //Mapper调用
     public SysUserMapper getSysUserMapper() {
         return sysUserMapper;

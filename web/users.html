@@ -61,6 +61,8 @@
             //-1（上一页）     1（下一页）      0（首页）   2（末页）
 
             var number = 2//每页显示数量
+            var a         //limit查询起始值
+            var b         //查询个数
 
             $.ajax({
                 url: 'user/getcount.do',
@@ -68,26 +70,49 @@
                 dataType: 'json',
                 success: function (rowsnumber) {//获得用户表所有的行数
 
-                    var anumber = rowsnumber / number               //页数为总行数除每页显示数量
-                    $("#aNumber").text(anumber)             //设置总页数
-                    var cnumber = Number($("#cNumber").text())  //得到当前页数
+                    var apage = (rowsnumber - 1) / number + 1               //页数为总行数除每页显示数量
+                    $("#aPage").text(apage)                             //设置总页数
+                    var cpage = Number($("#cPage").text())              //得到当前页数
 
 
                     if (op == 1) {
-                        $("#cNumber").text(cnumber + 1)
-                    } //根据OP值区别操作
-                    else if (op == -1) {
+                        if (cpage == apage) cpage = apage - 1
+                        else {
+                            $("#cPage").text(cpage + 1);
+                            $("#aPage").text(apage)
+                        }
 
-                        $("#cNumber").text(cnumber - 1)
+                        a = number * cpage
+                        b = rowsnumber - cpage * number
+                    }
+                    else if (op == -1) {
+                        if (cpage == 1) cpage = 2
+                        else {
+                            $("#cPage").text(cpage - 1);
+                            $("#aPage").text(apage)
+                        }
+
+                        a = number * (cpage - 2)
+                        b = rowsnumber - cpage * number
                     }
                     else if (op == 0) {
-                        $("#cNumber").text(1)
+                        $("#cPage").text(1)
+                        $("#aPage").text(apage)
+
+                        a = 0
+                        if (rowsnumber < number) b = rowsnumber
+                        else                  b = number
                     }
                     else if (op == 2) {
-                        $("#cNumber").text(anumber)
+                        $("#cPage").text(apage)
+                        $("#aPage").text(apage)
+
+                        a = number * (apage - 1)
+                        b = rowsnumber - a
                     }
 
                     //接下来算linmit语句传的值为多少
+                    alert("limit" + a + "," + b)
 
                 }
             });
@@ -338,8 +363,7 @@
 
                                         <span class="ti-control-skip-backward" onclick="getU(0)"/>
                                         <span class="ti-control-backward" onclick="getU(-1)"/>
-                                        <span class="ti-control-record" onclick="getUsers()"/><span
-                                            id="cNumber">2</span>/<span id="aNumber">40</span>
+                                        <span id="cPage">2</span>/<span id="aPage">40</span>
                                         <span class="ti-control-forward" onclick="getU(1)"/>
                                         <span class="ti-control-skip-forward" onclick="getU(2)"/>
                                     </div>

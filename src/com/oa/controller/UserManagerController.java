@@ -50,7 +50,6 @@ public class UserManagerController {
     @RequestMapping(value = "/getcount.do", produces = "text/plain;charset=utf8")
     public String getCount() {
         String str = JSONArray.toJSONString(service.getCount());
-        System.out.println(str);
         return str;
     }
 

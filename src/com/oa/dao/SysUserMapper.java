@@ -19,7 +19,7 @@ public interface SysUserMapper {
 
     List selectAll();
 
-    SysUser getUsers(int a, int b);
+    List getUsers(Integer numbera, Integer numberb);
 
     int getCount();
 }
