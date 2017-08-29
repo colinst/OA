@@ -3,6 +3,7 @@ package com.oa.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.oa.model.SysUser;
 import com.oa.service.UserManagerService;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,6 +46,13 @@ public class UserManagerController {
         return "done.jsp";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/getcount.do", produces = "text/plain;charset=utf8")
+    public String getCount() {
+        String str = JSONArray.toJSONString(service.getCount());
+        System.out.println(str);
+        return str;
+    }
 
 
     public UserManagerService getService() {

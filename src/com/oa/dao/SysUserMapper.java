@@ -18,4 +18,8 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     List selectAll();
+
+    SysUser getUsers(int a, int b);
+
+    int getCount();
 }

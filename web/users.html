@@ -29,8 +29,10 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/themify-icons.css" rel="stylesheet">
     <script type="text/javascript">
-        function getUsers() {
 
+        //获得所有的用户
+        var p;
+        function getUsers() {
             $.ajax({
                 url: 'user/selectall.do',
                 type: 'post',
@@ -38,17 +40,70 @@
                 dataType: 'json',
                 success: function (data) {
 
-                    $("#context").children().remove();//删除
+                    p = data
+
+                    $("#context").children().remove()
                     $.each(data, function (ci, c) {
 
                         if (c['role'] == 1) c['role'] = '用户'
                         else if (c['role'] == 0) c['role'] = '管理员'
-
-                        $("#context").append("<tr><td>" + c['userId'] + "</td><td>" + c['account'] + "</td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default'>修改</button><button type='button' class='btn btn-default'>删除</button></div></td></tr>");
-
+                        $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getDetial(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getDetial(" + ci + ")'>修改</button><button type='button' class='btn btn-default'>删除</button></div></td></tr>");
                     });
                 }
             });
+        }
+
+        //获得分页用户列表
+
+        function getU(op) {
+
+            //操作标识
+            //-1（上一页）     1（下一页）      0（首页）   2（末页）
+
+            var number = 2//每页显示数量
+
+            $.ajax({
+                url: 'user/getcount.do',
+                type: 'post',
+                dataType: 'json',
+                success: function (rowsnumber) {//获得用户表所有的行数
+
+                    var anumber = rowsnumber / number               //页数为总行数除每页显示数量
+                    $("#aNumber").text(anumber)             //设置总页数
+                    var cnumber = Number($("#cNumber").text())  //得到当前页数
+
+
+                    if (op == 1) {
+                        $("#cNumber").text(cnumber + 1)
+                    } //根据OP值区别操作
+                    else if (op == -1) {
+
+                        $("#cNumber").text(cnumber - 1)
+                    }
+                    else if (op == 0) {
+                        $("#cNumber").text(1)
+                    }
+                    else if (op == 2) {
+                        $("#cNumber").text(anumber)
+                    }
+
+                    //接下来算linmit语句传的值为多少
+
+                }
+            });
+        }
+
+
+        function getDetial(o) {
+
+            $("#context2").show()
+
+            $("#userId").val(p[o]['userId'])
+            $("#account").val(p[o]['account'])
+            $("#userName").text(p[o]['userName'])
+            $("#dep").val(p[o]['dep'])
+            $("#role").val(p[o]['role'])
+            $("#number").val(p[o]['number'])
         }
 
     </script>
@@ -172,70 +227,6 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Striped Table</h4>
-                                <p class="category">Here is a subtitle for this table</p>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Salary</th>
-                                    <th>Country</th>
-                                    <th>City</th>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Minerva Hooper</td>
-                                        <td>$23,789</td>
-                                        <td>Curaçao</td>
-                                        <td>Sinaai-Waas</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Sage Rodriguez</td>
-                                        <td>$56,142</td>
-                                        <td>Netherlands</td>
-                                        <td>Baileux</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Philip Chaney</td>
-                                        <td>$38,735</td>
-                                        <td>Korea, South</td>
-                                        <td>Overland Park</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Doris Greene</td>
-                                        <td>$63,542</td>
-                                        <td>Malawi</td>
-                                        <td>Feldkirchen in Kärnten</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Mason Porter</td>
-                                        <td>$78,615</td>
-                                        <td>Chile</td>
-                                        <td>Gloucester</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
 
 
                     <div class="col-md-12">
@@ -244,16 +235,16 @@
                                 <h4 class="title">用户综合管理</h4>
                                 <p class="category">公司所有的用户将显示在此表中</p>
                                 <div class="btn-group-sm">
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default" onclick="getU(-1)">
                                         新增
                                     </button>
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default" onclick="getU(0)">
                                         打印
                                     </button>
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default" onclick="getU(1)">
                                         导入
                                     </button>
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default" onclick="getU(2)">
                                         导出
                                     </button>
                                 </div>
@@ -289,58 +280,196 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
-                                        <td>Minerva Hooper</td>
-                                        <td>$23,789</td>
-                                        <td>Curaçao</td>
-                                        <td>Sinaai-Waas</td>
+                                        <td>1</td>
+                                        <td>Dakota Rice</td>
+                                        <td>$36,738</td>
+                                        <td>Niger</td>
                                         <td>Oud-Turnhout</td>
+                                        <td>Oud-Turnhout</td>
+                                        <td>
+                                            <div class="btn-group-sm">
+                                                <button type="button" class="btn btn-default">
+                                                    修改
+                                                </button>
+                                                <button type="button" class="btn btn-default">
+                                                    删除
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>3</td>
-                                        <td>Sage Rodriguez</td>
-                                        <td>$56,142</td>
-                                        <td>Netherlands</td>
-                                        <td>Baileux</td>
+                                        <td>1</td>
+                                        <td>Dakota Rice</td>
+                                        <td>$36,738</td>
+                                        <td>Niger</td>
+                                        <td>Oud-Turnhout</td>
+                                        <td>Oud-Turnhout</td>
+                                        <td>
+                                            <div class="btn-group-sm">
+                                                <button type="button" class="btn btn-default">
+                                                    修改
+                                                </button>
+                                                <button type="button" class="btn btn-default">
+                                                    删除
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>4</td>
-                                        <td>Philip Chaney</td>
-                                        <td>$38,735</td>
-                                        <td>Korea, South</td>
-                                        <td>Overland Park</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Mason Porter</td>
-                                        <td>$78,615</td>
-                                        <td>Chile</td>
-                                        <td>Gloucester</td>
+                                        <td>1</td>
+                                        <td>Dakota Rice</td>
+                                        <td>$36,738</td>
+                                        <td>Niger</td>
+                                        <td>Oud-Turnhout</td>
+                                        <td>Oud-Turnhout</td>
+                                        <td>
+                                            <div class="btn-group-sm">
+                                                <button type="button" class="btn btn-default">
+                                                    修改
+                                                </button>
+                                                <button type="button" class="btn btn-default">
+                                                    删除
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                     <div class="btn-group-sm">
-                                        <!--<button type="button" class="btn btn-default" >-->
-                                        <span class="ti-control-skip-backward"/>
-                                        <!--</button>
-                                        <button type="button" class="btn btn-default">-->
-                                        <span class="ti-control-backward"/>
-                                        <!--</button>
-                                        <button type="button" class="btn btn-default">-->
-                                        <span class="ti-control-record" onclick="getUsers()"/>
-                                        <!--</button>
-                                        <button type="button" class="btn btn-default">-->
-                                        <span class="ti-control-forward"/>
-                                        <!--</button>
-                                        <button type="button" class="btn btn-default">-->
-                                        <span class="ti-control-skip-forward"/>
-                                        <!--</button>-->
+
+                                        <span class="ti-control-skip-backward" onclick="getU(0)"/>
+                                        <span class="ti-control-backward" onclick="getU(-1)"/>
+                                        <span class="ti-control-record" onclick="getUsers()"/><span
+                                            id="cNumber">2</span>/<span id="aNumber">40</span>
+                                        <span class="ti-control-forward" onclick="getU(1)"/>
+                                        <span class="ti-control-skip-forward" onclick="getU(2)"/>
                                     </div>
                                 </table>
 
                             </div>
                         </div>
                     </div>
+                    <div id="context2" style="display: none;">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="card card-user">
+                                <div class="image">
+                                    <img src="assets/img/background.jpg" alt="..."/>
+                                </div>
+                                <div class="content">
+                                    <div class="author">
+                                        <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..."/>
+                                        <h4 class="title"><span id="userName">Chet Faker</span><br/>
+                                            <a href="#">
+                                                <small>@chetfaker</small>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <p class="description text-center">
+                                        "I like the way you work it <br>
+                                        No diggity <br>
+                                        I wanna bag it up"
+                                    </p>
+                                </div>
+                                <hr>
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-1">
+                                            <h5>12<br/>
+                                                <small>已参与</small>
+                                            </h5>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5>2GB<br/>
+                                                <small>已完成</small>
+                                            </h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5>24,6$<br/>
+                                                <small>进行中</small>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="col-lg-8 col-md-7">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">详细信息</h4>
+                                </div>
+                                <div class="content">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>ID</label>
+                                                    <input id="userId" type="text" class="form-control border-input"
+                                                           disabled
+                                                           placeholder="userId" value="Creative Code Inc.">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>账号</label>
+                                                    <input id="account" type="text" class="form-control border-input"
+                                                           placeholder="account" value="michael23">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">邮箱</label>
+                                                    <input id="email" type="email" class="form-control border-input"
+                                                           placeholder="Email">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>权限</label>
+                                                    <input id="role" type="text" class="form-control border-input"
+                                                           placeholder="role" value="michael23">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>部门</label>
+                                                    <input id="dep" type="text" class="form-control border-input"
+                                                           placeholder="dep" value="Faker">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label>手机</label>
+                                                    <input id="number" type="text" class="form-control border-input"
+                                                           placeholder="number" value="Faker">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>备注</label>
+                                                    <textarea id="else" rows="4" class="form-control border-input"
+                                                              placeholder="Here can be your description"
+                                                              value="Mike"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile
+                                            </button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

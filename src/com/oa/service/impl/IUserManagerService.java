@@ -26,5 +26,7 @@ public interface IUserManagerService {
 
     List selectAll();
 
+    int getCount();
+
 
 }
