@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 郭宏禧
@@ -62,8 +63,8 @@ public class UserManagerService  implements IUserManagerService {
     }
 
     @Override
-    public List getUsers(Integer numbera, Integer numberb) {
-        return sysUserMapper.getUsers(numbera, numberb);
+    public List getUsers(Map map) {
+        return sysUserMapper.getUsers(map);
     }
 
     //Mapper调用

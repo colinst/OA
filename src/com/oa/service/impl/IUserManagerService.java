@@ -4,6 +4,7 @@ package com.oa.service.impl;
 import com.oa.model.SysUser;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 郭宏禧
@@ -26,7 +27,7 @@ public interface IUserManagerService {
 
     List selectAll();
 
-    List getUsers(Integer numbera, Integer numberb);
+    List getUsers(Map map);
 
     int getCount();
 

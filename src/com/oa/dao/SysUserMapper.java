@@ -3,6 +3,7 @@ package com.oa.dao;
 import com.oa.model.SysUser;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SysUserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -19,7 +20,7 @@ public interface SysUserMapper {
 
     List selectAll();
 
-    List getUsers(Integer numbera, Integer numberb);
+    List getUsers(Map map);
 
     int getCount();
 }

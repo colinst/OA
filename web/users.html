@@ -41,25 +41,51 @@
                 success: function (data) {
 
                     p = data
-
-                    $("#context").children().remove()
-                    $.each(data, function (ci, c) {
-
-                        if (c['role'] == 1) c['role'] = '用户'
-                        else if (c['role'] == 0) c['role'] = '管理员'
-                        $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getDetial(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getDetial(" + ci + ")'>修改</button><button type='button' class='btn btn-default'>删除</button></div></td></tr>");
-                    });
+                    drawTable(data);
                 }
             });
         }
 
-        //获得分页用户列表
+        //渲染table
+        function drawTable(obj) {
 
-        function getU(op) {
+            $("#context").children().remove()
+            $.each(obj, function (ci, c) {
 
-            //操作标识
+                if (c['role'] == 1) c['role'] = '用户'
+                else if (c['role'] == 0) c['role'] = '管理员'
+                $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getDetial(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getDetial(" + ci + ")'>修改</button><button type='button' class='btn btn-default'>删除</button></div></td></tr>");
+            });
+        }
+
+        //获得分页列表
+        function getPagen(op) {
+
+            var page = getPNumber(op)
+            var na, nb
+            na = page[0]
+            nb = page[1]
+
+
+            alert(na + "<>" + nb)
+            $.ajax({
+                url: 'user/getusers.do',
+                type: 'post',
+                data: {numbera: "a", numberb: "b"},
+                dataType: 'json',
+                success: function (data) {
+
+                    p = data
+                    drawTable(data);
+                }
+            });
+        }
+
+
+        //获得分页范围
+        function getPage(op) {
+
             //-1（上一页）     1（下一页）      0（首页）   2（末页）
-
             var number = 2//每页显示数量
             var a         //limit查询起始值
             var b         //查询个数
@@ -70,32 +96,58 @@
                 dataType: 'json',
                 success: function (rowsnumber) {//获得用户表所有的行数
 
-                    var apage = (rowsnumber - 1) / number + 1               //页数为总行数除每页显示数量
+                    var apage = parseInt(rowsnumber - 1) / parseInt(number) + 1               //页数为总行数除每页显示数量)）
+                    apage = parseInt(apage)
                     $("#aPage").text(apage)                             //设置总页数
                     var cpage = Number($("#cPage").text())              //得到当前页数
 
 
                     if (op == 1) {
-                        if (cpage == apage) cpage = apage - 1
+
+                        //下一页
+                        if (cpage == apage || cpage == (apage - 1)) {
+
+                            $("#cPage").text(cpage);
+                            $("#aPage").text(apage)
+
+                            cpage = apage - 1
+
+                            a = number * cpage
+                            b = rowsnumber - a
+                        }
                         else {
+
                             $("#cPage").text(cpage + 1);
                             $("#aPage").text(apage)
-                        }
 
-                        a = number * cpage
-                        b = rowsnumber - cpage * number
+                            a = number * cpage
+                            b = number
+                        }
                     }
                     else if (op == -1) {
-                        if (cpage == 1) cpage = 2
+
+                        //上一页
+                        if (cpage == 1) {
+
+                            $("#cPage").text(1);
+                            $("#aPage").text(apage)
+
+                            a = 0
+                            if (rowsnumber < number) b = rowsnumber
+                            else                  b = number
+                        }
                         else {
+
                             $("#cPage").text(cpage - 1);
                             $("#aPage").text(apage)
-                        }
 
-                        a = number * (cpage - 2)
-                        b = rowsnumber - cpage * number
+                            a = number * (cpage - 2)
+                            b = number
+                        }
                     }
                     else if (op == 0) {
+
+                        //首页
                         $("#cPage").text(1)
                         $("#aPage").text(apage)
 
@@ -104,6 +156,8 @@
                         else                  b = number
                     }
                     else if (op == 2) {
+
+                        //末页
                         $("#cPage").text(apage)
                         $("#aPage").text(apage)
 
@@ -112,13 +166,26 @@
                     }
 
                     //接下来算linmit语句传的值为多少
-                    alert("limit" + a + "," + b)
+                    //alert("limit" + a + "," + b)
 
+                    $.ajax({
+                        url: 'user/getusers.do',
+                        type: 'post',
+                        data: {numbera: a, numberb: b},
+                        dataType: 'json',
+                        success: function (data) {
+
+                            p = data
+                            drawTable(data);
+                        }
+                    });
                 }
             });
+
+
         }
 
-
+        //修改传值
         function getDetial(o) {
 
             $("#context2").show()
@@ -260,16 +327,16 @@
                                 <h4 class="title">用户综合管理</h4>
                                 <p class="category">公司所有的用户将显示在此表中</p>
                                 <div class="btn-group-sm">
-                                    <button type="button" class="btn btn-default" onclick="getU(-1)">
+                                    <button type="button" class="btn btn-default">
                                         新增
                                     </button>
-                                    <button type="button" class="btn btn-default" onclick="getU(0)">
+                                    <button type="button" class="btn btn-default">
                                         打印
                                     </button>
-                                    <button type="button" class="btn btn-default" onclick="getU(1)">
+                                    <button type="button" class="btn btn-default">
                                         导入
                                     </button>
-                                    <button type="button" class="btn btn-default" onclick="getU(2)">
+                                    <button type="button" class="btn btn-default">
                                         导出
                                     </button>
                                 </div>
@@ -360,12 +427,27 @@
                                     </tr>
                                     </tbody>
                                     <div class="btn-group-sm">
+                                        <button type="button" class="btn btn-default" onclick="getPage(0)">
+                                            <span class="ti-control-skip-backward"/>
+                                        </button>
+                                        <button type="button" class="btn btn-default" onclick="getPage(-1)">
+                                            <span class="ti-control-backward"/>
+                                        </button>
+                                        <button type="button" class="btn btn-default" onclick="getUsers()">
+                                            <span id="cPage">1</span>/<span id="aPage">1</span>
+                                        </button>
+                                        <button type="button" class="btn btn-default" onclick="getPage(1)">
+                                            <span class="ti-control-forward"/>
+                                        </button>
+                                        <button type="button" class="btn btn-default" onclick="getPage(2)">
+                                            <span class="ti-control-skip-forward"/>
+                                        </button>
 
-                                        <span class="ti-control-skip-backward" onclick="getU(0)"/>
-                                        <span class="ti-control-backward" onclick="getU(-1)"/>
+                                        <!--
+                                        <span class="ti-control-backward"/>
                                         <span id="cPage">2</span>/<span id="aPage">40</span>
-                                        <span class="ti-control-forward" onclick="getU(1)"/>
-                                        <span class="ti-control-skip-forward" onclick="getU(2)"/>
+                                        <span class="ti-control-forward"/>
+                                        <span class="ti-control-skip-forward"/>-->
                                     </div>
                                 </table>
 

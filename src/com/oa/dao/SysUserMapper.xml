@@ -150,9 +150,9 @@
         select count(*)c from sys_user
     </select>
 
-    <!--获得选中的对象-->
-    <select id="getUsers" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--获得分页对象-->
+    <select id="getUsers" parameterType="map" resultMap="BaseResultMap">
         select * from sys_user
-        LIMIT #{numbera,jdbcType=INTEGER},#{numberb,jdbcType=INTEGER}
+        LIMIT #{start,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
     </select>
 </mapper>
