@@ -58,7 +58,7 @@
             });
         }
 
-        //获得分页列表
+        /*//获得分页列表
         function getPagen(op) {
 
             var page = getPNumber(op)
@@ -79,10 +79,10 @@
                     drawTable(data);
                 }
             });
-        }
+         }*/
 
 
-        //获得分页范围
+        //获得分页list
         function getPage(op) {
 
             //-1（上一页）     1（下一页）      0（首页）   2（末页）
@@ -107,8 +107,10 @@
                         //下一页
                         if (cpage == apage || cpage == (apage - 1)) {
 
-                            $("#cPage").text(cpage);
                             $("#aPage").text(apage)
+
+                            if (cpage == (apage - 1)) $("#cPage").text(apage)
+                            else                        $("#cPage").text(cpage)
 
                             cpage = apage - 1
 
@@ -165,13 +167,11 @@
                         b = rowsnumber - a
                     }
 
-                    //接下来算linmit语句传的值为多少
-                    //alert("limit" + a + "," + b)
-
+                    //取得范围内对象集合
                     $.ajax({
                         url: 'user/getusers.do',
                         type: 'post',
-                        data: {numbera: a, numberb: b},
+                        data: {start: a, limit: b},
                         dataType: 'json',
                         success: function (data) {
 
@@ -192,13 +192,98 @@
 
             $("#userId").val(p[o]['userId'])
             $("#account").val(p[o]['account'])
-            $("#userName").text(p[o]['userName'])
+            $("#userName").val(p[o]['userName'])
+            $("#userNamee").text(p[o]['userName'])
             $("#dep").val(p[o]['dep'])
             $("#role").val(p[o]['role'])
             $("#number").val(p[o]['number'])
         }
-
     </script>
+    <!--工具栏js-->
+    <script type="text/javascript">
+
+        var idTmr;
+        //得到浏览器类型
+        function getExplorer() {
+            var explorer = window.navigator.userAgent;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+                return 'ie';
+            }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+                return 'Firefox';
+            }
+            //Chrome
+            else if (explorer.indexOf("Chrome") >= 0) {
+                return 'Chrome';
+            }
+            //Opera
+            else if (explorer.indexOf("Opera") >= 0) {
+                return 'Opera';
+            }
+            //Safari
+            else if (explorer.indexOf("Safari") >= 0) {
+                return 'Safari';
+            }
+        }
+
+        //打印
+        function getExcel(tableid) {
+            if (getExplorer() == 'ie') {
+                var curTbl = document.getElementById(tableid);
+                var oXL = new ActiveXObject("Excel.Application");
+                var oWB = oXL.Workbooks.Add();
+                var xlsheet = oWB.Worksheets(1);
+                var sel = document.body.createTextRange();
+                sel.moveToElementText(curTbl);
+                sel.select();
+                sel.execCommand("Copy");
+                xlsheet.Paste();
+                oXL.Visible = true;
+
+                try {
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+                } catch (e) {
+                    print("Nested catch caught " + e);
+                } finally {
+                    oWB.SaveAs(fname);
+                    oWB.Close(savechanges = false);
+                    oXL.Quit();
+                    oXL = null;
+                    idTmr = window.setInterval("Cleanup();", 1);
+                }
+
+            }
+            else {
+                tableToExcel(tableid)
+            }
+        }
+
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+        var tableToExcel = (function () {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',
+                base64 = function (s) {
+                    return window.btoa(unescape(encodeURIComponent(s)))
+                },
+                format = function (s, c) {
+                    return s.replace(/{(\w+)}/g,
+                        function (m, p) {
+                            return c[p];
+                        })
+                }
+            return function (table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+    </script>
+
 
 </head>
 <body>
@@ -336,13 +421,13 @@
                                     <button type="button" class="btn btn-default">
                                         导入
                                     </button>
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default" onclick="getExcel('usertable')">
                                         导出
                                     </button>
                                 </div>
                             </div>
                             <div class="content table-responsive table-full-width">
-                                <table class="table table-hover">
+                                <table class="table table-hover" id="usertable">
                                     <thead>
                                     <th>ID</th>
                                     <th>账号</th>
@@ -463,7 +548,7 @@
                                 <div class="content">
                                     <div class="author">
                                         <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..."/>
-                                        <h4 class="title"><span id="userName">Chet Faker</span><br/>
+                                        <h4 class="title"><span id="userNamee">Chet Faker</span><br/>
                                             <a href="#">
                                                 <small>@chetfaker</small>
                                             </a>
@@ -504,13 +589,14 @@
                                     <h4 class="title">详细信息</h4>
                                 </div>
                                 <div class="content">
-                                    <form>
+
+                                    <form action="insertSelective.do" method="post">
                                         <div class="row">
+
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>ID</label>
-                                                    <input id="userId" type="text" class="form-control border-input"
-                                                           disabled
+                                                    <label>姓名</label>
+                                                    <input id="userName" type="text" class="form-control border-input"
                                                            placeholder="userId" value="Creative Code Inc.">
                                                 </div>
                                             </div>
@@ -566,8 +652,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="/" style="display: none">
+                                            <div class="/" style="display: none">
+                                                <label>ID</label>
+                                                <input id="userId" type="text" class="form-control border-input"
+                                                       placeholder="userId" value="Creative Code Inc.">
+                                            </div>
+                                        </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile
+                                            <button type="submit" class="btn btn-info btn-fill btn-wd" id="act">更新
                                             </button>
                                         </div>
                                         <div class="clearfix"></div>
@@ -605,7 +698,7 @@
                 </nav>
                 <div class="copyright pull-right">
                     Copyright &copy; 2017.Company name All rights reserved.<a target="_blank"
-                                                                              href="http://www.mycodes.net/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                                                                              href="/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
                 </div>
             </div>
         </footer>
