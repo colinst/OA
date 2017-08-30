@@ -144,8 +144,15 @@
         group_id = #{groupId,jdbcType=INTEGER}
         where user_id = #{userId,jdbcType=INTEGER}
     </update>
+
     <!--获得总行数-->
     <select id="getCount" resultType="java.lang.Integer">
         select count(*)c from sys_user
+    </select>
+
+    <!--获得分页对象-->
+    <select id="getUsers" parameterType="map" resultMap="BaseResultMap">
+        select * from sys_user
+        LIMIT #{start,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
     </select>
 </mapper>

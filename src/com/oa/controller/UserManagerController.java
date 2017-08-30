@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 郭宏禧
@@ -32,7 +34,7 @@ public class UserManagerController {
 
     @ResponseBody
     @RequestMapping(value = "/selectall.do", produces = "text/plain;charset=utf8")
-    public String getUsers() {
+    public String selectAll() {
 
         List list = service.selectAll();
         System.out.println(list);
@@ -50,7 +52,20 @@ public class UserManagerController {
     @RequestMapping(value = "/getcount.do", produces = "text/plain;charset=utf8")
     public String getCount() {
         String str = JSONArray.toJSONString(service.getCount());
-        System.out.println(str);
+        return str;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getusers.do", produces = "text/plain;charset=utf8")
+    public String getUsers(int numbera, int numberb) {
+
+        Map<String, Integer> page = new HashMap<String, Integer>();
+        page.put("start", numbera);
+        page.put("limit", numberb);
+        System.out.println(page);
+        List list = service.getUsers(page);
+        System.out.println(list);
+        String str = JSONArray.toJSONString(list);
         return str;
     }
 

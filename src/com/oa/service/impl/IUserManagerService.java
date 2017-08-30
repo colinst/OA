@@ -4,6 +4,7 @@ package com.oa.service.impl;
 import com.oa.model.SysUser;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 郭宏禧
@@ -25,6 +26,8 @@ public interface IUserManagerService {
     int updateByPrimaryKey(SysUser record);
 
     List selectAll();
+
+    List getUsers(Map map);
 
     int getCount();
 
