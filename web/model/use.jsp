@@ -163,7 +163,7 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">${modelName} <a href="/model/stat.do">发起统计</a></h4>
+                                <h4 class="title">${modelName} <a href="stat.do?modelId=${model.modelId}">发起统计</a></h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -175,17 +175,19 @@
                                         <th>${temp.columnName}</th>
                                     </c:forEach>
                                     </thead>
-                                    <tbody>
-                                    <c:forEach items="${user}" var="temp" varStatus="t">
-                                        <tr>
-                                            <td><label><input type="checkbox" name="subBox"
-                                                              value="${temp.userId}"/></label>${temp.userName}</td>
-                                            <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                                <td></td>
-                                            </c:forEach>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
+                                    <form action="stat.do" method="post">
+                                        <tbody>
+                                        <c:forEach items="${user}" var="temp" varStatus="t">
+                                            <tr>
+                                                <td><label><input type="checkbox" name="subBox"
+                                                                  value="${temp.userId}"/></label>${temp.userName}</td>
+                                                <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                                    <td></td>
+                                                </c:forEach>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </form>
                                 </table>
 
                             </div>
