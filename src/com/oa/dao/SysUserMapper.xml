@@ -136,7 +136,7 @@
         update sys_user
         set account = #{account,jdbcType=VARCHAR},
         user_name = #{userName,jdbcType=VARCHAR},
-        password = #{password,jdbcType=VARCHAR},
+        /*password = #{password,jdbcType=VARCHAR},*/
         dep = #{dep,jdbcType=VARCHAR},
         role = #{role,jdbcType=INTEGER},
         number = #{number,jdbcType=INTEGER},

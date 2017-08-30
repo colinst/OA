@@ -45,7 +45,7 @@ public class UserManagerController {
     @RequestMapping("/insertSelective.do")
     public String insertUser(SysUser user) {
         System.out.println(user + "_" + service.insertSelective(user));
-        return "done.jsp";
+        return "done";
     }
 
     @ResponseBody
@@ -57,14 +57,13 @@ public class UserManagerController {
 
     @ResponseBody
     @RequestMapping(value = "/getusers.do", produces = "text/plain;charset=utf8")
-    public String getUsers(int numbera, int numberb) {
+    public String getUsers(int start, int limit) {
 
         Map<String, Integer> page = new HashMap<String, Integer>();
-        page.put("start", numbera);
-        page.put("limit", numberb);
-        System.out.println(page);
+        page.put("start", start);
+        page.put("limit", limit);
+
         List list = service.getUsers(page);
-        System.out.println(list);
         String str = JSONArray.toJSONString(list);
         return str;
     }
