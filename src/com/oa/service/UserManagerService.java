@@ -23,7 +23,7 @@ public class UserManagerService  implements IUserManagerService {
 
     @Override
     public int deleteByPrimaryKey(Integer userId) {
-        return 0;
+        return sysUserMapper.deleteByPrimaryKey(userId);
     }
 
     @Override
