@@ -48,7 +48,19 @@ public class ModelConeroller {
 
     @RequestMapping("/insertModel.do")
     public String insertModel(Model model, HttpServletRequest request, HttpSession session) {
+        //if()
+        //session.getAttribute("username");List<ModelColumnName> list,
+        model.setCreateUserId(2017);
+        modelService.insert(model);
+        request.setAttribute("modelName", model.getModelName());
+        request.setAttribute("model", model);
+        request.setAttribute("user", userManagerService.selectAll());
+        return "/model/use.jsp";
+    }
 
+    @RequestMapping("/useModel.do")
+    public String useModel(Model model, HttpServletRequest request, HttpSession session) {
+        //if()
         //session.getAttribute("username");List<ModelColumnName> list,
         model.setCreateUserId(2017);
         modelService.insert(model);

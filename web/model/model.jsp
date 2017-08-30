@@ -269,11 +269,10 @@
                                                 <fmt:formatDate value="${temp.createtime}" pattern="yyyy-MM-dd"/>
                                             </td>
                                             <td>
-                                                使用
 
-                                                    <%--
-                                                                                        <a href="newschange?news.newsId=${temp.newsId}&news.title=${temp.title}&news.newsType=${temp.newsType}&news.newsContent=${temp.newsContent}">使用</a> <a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>
-                                                    --%>
+
+                                                <a href="useModel.do?model.modelId=${temp.modelId}&model.modelName=${temp.modelName}">使用</a> <%--<a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>--%>
+
 
                                             </td>
                                         </tr>
