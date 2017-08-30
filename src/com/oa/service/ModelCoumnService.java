@@ -51,6 +51,12 @@ public class ModelCoumnService implements IModelColumnService {
         return modelColumnMapper.addModelAndColumn(list);
     }
 
+    @Override
+    public List<ModelColumn> selectAll(Integer modelId) {
+        List<ModelColumn> mc = modelColumnMapper.selectAll(modelId);
+        return mc;
+    }
+
     public ModelColumnMapper getModelColumnMapper() {
         return modelColumnMapper;
     }

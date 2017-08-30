@@ -34,7 +34,7 @@ public class ModelColumnNameService implements IModelColumnNameService {
 
     @Override
     public ModelColumnName selectByPrimaryKey(Integer columnId) {
-        return null;
+        return modelColumnNameMapper.selectByPrimaryKey(columnId);
     }
 
     @Override

@@ -1,10 +1,8 @@
 package com.oa.controller;
 
 import com.oa.dao.ModelColumnMapper;
-import com.oa.model.Model;
-import com.oa.model.ModelColumn;
-import com.oa.model.ModelColumnName;
-import com.oa.model.Page;
+import com.oa.model.*;
+import com.oa.service.ModelColumnNameService;
 import com.oa.service.impl.IModelColumnNameService;
 import com.oa.service.impl.IModelColumnService;
 import com.oa.service.impl.IModelService;
@@ -54,6 +52,7 @@ public class ModelConeroller {
         modelService.insert(model);
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
+        List<SysUser> su = userManagerService.selectAll();
         request.setAttribute("user", userManagerService.selectAll());
         return "/model/use.jsp";
     }
@@ -62,8 +61,13 @@ public class ModelConeroller {
     public String useModel(Model model, HttpServletRequest request, HttpSession session) {
         //if()
         //session.getAttribute("username");List<ModelColumnName> list,
-        model.setCreateUserId(2017);
-        modelService.insert(model);
+        List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
+        List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
+        for (ModelColumn modelColumn : mc) {
+            mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
+        }
+        model.setMc(mc);
+        model.setList(mcn);
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
         request.setAttribute("user", userManagerService.selectAll());

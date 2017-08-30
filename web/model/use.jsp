@@ -163,13 +163,14 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">${modelName}</h4>  <a href="/model/stat.do">发起统计</a>
+                                <h4 class="title">${modelName} <a href="/model/stat.do">发起统计</a></h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover" border="1" cellspacing="0">
                                     <thead>
-                                    <th></th>
+                                    <th><label><input type="checkbox" id="checkAll" onclick="swapCheck()"/></label>全选
+                                    </th>
                                     <c:forEach items="${model.list}" var="temp" varStatus="t">
                                         <th>${temp.columnName}</th>
                                     </c:forEach>
@@ -177,8 +178,8 @@
                                     <tbody>
                                     <c:forEach items="${user}" var="temp" varStatus="t">
                                         <tr>
-                                            <td><input type="checkbox" name="change"
-                                                       value="{temp.userId}"/>${temp.userName}</td>
+                                            <td><label><input type="checkbox" name="subBox"
+                                                              value="${temp.userId}"/></label>${temp.userName}</td>
                                             <c:forEach items="${model.list}" var="temp" varStatus="t">
                                                 <td></td>
                                             </c:forEach>

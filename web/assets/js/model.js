@@ -27,3 +27,27 @@ function add() {
 function use() {
     document.getElementById('use_table').submit();
 }
+/*$(function() {
+ $("#checkAll").click(function() {
+ $('input[name="subBox"]').attr("checked",this.checked);
+ });
+ var $subBox = $("input[name='subBox']");
+ $subBox.click(function(){
+ $("#checkAll").attr("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);
+ });
+ });*/
+//checkbox 全选/取消全选
+var isCheckAll = false;
+function swapCheck() {
+    if (isCheckAll) {
+        $("input[type='checkbox']").each(function () {
+            this.checked = false;
+        });
+        isCheckAll = false;
+    } else {
+        $("input[type='checkbox']").each(function () {
+            this.checked = true;
+        });
+        isCheckAll = true;
+    }
+}

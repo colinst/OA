@@ -18,4 +18,6 @@ public interface ModelColumnMapper {
     int updateByPrimaryKey(ModelColumn record);
 
     int addModelAndColumn(List<ModelColumn> list);
+
+    List<ModelColumn> selectAll(Integer modelId);
 }
