@@ -8,7 +8,7 @@
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="dep" jdbcType="VARCHAR" property="dep"/>
         <result column="role" jdbcType="INTEGER" property="role"/>
-        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="number" jdbcType="VARCHAR" property="number"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="group_id" jdbcType="INTEGER" property="groupId"/>
     </resultMap>
@@ -114,7 +114,7 @@
             <if test="role != null">
                 role = #{role,jdbcType=INTEGER},
             </if>
-            <if test="number != null  and dnumber !=''">
+            <if test="number != null and number !=''">
                 number = #{number,jdbcType=VARCHAR},
             </if>
             <if test="email != null and email !=''">

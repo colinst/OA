@@ -285,7 +285,15 @@
             }
         })()
     </script>
+    <style>
+        .divcss5-right {
+            width: 255px;
+            border: 0px solid #F00;
+            float: right
+        }
 
+        /* css注释：对divcss5-right设置float:right即可让对象靠右浮动 */
+    </style>
 
 </head>
 <body>
@@ -411,25 +419,27 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
+
                                 <h4 class="title">用户综合管理</h4>
                                 <p class="category">公司所有的用户将显示在此表中</p>
-                                <div class="btn-group-sm">
-                                    <button type="button" class="btn btn-default" onclick="getUpinsert(-10)">
-                                        新增
-                                    </button>
-                                    <button type="button" class="btn btn-default">
-                                        打印
-                                    </button>
-                                    <button type="button" class="btn btn-default">
-                                        导入
-                                    </button>
-                                    <button type="button" class="btn btn-default" onclick="getExcel('usertable')">
-                                        导出
-                                    </button>
-                                </div>
+
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover" id="usertable">
+                                    <div class="btn-group-sm ">
+                                        <button type="button" class="btn btn-default" onclick="getUpinsert(-10)">
+                                            新增
+                                        </button>
+                                        <button type="button" class="btn btn-default">
+                                            打印
+                                        </button>
+                                        <button type="button" class="btn btn-default">
+                                            导入
+                                        </button>
+                                        <button type="button" class="btn btn-default" onclick="getExcel('usertable')">
+                                            导出
+                                        </button>
+                                    </div>
                                     <thead>
                                     <th>ID</th>
                                     <th>账号</th>
@@ -513,7 +523,7 @@
                                         </td>
                                     </tr>
                                     </tbody>
-                                    <div class="btn-group-sm">
+                                    <!--<div class="btn-group-sm" style="display: none">
                                         <button type="button" class="btn btn-default" onclick="getPage(0)">
                                             <span class="ti-control-skip-backward"/>
                                         </button>
@@ -530,8 +540,26 @@
                                             <span class="ti-control-skip-forward"/>
                                         </button>
 
-                                    </div>
+                                    </div>-->
                                 </table>
+                                <div class="btn-group-sm divcss5-right">
+                                    <button type="button" class="btn btn-default" onclick="getPage(0)">
+                                        <span class="ti-control-skip-backward"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="getPage(-1)">
+                                        <span class="ti-control-backward"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="getUsers()">
+                                        <span id="cPage">1</span>/<span id="aPage">1</span>
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="getPage(1)">
+                                        <span class="ti-control-forward"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="getPage(2)">
+                                        <span class="ti-control-skip-forward"/>
+                                    </button>
+
+                                </div>
 
                             </div>
                         </div>
