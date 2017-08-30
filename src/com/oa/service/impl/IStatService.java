@@ -1,10 +1,10 @@
-package com.oa.dao;
+package com.oa.service.impl;
 
 import com.oa.model.Stat;
 
 import java.util.List;
 
-public interface StatMapper {
+public interface IStatService {
     int deleteByPrimaryKey(Integer statId);
 
     int insert(Stat record);

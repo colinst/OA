@@ -40,6 +40,7 @@
     <link href="../assets/css/themify-icons.css" rel="stylesheet">
     <link href="../assets/css/model.css" rel="stylesheet">
 
+
 </head>
 <body>
 
@@ -78,7 +79,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="stat.html">
+                    <a href="../stat.html">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
                     </a>
@@ -90,13 +91,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="instat.html">
+                    <a href="../instat.html">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notice.html">
+                    <a href="../notice.html">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
                     </a>
@@ -163,24 +164,24 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">${modelName} <a href="stat.do?modelId=${model.modelId}">发起统计</a></h4>
+                                <h4 class="title">${modelName} <a onclick="stat()">发起统计</a></h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover" border="1" cellspacing="0">
                                     <thead>
-                                    <th><label><input type="checkbox" id="checkAll" onclick="swapCheck()"/></label>全选
+                                    <th><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
                                     </th>
                                     <c:forEach items="${model.list}" var="temp" varStatus="t">
                                         <th>${temp.columnName}</th>
                                     </c:forEach>
                                     </thead>
-                                    <form action="stat.do" method="post">
+                                    <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
                                         <tbody>
                                         <c:forEach items="${user}" var="temp" varStatus="t">
                                             <tr>
-                                                <td><label><input type="checkbox" name="subBox"
-                                                                  value="${temp.userId}"/></label>${temp.userName}</td>
+                                                <td><input id="a" type="checkbox" name="subBox"
+                                                           value="${temp.userId}"/>${temp.userName}</td>
                                                 <c:forEach items="${model.list}" var="temp" varStatus="t">
                                                     <td></td>
                                                 </c:forEach>

@@ -103,4 +103,16 @@
         type = #{type,jdbcType=INTEGER}
         where stat_id = #{statId,jdbcType=INTEGER}
     </update>
+    <insert id="addStats">
+        insert into stat (stat_id, stat_name, user_id,
+        create_user_id, createtime, type
+        )
+        values
+        <foreach collection="list" separator="," item="temp">
+
+            (#{temp.statId,jdbcType=INTEGER}, #{temp.statName,jdbcType=VARCHAR}, #{temp.userId,jdbcType=INTEGER},
+            #{temp.createUserId,jdbcType=INTEGER}, #{temp.createtime,jdbcType=VARCHAR},0
+            )
+        </foreach>
+    </insert>
 </mapper>

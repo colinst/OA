@@ -76,7 +76,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="stat.html">
+                    <a href="../stat.html">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
                     </a>
@@ -88,13 +88,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="instat.html">
+                    <a href="../instat.html">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notice.html">
+                    <a href="../notice.html">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
                     </a>

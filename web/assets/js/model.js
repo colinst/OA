@@ -27,6 +27,11 @@ function add() {
 function use() {
     document.getElementById('use_table').submit();
 }
+function stat() {
+    document.getElementById('sys_stat').submit();
+
+}
+
 /*$(function() {
  $("#checkAll").click(function() {
  $('input[name="subBox"]').attr("checked",this.checked);

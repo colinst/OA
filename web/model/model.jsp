@@ -245,7 +245,8 @@
                         <div class="card card-plain">
                             <div class="header">
                                 <h4 class="title">表格模板</h4>
-                                <p class="category">您可以使用以下表格或者<a onclick="show()">自定义表格</a></p>
+                                <p class="category">您可以使用以下表格或者<a onclick="show()">自定义表格</a>
+                                <h3 id="message"><%--&nbsp;   &nbsp;   &nbsp;   &nbsp;--%>${message}</h3></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">
@@ -271,7 +272,9 @@
                                             <td>
 
 
-                                                <a href="useModel.do?modelId=${temp.modelId}&modelName=${temp.modelName}">使用</a> <%--<a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>--%>
+                                                <a href="useModel.do?modelId=${temp.modelId}&modelName=${temp.modelName}">使用&nbsp;
+                                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                                    &nbsp; </a> <%--<a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>--%>
 
 
                                             </td>
