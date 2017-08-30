@@ -18,3 +18,12 @@
 #content {
     display: none;
 }
+
+#checkAll, #a {
+    outline: none;
+}
+
+#message {
+    color: red;
+    display: inline;
+}

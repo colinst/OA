@@ -73,7 +73,7 @@ public class ModelService implements IModelService {
 
     @Override
     public Model selectByPrimaryKey(Integer modelId) {
-        return null;
+        return modelMapper.selectByPrimaryKey(modelId);
     }
 
     @Override

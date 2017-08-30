@@ -3,10 +3,8 @@ package com.oa.controller;
 import com.oa.dao.ModelColumnMapper;
 import com.oa.model.*;
 import com.oa.service.ModelColumnNameService;
-import com.oa.service.impl.IModelColumnNameService;
-import com.oa.service.impl.IModelColumnService;
-import com.oa.service.impl.IModelService;
-import com.oa.service.impl.IUserManagerService;
+import com.oa.service.impl.*;
+import com.oa.util.DateFormatUtil;
 import com.oa.util.PageControlUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,6 +31,8 @@ public class ModelConeroller {
     private IModelColumnNameService modelColumnNameService;
     @Resource
     private IUserManagerService userManagerService;
+    @Resource
+    private IStatService statService;
 
     @RequestMapping("/selectModel.do")
     public String selectModel(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
@@ -61,6 +62,7 @@ public class ModelConeroller {
     public String useModel(Model model, HttpServletRequest request, HttpSession session) {
         //if()
         //session.getAttribute("username");List<ModelColumnName> list,
+
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
         for (ModelColumn modelColumn : mc) {
@@ -72,6 +74,39 @@ public class ModelConeroller {
         request.setAttribute("model", model);
         request.setAttribute("user", userManagerService.selectAll());
         return "/model/use.jsp";
+    }
+
+    @RequestMapping("/statModel.do")
+    public String statModel(Model model, HttpServletRequest request, HttpSession session) {
+        //if()
+        //session.getAttribute("username");List<ModelColumnName> list,
+        model = modelService.selectByPrimaryKey(model.getModelId());
+        List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
+        List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
+        for (ModelColumn modelColumn : mc) {
+            mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
+        }
+        model.setMc(mc);
+        model.setList(mcn);
+        List<Stat> stats = new ArrayList<Stat>();
+        String[] sub = request.getParameterValues("subBox");
+        int[] ints = new int[sub.length];
+        for (int i = 0; i < sub.length; i++) {
+
+            ints[i] = Integer.valueOf(sub[i]);
+        }
+        for (int i = 0; i < sub.length; i++) {
+            Stat stat = new Stat();
+            stat.setUserId(ints[i]);
+            stat.setStatId(model.getModelId());
+            stat.setStatName(model.getModelName());
+            stat.setCreatetime(new DateFormatUtil().getCreatetime(model.getCreatetime()));
+            stat.setCreateUserId(model.getCreateUserId());
+            stats.add(stat);
+        }
+        statService.addStats(stats);
+        request.setAttribute("message", "统计发布成功！");
+        return "selectModel.do";
     }
 
 
