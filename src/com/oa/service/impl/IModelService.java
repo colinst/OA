@@ -1,11 +1,11 @@
-package com.oa.dao;
+package com.oa.service.impl;
 
 import com.oa.model.Model;
 import com.oa.model.Page;
 
 import java.util.List;
 
-public interface ModelMapper {
+public interface IModelService {
     int deleteByPrimaryKey(Integer modelId);
 
     int insert(Model record);
@@ -23,5 +23,4 @@ public interface ModelMapper {
     List<Model> selectPageSplit(Page page);
 
     int selectId();
-
 }

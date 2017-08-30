@@ -1,6 +1,7 @@
 package com.oa.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Model {
     private Integer modelId;
@@ -10,6 +11,8 @@ public class Model {
     private Integer createUserId;
 
     private Date createtime;
+    private List<ModelColumnName> list;
+    private List<ModelColumn> mc;
 
     public Integer getModelId() {
         return modelId;
@@ -41,5 +44,21 @@ public class Model {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public List<ModelColumnName> getList() {
+        return list;
+    }
+
+    public void setList(List<ModelColumnName> list) {
+        this.list = list;
+    }
+
+    public List<ModelColumn> getMc() {
+        return mc;
+    }
+
+    public void setMc(List<ModelColumn> mc) {
+        this.mc = mc;
     }
 }

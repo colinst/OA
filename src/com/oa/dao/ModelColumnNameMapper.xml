@@ -55,4 +55,14 @@
         set column_name = #{columnName,jdbcType=VARCHAR}
         where column_id = #{columnId,jdbcType=INTEGER}
     </update>
+    <insert id="addColumn">
+        insert into model_column_name (column_name)
+        values
+        <foreach collection="list" separator="," item="temp">
+            ( #{temp.columnName,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <select id="selectId" resultType="int">
+        select max(column_Id) as column_Id from model_column_name
+    </select>
 </mapper>

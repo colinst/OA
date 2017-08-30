@@ -21,10 +21,9 @@
         where model_id = #{modelId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.oa.model.Model">
-        insert into model (model_id, model_name, create_user_id,
+        insert into model (model_name, create_user_id,
         createtime)
-        values (#{modelId,jdbcType=INTEGER}, #{modelName,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER},
-        #{createtime,jdbcType=TIMESTAMP})
+        values ( #{modelName,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER},now())
     </insert>
     <insert id="insertSelective" parameterType="com.oa.model.Model">
         insert into model
@@ -79,4 +78,24 @@
         createtime = #{createtime,jdbcType=TIMESTAMP}
         where model_id = #{modelId,jdbcType=INTEGER}
     </update>
+    <select id="selectCount" resultType="int">
+        select count(*) from model
+
+    </select>
+    <select id="selectId" resultType="int">
+        select max(model_id) as model_id from model
+
+    </select>
+    <select id="" resultType="com.oa.model.Model" parameterType="com.oa.model.Page">
+
+       select * from model order by createtime desc LIMIT #{start},#{count}
+
+    </select>
+    <select id="selectPageSplit" parameterType="com.oa.model.Page" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from model
+        order by createtime desc LIMIT #{start},#{count}
+    </select>
+
 </mapper>

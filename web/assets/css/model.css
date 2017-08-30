@@ -1,3 +1,20 @@
-#custom {
+#model {
+    display: none;
+}
+
+.page {
+    float: right;
+}
+
+#table_1 {
+    float: right;
+    margin-top: 2%;;
+}
+
+#my_custom {
+    width: 99%;
+}
+
+#content {
     display: none;
 }

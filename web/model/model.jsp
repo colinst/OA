@@ -1,9 +1,19 @@
+<%@ page import="java.text.SimpleDateFormat" %><%--
+  Created by IntelliJ IDEA.
+  User: 39805
+  Date: 2017/8/28
+  Time: 23:48
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
     <title></title>
@@ -13,22 +23,23 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Animation library for notifications   -->
-    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="../assets/css/animate.min.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="../assets/css/paper-dashboard.css" rel="stylesheet"/>
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="assets/css/demo.css" rel="stylesheet"/>
+    <link href="../assets/css/demo.css" rel="stylesheet"/>
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/themify-icons.css" rel="stylesheet">
-    <link href="assets/css/model.css" rel="stylesheet">
+    <link href="../assets/css/themify-icons.css" rel="stylesheet">
+    <link href="../assets/css/model.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -50,43 +61,43 @@
 
             <ul class="nav">
                 <li>
-                    <a href="index.html">
+                    <a href="../index.html">
                         <i class="ti-home"></i>
                         <p>首页</p>
                     </a>
                 </li>
                 <li>
-                    <a href="users.html">
+                    <a href="../users.html">
                         <i class="ti-user"></i>
                         <p>用户管理</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="model.html">
+                    <a href="selectModel.do">
                         <i class="ti-view-list-alt"></i>
                         <p>模板管理</p>
                     </a>
                 </li>
                 <li>
-                    <a href="stat.html">
+                    <a href="../stat.html">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
                     </a>
                 </li>
                 <li>
-                    <a href="userdata.html">
+                    <a href="../userdata.html">
                         <i class="ti-id-badge"></i>
                         <p>个人资料</p>
                     </a>
                 </li>
                 <li>
-                    <a href="instat.html">
+                    <a href="../instat.html">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notice.html">
+                    <a href="../notice.html">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
                     </a>
@@ -156,60 +167,75 @@
                                 <p class="category">您可以自定义表格或者<a onclick="hide()">使用已有表格</a></p>
                             </div>
                             <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Salary</th>
-                                    <th>Country</th>
-                                    <th>City</th>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Minerva Hooper</td>
-                                        <td>$23,789</td>
-                                        <td>Curaçao</td>
-                                        <td>Sinaai-Waas</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Sage Rodriguez</td>
-                                        <td>$56,142</td>
-                                        <td>Netherlands</td>
-                                        <td>Baileux</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Philip Chaney</td>
-                                        <td>$38,735</td>
-                                        <td>Korea, South</td>
-                                        <td>Overland Park</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Doris Greene</td>
-                                        <td>$63,542</td>
-                                        <td>Malawi</td>
-                                        <td>Feldkirchen in Kärnten</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Mason Porter</td>
-                                        <td>$78,615</td>
-                                        <td>Chile</td>
-                                        <td>Gloucester</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <form action="insertModel.do" method="post" id="use_table">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <th>表名字</th>
+                                        <th>内容1</th>
+                                        <th>内容2</th>
+                                        <th>内容3</th>
+                                        <th>内容4</th>
+                                        <th>内容5</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><input type="text" class="form-control border-input"
+                                                       placeholder="表名" value="" name="modelName"></td>
+                                            <td><input type="text" class="form-control border-input"
+                                                       placeholder="内容" value="" name="list[0].columnName"></td>
+                                            <td><input type="text" class="form-control border-input"
+                                                       placeholder="内容" value="" name="list[1].columnName"></td>
+                                            <td><input type="text" class="form-control border-input"
+                                                       placeholder="内容" value="" name="list[2].columnName"></td>
+                                            <td><input type="text" class="form-control border-input"
+                                                       placeholder="内容" value="" name="list[3].columnName"></td>
+                                            <td><input type="text" class="form-control border-input"
+                                                       placeholder="内容" value="" name="list[4].columnName"></td>
 
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <div class="content" id="content">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <th>内容6</th>
+                                            <th>内容7</th>
+                                            <th>内容8</th>
+                                            <th>内容9</th>
+                                            <th>内容10</th>
+                                            <th>内容11</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><input type="text" class="form-control border-input"
+                                                           placeholder="内容" value="" name="list[5].columnName"></td>
+                                                <td><input type="text" class="form-control border-input"
+                                                           placeholder="内容" value="" name="list[6].columnName"></td>
+                                                <td><input type="text" class="form-control border-input"
+                                                           placeholder="内容" value="" name="list[7].columnName"></td>
+                                                <td><input type="text" class="form-control border-input"
+                                                           placeholder="内容" value="" name="list[8].columnName"></td>
+                                                <td><input type="text" class="form-control border-input"
+                                                           placeholder="内容" value="" name="list[9].columnName"></td>
+                                                <td><input type="text" class="form-control border-input"
+                                                           placeholder="内容" value="" name="list[10].columnName"></td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                    <div id="table_1">
+                                        <h4><a class="use" href="#" name="submit"
+                                               onclick="document.getElementById('use_table').submit();return false">使用</a>
+                                            <span id="add"><a onclick="add()">增加内容</a></span></h4>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -231,13 +257,27 @@
                                     <th>操作</th>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                    </tr>
+
+                                    <c:forEach items="${page.pageMessage }" var="temp" varStatus="t">
+
+                                        <tr>
+
+                                            <td>${temp.modelId}</td>
+                                            <td>${temp.modelName }</td>
+                                            <td>${temp.createUserId }</td>
+                                            <td>
+                                                <fmt:formatDate value="${temp.createtime}" pattern="yyyy-MM-dd"/>
+                                            </td>
+                                            <td>
+                                                使用
+
+                                                    <%--
+                                                                                        <a href="newschange?news.newsId=${temp.newsId}&news.title=${temp.title}&news.newsType=${temp.newsType}&news.newsContent=${temp.newsContent}">使用</a> <a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>
+                                                    --%>
+
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
 
                                     </tbody>
                                 </table>
@@ -245,14 +285,14 @@
                             </div>
                         </div>
                         <div class="page">
-                            <form action="newsallnews" method="post">
-                                共<span>${page.allCount }</span>条新闻
+                            <form action="selectModel.do" method="post">
+                                共<span>${page.allCount }</span>个表格
                                 <input type="button" value="首页" onclick="pageTest(0)">
                                 <input type="button" value="上一页" onclick="pageTest(${page.currentPage-1})">
                                 <input type="button" value="下一页" onclick="pageTest(${page.currentPage+1})">
-                                第<span style="color:red;font-weight:600">${page.currentPage+1}</span>页
-                                共<span style="color:red;font-weight:600">${page.allPage}</span>页
-                                <input type="text" class="page-input" name="jumpPage">
+                                第<span>${page.currentPage+1}</span>页
+                                共<span>${page.allPage}</span>页
+                                <input type="text" class="page-input" name="jumpPage" size="4">
                                 <input type="submit" class="page-btn" value="跳转">
                             </form>
                         </div>
@@ -300,26 +340,27 @@
 </body>
 
 <!--   Core JS Files   -->
-<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 <!--  Checkbox, Radio & Switch Plugins -->
-<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+<script src="../assets/js/bootstrap-checkbox-radio.js"></script>
 
 <!--  Charts Plugin -->
-<script src="assets/js/chartist.min.js"></script>
+<script src="../assets/js/chartist.min.js"></script>
 
 <!--  Notifications Plugin    -->
-<script src="assets/js/bootstrap-notify.js"></script>
+<script src="../assets/js/bootstrap-notify.js"></script>
 
 <!--  Google Maps Plugin    -->
 <!---<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>--->
 
 <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-<script src="assets/js/paper-dashboard.js"></script>
+<script src="../assets/js/paper-dashboard.js"></script>
 
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-<script src="assets/js/demo.js"></script>
-<script src="assets/js/model.js"></script>
+<script src="../assets/js/demo.js"></script>
+<script src="../assets/js/model.js"></script>
 
 </html>
+

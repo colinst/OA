@@ -55,4 +55,13 @@
         set column_id = #{columnId,jdbcType=INTEGER}
         where model_id = #{modelId,jdbcType=INTEGER}
     </update>
+    <insert id="addModelAndColumn">
+        insert into model_column (model_id, column_id)
+        values
+        <foreach collection="list" separator="," item="temp">
+
+            (#{temp.modelId,jdbcType=INTEGER}, #{temp.columnId,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
 </mapper>

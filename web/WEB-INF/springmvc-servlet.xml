@@ -50,8 +50,7 @@
         <!-- 使用事务处理的连接池 -->
         <property name="dataSource" ref="dataSource"/>
     </bean>
-<!--
-    &lt;!&ndash;5. 事务处理使用注解 &ndash;&gt;
-    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>

@@ -1,10 +1,10 @@
-package com.oa.dao;
+package com.oa.service.impl;
 
 import com.oa.model.ModelColumn;
 
 import java.util.List;
 
-public interface ModelColumnMapper {
+public interface IModelColumnService {
     int deleteByPrimaryKey(Integer modelId);
 
     int insert(ModelColumn record);
