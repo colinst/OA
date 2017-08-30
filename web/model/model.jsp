@@ -326,7 +326,7 @@
                 </nav>
                 <div class="copyright pull-right">
                     Copyright &copy; 2017.Company name All rights reserved.<a target="_blank"
-                                                                              href="http://www.mycodes.net/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                                                                              href="/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
                 </div>
             </div>
         </footer>

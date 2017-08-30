@@ -32,11 +32,11 @@
         where user_id = #{userId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.oa.model.SysUser">
-        insert into sys_user (user_id, account, user_name,
+        insert into sys_user (account, user_name,
         password, dep, role,
         number, email, group_id
         )
-        values (#{userId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+        values ( #{account,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
         #{password,jdbcType=VARCHAR}, #{dep,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER},
         #{number,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{groupId,jdbcType=INTEGER}
         )
@@ -44,19 +44,16 @@
     <insert id="insertSelective" parameterType="com.oa.model.SysUser">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userId != null">
-                user_id,
-            </if>
-            <if test="account != null">
+            <if test="account != null and account !=''">
                 account,
             </if>
-            <if test="userName != null">
+            <if test="userName != null  and userName !=''">
                 user_name,
             </if>
-            <if test="password != null">
+            <if test="password != null  and password !=''">
                 password,
             </if>
-            <if test="dep != null">
+            <if test="dep != null and dep !=''">
                 dep,
             </if>
             <if test="role != null">
@@ -65,7 +62,7 @@
             <if test="number != null">
                 number,
             </if>
-            <if test="email != null">
+            <if test="email != null and email !=''">
                 email,
             </if>
             <if test="groupId != null">
@@ -73,28 +70,25 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="account != null">
+            <if test="account != null and account !=''">
                 #{account,jdbcType=VARCHAR},
             </if>
-            <if test="userName != null">
+            <if test="userName != null and userName !=''">
                 #{userName,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
+            <if test="password != null and password !=''">
                 #{password,jdbcType=VARCHAR},
             </if>
-            <if test="dep != null">
+            <if test="dep != null and dep !=''">
                 #{dep,jdbcType=VARCHAR},
             </if>
             <if test="role != null">
                 #{role,jdbcType=INTEGER},
             </if>
-            <if test="number != null">
-                #{number,jdbcType=INTEGER},
+            <if test="number != null and number !=''">
+                #{number},
             </if>
-            <if test="email != null">
+            <if test="email != null and email !=''">
                 #{email,jdbcType=VARCHAR},
             </if>
             <if test="groupId != null">
@@ -105,25 +99,25 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.SysUser">
         update sys_user
         <set>
-            <if test="account != null">
+            <if test="account != null and account !=''">
                 account = #{account,jdbcType=VARCHAR},
             </if>
-            <if test="userName != null">
+            <if test="userName != null and userName !=''">
                 user_name = #{userName,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
+            <if test="password != null and password !=''">
                 password = #{password,jdbcType=VARCHAR},
             </if>
-            <if test="dep != null">
+            <if test="dep != null and dep !=''">
                 dep = #{dep,jdbcType=VARCHAR},
             </if>
             <if test="role != null">
                 role = #{role,jdbcType=INTEGER},
             </if>
-            <if test="number != null">
-                number = #{number,jdbcType=INTEGER},
+            <if test="number != null  and dnumber !=''">
+                number = #{number,jdbcType=VARCHAR},
             </if>
-            <if test="email != null">
+            <if test="email != null and email !=''">
                 email = #{email,jdbcType=VARCHAR},
             </if>
             <if test="groupId != null">

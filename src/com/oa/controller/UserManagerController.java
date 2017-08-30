@@ -37,15 +37,22 @@ public class UserManagerController {
     public String selectAll() {
 
         List list = service.selectAll();
-        System.out.println(list);
         String str = JSONArray.toJSONString(list);
         return str;
     }
 
     @RequestMapping("/insertSelective.do")
     public String insertUser(SysUser user) {
-        System.out.println(user + "_" + service.insertSelective(user));
-        return "done";
+
+        System.out.println(user + "增加_" + service.insertSelective(user));
+        return "done.jsp";
+    }
+
+    @RequestMapping("/updateSelective.do")
+    public String updateUser(SysUser user) {
+
+        System.out.println(user + "更新_" + service.updateByPrimaryKeySelective(user));
+        return "done.jsp";
     }
 
     @ResponseBody

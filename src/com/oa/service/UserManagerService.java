@@ -33,8 +33,7 @@ public class UserManagerService  implements IUserManagerService {
 
     @Override
     public int insertSelective(SysUser record) {
-        sysUserMapper.insertSelective(record);
-        return 0;
+        return sysUserMapper.insertSelective(record);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class UserManagerService  implements IUserManagerService {
 
     @Override
     public int updateByPrimaryKeySelective(SysUser record) {
-        return 0;
+        return sysUserMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override

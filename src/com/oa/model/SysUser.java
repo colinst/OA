@@ -13,7 +13,7 @@ public class SysUser {
 
     private Integer role;
 
-    private Integer number;
+    private String number;
 
     private String email;
 
@@ -67,11 +67,11 @@ public class SysUser {
         this.role = role;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

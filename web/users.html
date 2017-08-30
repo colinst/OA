@@ -54,33 +54,9 @@
 
                 if (c['role'] == 1) c['role'] = '用户'
                 else if (c['role'] == 0) c['role'] = '管理员'
-                $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getDetial(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getDetial(" + ci + ")'>修改</button><button type='button' class='btn btn-default'>删除</button></div></td></tr>");
+                $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getUpinsert(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getUpinsert(" + ci + ")'>修改</button><button type='button' class='btn btn-default'>删除</button></div></td></tr>");
             });
         }
-
-        /*//获得分页列表
-        function getPagen(op) {
-
-            var page = getPNumber(op)
-            var na, nb
-            na = page[0]
-            nb = page[1]
-
-
-            alert(na + "<>" + nb)
-            $.ajax({
-                url: 'user/getusers.do',
-                type: 'post',
-                data: {numbera: "a", numberb: "b"},
-                dataType: 'json',
-                success: function (data) {
-
-                    p = data
-                    drawTable(data);
-                }
-            });
-         }*/
-
 
         //获得分页list
         function getPage(op) {
@@ -186,17 +162,43 @@
         }
 
         //修改传值
-        function getDetial(o) {
+        function getUpinsert(o) {
 
+            //修改传值
             $("#context2").show()
 
-            $("#userId").val(p[o]['userId'])
-            $("#account").val(p[o]['account'])
-            $("#userName").val(p[o]['userName'])
-            $("#userNamee").text(p[o]['userName'])
-            $("#dep").val(p[o]['dep'])
-            $("#role").val(p[o]['role'])
-            $("#number").val(p[o]['number'])
+            if (o == -10) {
+
+                $("#userId").val('0000')
+                $("#account").val('')
+                $("#userName").val('')
+                $("#email").val('')
+                $("#userNamee").text('')
+                $("#dep").val('')
+                $("#role").val(1)
+                $("#number").val('')
+                $("#passwordd").show()
+                $("#password").val(123)
+
+                $("#former").attr("action", "/user/insertSelective.do")
+                $("#act").text("增加")
+            } else {
+
+                $("#userId").val(p[o]['userId'])
+                $("#account").val(p[o]['account'])
+                $("#userName").val(p[o]['userName'])
+                $("#email").val(p[o]['email'])
+                $("#userNamee").text(p[o]['userName'])
+                $("#dep").val(p[o]['dep'])
+                if (p[o]['role'] == '用户') $("#role").val(1)
+                if (p[o]['role'] == '管理员') $("#role").val(0)
+                $("#number").val(p[o]['number'])
+                $("#passwordd").hide()
+                $("#password").val(null)
+
+                $("#former").attr("action", "/user/updateSelective.do")
+                $("#act").text("更新")
+            }
         }
     </script>
     <!--工具栏js-->
@@ -412,7 +414,7 @@
                                 <h4 class="title">用户综合管理</h4>
                                 <p class="category">公司所有的用户将显示在此表中</p>
                                 <div class="btn-group-sm">
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default" onclick="getUpinsert(-10)">
                                         新增
                                     </button>
                                     <button type="button" class="btn btn-default">
@@ -528,11 +530,6 @@
                                             <span class="ti-control-skip-forward"/>
                                         </button>
 
-                                        <!--
-                                        <span class="ti-control-backward"/>
-                                        <span id="cPage">2</span>/<span id="aPage">40</span>
-                                        <span class="ti-control-forward"/>
-                                        <span class="ti-control-skip-forward"/>-->
                                     </div>
                                 </table>
 
@@ -590,20 +587,22 @@
                                 </div>
                                 <div class="content">
 
-                                    <form action="insertSelective.do" method="post">
+                                    <form id="former" action="" method="post">
                                         <div class="row">
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>姓名</label>
-                                                    <input id="userName" type="text" class="form-control border-input"
+                                                    <input id="userName" name="userName" type="text"
+                                                           class="form-control border-input"
                                                            placeholder="userId" value="Creative Code Inc.">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>账号</label>
-                                                    <input id="account" type="text" class="form-control border-input"
+                                                    <input id="account" name="account" type="text"
+                                                           class="form-control border-input"
                                                            placeholder="account" value="michael23">
                                                 </div>
                                             </div>
@@ -611,7 +610,8 @@
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">邮箱</label>
-                                                    <input id="email" type="email" class="form-control border-input"
+                                                    <input id="email" name="email" type="email"
+                                                           class="form-control border-input"
                                                            placeholder="Email">
                                                 </div>
                                             </div>
@@ -621,22 +621,31 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>权限</label>
-                                                    <input id="role" type="text" class="form-control border-input"
-                                                           placeholder="role" value="michael23">
+                                                    <input id="role" name="role" type="text"
+                                                           class="form-control border-input"
+                                                           placeholder="1(用户)0(管理)">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>部门</label>
-                                                    <input id="dep" type="text" class="form-control border-input"
-                                                           placeholder="dep" value="Faker">
+                                                    <input id="dep" name="dep" type="text"
+                                                           class="form-control border-input"
+                                                           placeholder="dep">
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label>手机</label>
-                                                    <input id="number" type="text" class="form-control border-input"
-                                                           placeholder="number" value="Faker">
+                                                    <input id="number" name="number" type="text"
+                                                           class="form-control border-input"
+                                                           placeholder="number">
+                                                </div>
+                                                <div class="form-group" id="passwordd" style="display: none">
+                                                    <label>密码</label>
+                                                    <input id="password" name="password" type="text"
+                                                           class="form-control border-input"
+                                                           placeholder="userId">
                                                 </div>
                                             </div>
                                         </div>
@@ -645,18 +654,20 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>备注</label>
-                                                    <textarea id="else" rows="4" class="form-control border-input"
+                                                    <label>标签</label>
+                                                    <textarea id="groupId" name="groupId" rows="4"
+                                                              class="form-control border-input"
                                                               placeholder="Here can be your description"
                                                               value="Mike"></textarea>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="/" style="display: none">
-                                            <div class="/" style="display: none">
-                                                <label>ID</label>
-                                                <input id="userId" type="text" class="form-control border-input"
-                                                       placeholder="userId" value="Creative Code Inc.">
+                                        <div class="row" style="display: none">
+                                            <div class="col-md-3">
+                                                <input id="userId" name="userId" type="text" class="/"
+                                                       style="display: none"
+                                                       placeholder="userId" value="0000">
+
                                             </div>
                                         </div>
                                         <div class="text-center">
