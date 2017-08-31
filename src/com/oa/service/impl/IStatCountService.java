@@ -1,11 +1,10 @@
-package com.oa.dao;
+package com.oa.service.impl;
 
-import com.oa.model.ModelColumn;
 import com.oa.model.StatCount;
 
 import java.util.List;
 
-public interface StatCountMapper {
+public interface IStatCountService {
     int deleteByPrimaryKey(Integer modelId);
 
     int insert(StatCount record);

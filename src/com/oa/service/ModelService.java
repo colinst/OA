@@ -83,6 +83,7 @@ public class ModelService implements IModelService {
 
     @Override
     public int updateByPrimaryKey(Model record) {
+
         return 0;
     }
 
@@ -105,6 +106,17 @@ public class ModelService implements IModelService {
     @Override
     public int updateType(Model record) {
         return modelMapper.updateType(record);
+    }
+
+    @Override
+    public List<Model> selectStatPageSplit(Page page) {
+        List<Model> list = modelMapper.selectStatPageSplit(page);
+        return list;
+    }
+
+    @Override
+    public int selectStatCount(Model record) {
+        return modelMapper.selectStatCount(record);
     }
 
     public ModelMapper getModelMapper() {

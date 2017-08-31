@@ -43,13 +43,23 @@ public class StatService implements IStatService {
 
     @Override
     public int updateByPrimaryKey(Stat record) {
-        return 0;
+        return statMapper.updateByPrimaryKey(record);
     }
 
     @Override
     public int addStats(List<Stat> stats) {
         int i = statMapper.addStats(stats);
         return i;
+    }
+
+    @Override
+    public List<Stat> selectByStatId(Integer statId) {
+        return statMapper.selectByStatId(statId);
+    }
+
+    @Override
+    public List<Stat> selectByUserId(Integer userId) {
+        return statMapper.selectByUserId(userId);
     }
 
     public StatMapper getStatMapper() {

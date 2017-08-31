@@ -82,6 +82,10 @@
         select count(*) from model
 
     </select>
+    <select id="selectStatCount" resultType="int" parameterType="com.oa.model.Model">
+        select count(*) from model where type=1 and create_user_id=#{createUserId}
+
+    </select>
     <select id="selectId" resultType="int">
         select max(model_id) as model_id from model
 
@@ -102,5 +106,12 @@
         set type = 1
         where model_id = #{modelId,jdbcType=INTEGER}
     </update>
+    <select id="selectStatPageSplit" parameterType="com.oa.model.Page" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from model where type=1 and create_user_id=#{model.createUserId}
+        order by createtime desc LIMIT #{start},#{count}
+    </select>
+
 
 </mapper>

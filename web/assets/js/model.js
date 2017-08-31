@@ -30,18 +30,24 @@ function use() {
 function stat() {
     document.getElementById('sys_stat').submit();
 
+
+}
+function write_submit() {
+    var flag = true;
+    var x = document.getElementsByName("list[0].columnName");
+    for (var i = 0; i < x.length; i++) {
+        if (x[i].value == "") {
+            alert("还有未填写的内容不能提交！")
+            flag = false;
+            return false;// 有空值
+        }
+
+    }
+    if (flag) {
+        document.getElementById('writeinstat').submit();
+    }
 }
 
-/*$(function() {
- $("#checkAll").click(function() {
- $('input[name="subBox"]').attr("checked",this.checked);
- });
- var $subBox = $("input[name='subBox']");
- $subBox.click(function(){
- $("#checkAll").attr("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);
- });
- });*/
-//checkbox 全选/取消全选
 var isCheckAll = false;
 function swapCheck() {
     if (isCheckAll) {
@@ -56,3 +62,5 @@ function swapCheck() {
         isCheckAll = true;
     }
 }
+
+

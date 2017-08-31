@@ -38,7 +38,7 @@ public class UserManagerService  implements IUserManagerService {
 
     @Override
     public SysUser selectByPrimaryKey(Integer userId) {
-        return null;
+        return sysUserMapper.selectByPrimaryKey(userId);
     }
 
     @Override

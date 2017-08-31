@@ -90,4 +90,16 @@
         count_id = #{countId,jdbcType=INTEGER}
         where model_id = #{modelId,jdbcType=INTEGER}
     </update>
+    <insert id="addStatCount">
+        insert into stat_count (model_id, user_id, column_id,
+        count, count_id)
+        values
+        <foreach collection="list" separator="," item="temp">
+
+            (#{temp.modelId,jdbcType=INTEGER}, #{temp.userId,jdbcType=INTEGER}, #{temp.columnId,jdbcType=INTEGER},
+            #{temp.count,jdbcType=VARCHAR}, #{temp.countId,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+
 </mapper>

@@ -244,8 +244,8 @@
                     <div class="col-md-12" id="model">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">表格模板</h4>
-                                <p class="category">您可以使用以下表格或者<a onclick="show()">自定义表格</a>
+                                <h4 class="title">参与统计</h4>
+                                <p class="category">需要您参与以下统计
                                 <h3 id="message"><%--&nbsp;   &nbsp;   &nbsp;   &nbsp;--%>${message}</h3></p>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -272,7 +272,7 @@
                                             <td>
 
 
-                                                <a href="useModel.do?modelId=${temp.modelId}&modelName=${temp.modelName}">使用&nbsp;
+                                                <a href="writeInstat.do?modelId=${temp.modelId}&modelName=${temp.modelName}">填写&nbsp;
                                                     &nbsp; &nbsp; &nbsp; &nbsp;
                                                     &nbsp; </a> <%--<a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>--%>
 
@@ -287,8 +287,8 @@
                             </div>
                         </div>
                         <div class="page">
-                            <form action="selectModel.do" method="post">
-                                共<span>${page.allCount }</span>个表格
+                            <form action="selectStat.do" method="post">
+                                共<span>${page.allCount }</span>个统计
                                 <input type="button" value="首页" onclick="pageTest(0)">
                                 <input type="button" value="上一页" onclick="pageTest(${page.currentPage-1})">
                                 <input type="button" value="下一页" onclick="pageTest(${page.currentPage+1})">

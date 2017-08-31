@@ -164,29 +164,38 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">${modelName} <a onclick="stat()">发起统计</a></h4>
+                                <h4 class="title"></h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover" border="1" cellspacing="0">
                                     <thead>
-                                    <th><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
-                                    </th>
-                                    <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                        <th>${temp.columnName}</th>
-                                    </c:forEach>
-                                    </thead>
-                                    <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
-                                        <tbody>
-                                        <c:forEach items="${user}" var="temp" varStatus="t">
-                                            <tr>
-                                                <td><input id="a" type="checkbox" name="subBox"
-                                                           value="${temp.userId}"/>${temp.userName}</td>
-                                                <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                                    <td></td>
-                                                </c:forEach>
-                                            </tr>
+                                    <tr>
+                                        <th colspan="${length}" style="text-align:center">${modelName}</th>
+                                    </tr>
+                                    <tr align="center">
+
+                                        <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                            <td>${temp.columnName}</td>
                                         </c:forEach>
+
+                                    </tr>
+                                    </thead>
+                                    <form action="writeSubmit.do?modelId=${model.modelId}" method="post"
+                                          id="writeinstat">
+                                        <tbody>
+
+                                        <tr align="center">
+                                            <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                                <td><input type="text" class="form-control border-input"
+                                                           value="" name="list[${t.index}].columnName"></td>
+                                            </c:forEach>
+                                        </tr>
+                                        <tr align="right">
+                                            <td colspan="${length}"><a onclick="write_submit()">————提交&nbsp; &nbsp;
+                                                &nbsp; &nbsp;</a></td>
+                                        </tr>
+
                                         </tbody>
                                     </form>
                                 </table>

@@ -11,7 +11,7 @@ public class Page {
     private int allCount;
     private List pageMessage;
     private String createtime;
-
+    private Model model;
     public Page() {
     }
 
@@ -80,5 +80,13 @@ public class Page {
 
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 }

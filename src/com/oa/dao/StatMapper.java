@@ -18,4 +18,8 @@ public interface StatMapper {
     int updateByPrimaryKey(Stat record);
 
     int addStats(List<Stat> stats);
+
+    List<Stat> selectByStatId(Integer statId);
+
+    List<Stat> selectByUserId(Integer userId);
 }

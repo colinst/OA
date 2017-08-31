@@ -164,24 +164,27 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">${modelName} <a onclick="stat()">发起统计</a></h4>
-                                <p class="category"></p>
+                                <h4 class="title">你有一下几条测评需要填写</h4>
+                                <p class="category">${message}</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover" border="1" cellspacing="0">
                                     <thead>
-                                    <th><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
-                                    </th>
-                                    <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                        <th>${temp.columnName}</th>
-                                    </c:forEach>
+                                    <tr>
+                                        <th colspan="${length}" style="text-align:center">${modelName}</th>
+                                    </tr>
+                                    <tr align="center">
+                                        <td></td>
+                                        <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                            <td>${temp.columnName}</td>
+                                        </c:forEach>
+                                    </tr>
                                     </thead>
                                     <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
                                         <tbody>
                                         <c:forEach items="${user}" var="temp" varStatus="t">
-                                            <tr>
-                                                <td><input id="a" type="checkbox" name="subBox"
-                                                           value="${temp.userId}"/>${temp.userName}</td>
+                                            <tr align="center">
+                                                <td>${temp.userName}</td>
                                                 <c:forEach items="${model.list}" var="temp" varStatus="t">
                                                     <td></td>
                                                 </c:forEach>

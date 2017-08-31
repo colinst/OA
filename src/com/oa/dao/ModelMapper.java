@@ -26,4 +26,7 @@ public interface ModelMapper {
 
     int updateType(Model record);
 
+    List<Model> selectStatPageSplit(Page page);
+
+    int selectStatCount(Model record);
 }

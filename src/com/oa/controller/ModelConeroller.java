@@ -3,6 +3,7 @@ package com.oa.controller;
 import com.oa.dao.ModelColumnMapper;
 import com.oa.model.*;
 import com.oa.service.ModelColumnNameService;
+import com.oa.service.ModelService;
 import com.oa.service.impl.*;
 import com.oa.util.DateFormatUtil;
 import com.oa.util.PageControlUtil;
@@ -33,7 +34,8 @@ public class ModelConeroller {
     private IUserManagerService userManagerService;
     @Resource
     private IStatService statService;
-
+    @Resource
+    private IStatCountService statCountService;
     @RequestMapping("/selectModel.do")
     public String selectModel(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
         Page page = new Page(modelService.selectCount());
@@ -126,5 +128,111 @@ public class ModelConeroller {
         return "selectModel.do";
     }
 
+
+    @RequestMapping("/selectStat.do")
+    public String selectStat(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
+
+        Model model = new Model();
+        // session.getAttribute("username")
+        model.setCreateUserId(2017);
+        Page page = new Page(modelService.selectStatCount(model));
+        PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
+        page.setModel(model);
+        List<Model> list = modelService.selectStatPageSplit(page);
+        page.setPageMessage(list);
+        request.setAttribute("page", page);
+        return "/model/statmodel.jsp";
+    }
+
+    @RequestMapping("/statistics.do")
+    public String statMessage(Model model, HttpServletRequest request, HttpSession session) {
+        //if()
+        //session.getAttribute("username");List<ModelColumnName> list,
+
+        List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
+        List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
+        for (ModelColumn modelColumn : mc) {
+            mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
+        }
+        model.setMc(mc);
+        model.setList(mcn);
+        List<SysUser> users = new ArrayList<SysUser>();
+        List<Stat> stats = statService.selectByStatId(model.getModelId());
+        for (Stat stat : stats) {
+            users.add(userManagerService.selectByPrimaryKey(stat.getUserId()));
+        }
+
+
+        request.setAttribute("modelName", model.getModelName());
+        request.setAttribute("model", model);
+        request.setAttribute("user", users);
+        request.setAttribute("length", mcn.size() + 1);
+        return "/model/statistics.jsp";
+    }
+
+    @RequestMapping("/selectInstat.do")
+    public String selectInstat(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
+
+        Model model = new Model();
+        SysUser user = new SysUser();
+        //session.getAttribute("username")
+        user.setUserId(1000);
+        List<Stat> stats = statService.selectByUserId(user.getUserId());
+        List<Model> models = new ArrayList<Model>();
+        for (Stat stat : stats) {
+            models.add(modelService.selectByPrimaryKey(stat.getStatId()));
+        }
+        Page page = new Page(stats.size());
+        PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
+        page.setModel(model);
+        page.setPageMessage(models);
+        request.setAttribute("page", page);
+        return "/model/instatmodel.jsp";
+    }
+
+    @RequestMapping("/writeInstat.do")
+    public String writeInstat(Model model, HttpServletRequest request, HttpSession session) {
+
+        //session.getAttribute("username");List<ModelColumnName> list,
+
+        List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
+        List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
+        for (ModelColumn modelColumn : mc) {
+            mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
+        }
+        model.setMc(mc);
+        model.setList(mcn);
+
+        request.setAttribute("modelName", model.getModelName());
+        request.setAttribute("model", model);
+        request.setAttribute("length", mcn.size() + 1);
+
+        return "/model/writeinstat.jsp";
+    }
+
+
+    @RequestMapping("/writeSubmit.do")
+    public String writeSubmit(Model model, HttpServletRequest request, HttpSession session) {
+        SysUser user = new SysUser();
+        //session.getAttribute("username")
+        user.setUserId(1000);
+        List<ModelColumn> modelColumns = modelColumnService.selectAll(model.getModelId());
+        List<StatCount> statCounts = new ArrayList<StatCount>();
+        for (int i = 0; i < modelColumns.size(); i++) {
+            StatCount statCount = new StatCount();
+            statCount.setModelId(model.getModelId());
+            statCount.setColumnId(modelColumns.get(i).getColumnId());
+            statCount.setUserId(user.getUserId());
+            statCount.setCount(model.getList().get(i).getColumnName());
+            statCounts.add(statCount);
+        }
+        Stat stat = new Stat();
+        stat.setUserId(user.getUserId());
+        stat.setStatId(model.getModelId());
+        statCountService.addStatCount(statCounts);
+        statService.updateByPrimaryKey(stat);
+        request.setAttribute("message", "提交成功！");
+        return "selectInstat.do";
+    }
 
 }
