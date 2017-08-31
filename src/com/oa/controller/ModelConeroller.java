@@ -66,20 +66,20 @@ public class ModelConeroller {
             request.setAttribute("message", "表内容为空不能使用！");
             return "selectModel.do";
         }
-        model.setCreateUserId(2017);
+        SysUser user = (SysUser) session.getAttribute("user");
+        model.setCreateUserId(user.getUserId());
         modelService.insert(model);
         model.setModelId(modelService.selectId());
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
         // List<SysUser> su = userManagerService.selectAll();
-        request.setAttribute("user", userManagerService.selectAll());
+        request.setAttribute("users", userManagerService.selectAll());
         return "/model/use.jsp";
     }
 
     @RequestMapping("/useModel.do")
     public String useModel(Model model, HttpServletRequest request, HttpSession session) {
-        //if()
-        //session.getAttribute("username");List<ModelColumnName> list,
+
 
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
@@ -96,8 +96,7 @@ public class ModelConeroller {
 
     @RequestMapping("/statModel.do")
     public String statModel(Model model, HttpServletRequest request, HttpSession session) {
-        //if()
-        //session.getAttribute("username");List<ModelColumnName> list,
+
         model = modelService.selectByPrimaryKey(model.getModelId());
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
@@ -133,8 +132,8 @@ public class ModelConeroller {
     public String selectStat(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
 
         Model model = new Model();
-        // session.getAttribute("username")
-        model.setCreateUserId(2017);
+        SysUser user = (SysUser) session.getAttribute("user");
+        model.setCreateUserId(user.getUserId());
         Page page = new Page(modelService.selectStatCount(model));
         PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
         page.setModel(model);
@@ -146,8 +145,6 @@ public class ModelConeroller {
 
     @RequestMapping("/statistics.do")
     public String statMessage(Model model, HttpServletRequest request, HttpSession session) {
-        //if()
-        //session.getAttribute("username");List<ModelColumnName> list,
 
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
@@ -165,7 +162,7 @@ public class ModelConeroller {
 
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
-        request.setAttribute("user", users);
+        request.setAttribute("users", users);
         request.setAttribute("length", mcn.size() + 1);
         return "/model/statistics.jsp";
     }
@@ -174,9 +171,8 @@ public class ModelConeroller {
     public String selectInstat(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
 
         Model model = new Model();
-        SysUser user = new SysUser();
-        //session.getAttribute("username")
-        user.setUserId(1000);
+        SysUser user = (SysUser) session.getAttribute("user");
+
         List<Stat> stats = statService.selectByUserId(user.getUserId());
         List<Model> models = new ArrayList<Model>();
         for (Stat stat : stats) {
@@ -193,7 +189,6 @@ public class ModelConeroller {
     @RequestMapping("/writeInstat.do")
     public String writeInstat(Model model, HttpServletRequest request, HttpSession session) {
 
-        //session.getAttribute("username");List<ModelColumnName> list,
 
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
@@ -213,9 +208,9 @@ public class ModelConeroller {
 
     @RequestMapping("/writeSubmit.do")
     public String writeSubmit(Model model, HttpServletRequest request, HttpSession session) {
-        SysUser user = new SysUser();
-        //session.getAttribute("username")
-        user.setUserId(1000);
+
+        SysUser user = (SysUser) session.getAttribute("user");
+
         List<ModelColumn> modelColumns = modelColumnService.selectAll(model.getModelId());
         List<StatCount> statCounts = new ArrayList<StatCount>();
         for (int i = 0; i < modelColumns.size(); i++) {
