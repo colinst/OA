@@ -22,5 +22,7 @@ public interface SysUserMapper {
 
     List getUsers(Map map);
 
+    SysUser getUser(Map map);
+
     int getCount();
 }

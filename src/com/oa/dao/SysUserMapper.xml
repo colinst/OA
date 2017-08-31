@@ -149,4 +149,10 @@
         select * from sys_user
         LIMIT #{start,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
     </select>
+    <!--getUser-->
+    <select id="getUser" parameterType="map" resultMap="BaseResultMap">
+        select * from sys_user
+        WHERE account = #{account,jdbcType=VARCHAR}
+              AND password = #{password,jdbcType=VARCHAR}
+    </select>
 </mapper>

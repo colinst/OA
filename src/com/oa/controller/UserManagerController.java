@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +28,14 @@ public class UserManagerController {
     @Resource
     private UserManagerService service;
 
+    //增加用户
     @RequestMapping("/insert.do")
     public String addUser(SysUser user) {
         System.out.println(user + "_" + service.insert(user));
         return "done.jsp";
     }
 
+    //获得所有用户
     @ResponseBody
     @RequestMapping(value = "/selectall.do", produces = "text/plain;charset=utf8")
     public String selectAll() {
@@ -41,6 +45,7 @@ public class UserManagerController {
         return str;
     }
 
+    //增加用户（可选属性）
     @RequestMapping("/insertSelective.do")
     public String insertUser(SysUser user) {
 
@@ -48,6 +53,7 @@ public class UserManagerController {
         return "done.jsp";
     }
 
+    //更新用户（有变化则更新）
     @RequestMapping("/updateSelective.do")
     public String updateUser(SysUser user) {
 
@@ -55,6 +61,7 @@ public class UserManagerController {
         return "done.jsp";
     }
 
+    //获得用户数量
     @ResponseBody
     @RequestMapping(value = "/getcount.do", produces = "text/plain;charset=utf8")
     public String getCount() {
@@ -62,6 +69,7 @@ public class UserManagerController {
         return str;
     }
 
+    //获得用户列表
     @ResponseBody
     @RequestMapping(value = "/getusers.do", produces = "text/plain;charset=utf8")
     public String getUsers(int start, int limit) {
@@ -75,12 +83,39 @@ public class UserManagerController {
         return str;
     }
 
+    //删除用户
     @ResponseBody
     @RequestMapping(value = "/delete.do", produces = "text/plain;charset=utf8")
     public String delUser(Integer userId) {
         return JSONArray.toJSONString(service.deleteByPrimaryKey(userId));
     }
 
+
+    //用户登录
+    @ResponseBody
+    @RequestMapping(value = "/login.do", produces = "text/plain;charset=utf8")
+    public String Login(String account, String password, HttpSession session) {
+
+        Map<String, String> login = new HashMap<String, String>();
+        login.put("account", account);
+        login.put("password", password);
+
+        SysUser user = service.getUser(login);
+        if (user != null) session.setAttribute("user", user);
+
+        return JSONArray.toJSONString(user);
+    }
+
+    //获得session的ID
+    @ResponseBody
+    @RequestMapping(value = "/getid.do", produces = "text/plain;charset=utf8")
+    public String getId(HttpSession session) {
+
+        Object obj = session.getAttribute("user");
+        SysUser user = (SysUser) obj;
+
+        return JSONArray.toJSONString(user);
+    }
 
 
     public UserManagerService getService() {
