@@ -11,6 +11,8 @@ public class Model {
     private Integer createUserId;
 
     private Date createtime;
+    private Integer type;
+
     private List<ModelColumnName> list;
     private List<ModelColumn> mc;
 
@@ -60,5 +62,13 @@ public class Model {
 
     public void setMc(List<ModelColumn> mc) {
         this.mc = mc;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

@@ -23,4 +23,6 @@ public interface IModelService {
     List<Model> selectPageSplit(Page page);
 
     int selectId();
+
+    int updateType(Model record);
 }

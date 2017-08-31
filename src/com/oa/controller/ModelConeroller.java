@@ -49,11 +49,27 @@ public class ModelConeroller {
     public String insertModel(Model model, HttpServletRequest request, HttpSession session) {
         //if()
         //session.getAttribute("username");List<ModelColumnName> list,
+        if (model.getModelName() == "") {
+            request.setAttribute("message", "表名为空不能使用！");
+            return "selectModel.do";
+        }
+        boolean flag = true;
+        for (ModelColumnName mcn : model.getList()) {
+            if (mcn.getColumnName() != "") {
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            request.setAttribute("message", "表内容为空不能使用！");
+            return "selectModel.do";
+        }
         model.setCreateUserId(2017);
         modelService.insert(model);
+        model.setModelId(modelService.selectId());
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
-        List<SysUser> su = userManagerService.selectAll();
+        // List<SysUser> su = userManagerService.selectAll();
         request.setAttribute("user", userManagerService.selectAll());
         return "/model/use.jsp";
     }
@@ -106,6 +122,7 @@ public class ModelConeroller {
         }
         statService.addStats(stats);
         request.setAttribute("message", "统计发布成功！");
+        modelService.updateType(model);
         return "selectModel.do";
     }
 

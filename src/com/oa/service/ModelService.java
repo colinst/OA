@@ -62,7 +62,7 @@ public class ModelService implements IModelService {
             mc.setColumnId(mcn.get(i).getColumnId());
             lmc.add(mc);
         }
-        int t = modelColumnMapper.addModelAndColumn(lmc); //添加用户权限
+        int t = modelColumnMapper.addModelAndColumn(lmc);
         return j + t;
     }
 
@@ -100,6 +100,11 @@ public class ModelService implements IModelService {
     @Override
     public int selectId() {
         return modelMapper.selectId();
+    }
+
+    @Override
+    public int updateType(Model record) {
+        return modelMapper.updateType(record);
     }
 
     public ModelMapper getModelMapper() {

@@ -24,4 +24,6 @@ public interface ModelMapper {
 
     int selectId();
 
+    int updateType(Model record);
+
 }
