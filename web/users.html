@@ -54,15 +54,16 @@
 
                 if (c['role'] == 1) c['role'] = '用户'
                 else if (c['role'] == 0) c['role'] = '管理员'
-                $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getUpinsert(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getUpinsert(" + ci + ")'>修改</button><button type='button' class='btn btn-default'>删除</button></div></td></tr>");
+                $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getUpinsert(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getUpinsert(" + ci + ")'>修改</button><button type='button' class='btn btn-default' onclick='delUser(" + ci + ")'>删除</button></div></td></tr>");
             });
         }
 
         //获得分页list
         function getPage(op) {
+            $("#context2").hide()
 
             //-1（上一页）     1（下一页）      0（首页）   2（末页）
-            var number = 2//每页显示数量
+            var number = 6//每页显示数量
             var a         //limit查询起始值
             var b         //查询个数
 
@@ -200,6 +201,28 @@
                 $("#act").text("更新")
             }
         }
+
+        //删除用户
+        function delUser(o) {
+
+            var userId = p[o]['userId']
+
+            $.ajax({
+                url: 'user/delete.do',
+                type: 'post',
+                data: {userId: userId},
+                dataType: 'json',
+                success: function (result) {
+
+                    if (result == '1') {
+                        alert("删除成功");
+                        myfun()
+                    }
+                    else                alert("删除失败")
+                }
+            });
+
+        }
     </script>
     <!--工具栏js-->
     <script type="text/javascript">
@@ -294,6 +317,15 @@
 
         /* css注释：对divcss5-right设置float:right即可让对象靠右浮动 */
     </style>
+    <!--加载后动作-->
+    <script language="javascript">
+        function myfun() {
+            getPage(0)
+        }
+        // 用js实现在加载完成一个页面后自动执行一个方法
+        /*用window.onload调用myfun()*/
+        window.onload = myfun;//不要括号
+    </script>
 
 </head>
 <body>
@@ -523,24 +555,6 @@
                                         </td>
                                     </tr>
                                     </tbody>
-                                    <!--<div class="btn-group-sm" style="display: none">
-                                        <button type="button" class="btn btn-default" onclick="getPage(0)">
-                                            <span class="ti-control-skip-backward"/>
-                                        </button>
-                                        <button type="button" class="btn btn-default" onclick="getPage(-1)">
-                                            <span class="ti-control-backward"/>
-                                        </button>
-                                        <button type="button" class="btn btn-default" onclick="getUsers()">
-                                            <span id="cPage">1</span>/<span id="aPage">1</span>
-                                        </button>
-                                        <button type="button" class="btn btn-default" onclick="getPage(1)">
-                                            <span class="ti-control-forward"/>
-                                        </button>
-                                        <button type="button" class="btn btn-default" onclick="getPage(2)">
-                                            <span class="ti-control-skip-forward"/>
-                                        </button>
-
-                                    </div>-->
                                 </table>
                                 <div class="btn-group-sm divcss5-right">
                                     <button type="button" class="btn btn-default" onclick="getPage(0)">
@@ -558,8 +572,8 @@
                                     <button type="button" class="btn btn-default" onclick="getPage(2)">
                                         <span class="ti-control-skip-forward"/>
                                     </button>
-
                                 </div>
+                                <div class="row"></div>
 
                             </div>
                         </div>

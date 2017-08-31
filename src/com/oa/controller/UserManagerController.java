@@ -75,6 +75,13 @@ public class UserManagerController {
         return str;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/delete.do", produces = "text/plain;charset=utf8")
+    public String delUser(Integer userId) {
+        return JSONArray.toJSONString(service.deleteByPrimaryKey(userId));
+    }
+
+
 
     public UserManagerService getService() {
         return service;
