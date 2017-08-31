@@ -178,7 +178,7 @@
                                     </thead>
                                     <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
                                         <tbody>
-                                        <c:forEach items="${user}" var="temp" varStatus="t">
+                                        <c:forEach items="${users}" var="temp" varStatus="t">
                                             <tr>
                                                 <td><input id="a" type="checkbox" name="subBox"
                                                            value="${temp.userId}"/>${temp.userName}</td>

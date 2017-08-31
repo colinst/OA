@@ -182,7 +182,7 @@
                                     </thead>
                                     <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
                                         <tbody>
-                                        <c:forEach items="${user}" var="temp" varStatus="t">
+                                        <c:forEach items="${users}" var="temp" varStatus="t">
                                             <tr align="center">
                                                 <td>${temp.userName}</td>
                                                 <c:forEach items="${model.list}" var="temp" varStatus="t">
