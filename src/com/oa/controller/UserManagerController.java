@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -92,18 +94,22 @@ public class UserManagerController {
 
 
     //用户登录
-    @ResponseBody
     @RequestMapping(value = "/login.do", produces = "text/plain;charset=utf8")
-    public String Login(String account, String password, HttpSession session) {
+    public String Login(String account, String password, HttpSession session, HttpServletResponse resp) throws IOException {
 
         Map<String, String> login = new HashMap<String, String>();
         login.put("account", account);
         login.put("password", password);
 
         SysUser user = service.getUser(login);
-        if (user != null) session.setAttribute("user", user);
 
-        return JSONArray.toJSONString(user);
+        if (user != null) {
+            session.setAttribute("user", user);
+            resp.sendRedirect("http://localhost:8080/index.html");
+        } else {
+            resp.sendRedirect("http://localhost:8080/login.html");
+        }
+        return null;
     }
 
     //获得session的ID

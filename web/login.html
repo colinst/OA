@@ -176,10 +176,10 @@
   </div>
   <div class="form">
     <h2>请输入你的账户</h2>
-    <form>
-      <input type="text" placeholder="账号" id="account"/>
-      <input type="password" placeholder="密码" id="pin"/>
-      <button onclick="loginIn()">登录</button>
+    <form action="/user/login.do" method="post">
+      <input type="text" placeholder="账号" id="account" name="account"/>
+      <input type="password" placeholder="密码" id="password" name="password"/>
+      <button type="submit">登录</button>
     </form>
   </div>
   <div class="form">
@@ -209,32 +209,7 @@
     }, "slow");
   });
 </script>-->
-<script type="text/javascript">
 
-    function loginIn() {
-        var account = $("#account").val()
-        var password = $("#pin").val()
-
-        $.ajax({
-            url: 'user/login.do',
-            type: 'post',
-            data: {account: account, password: password},
-            dataType: 'json',
-            success: function (user) {
-
-                if (user == null) alert("密码错误")
-
-                var role = parseInt(user['role'])
-                if (role >= 0) {/*alert(window.location.href);*/
-                    top.location = 'http://localhost:8080/index.html'
-                }
-            }
-        });
-
-    }
-
-
-</script>
 
 </body>
 </html>

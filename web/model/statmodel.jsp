@@ -39,6 +39,15 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/themify-icons.css" rel="stylesheet">
     <link href="../assets/css/model.css" rel="stylesheet">
+    <style>
+        .divcss5-right {
+            width: 255px;
+            border: 0px solid #F00;
+            float: right
+        }
+
+        /* css注释：对divcss5-right设置float:right即可让对象靠右浮动 */
+    </style>
 
 
 </head>
@@ -270,11 +279,22 @@
                                                 <fmt:formatDate value="${temp.createtime}" pattern="yyyy-MM-dd"/>
                                             </td>
                                             <td>
+                                                <div class="btn-group-sm">
+                                                    <button type="button" class="btn btn-default">
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-default">
+                                                        <a href="statistics.do?modelId=${temp.modelId}&modelName=${temp.modelName}">查看 </a>
+                                                    </button>
+                                                    <button type="button" class="btn btn-default">
+                                                        删除
+                                                    </button>
+                                                </div>
 
 
-                                                <a href="statistics.do?modelId=${temp.modelId}&modelName=${temp.modelName}">查看&nbsp;
-                                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                                    &nbsp; </a> <%--<a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>--%>
+                                                    <%--<a href="statistics.do?modelId=${temp.modelId}&modelName=${temp.modelName}">查看&nbsp;
+                                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                                        &nbsp; </a> --%><%--<a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>--%>
 
 
                                             </td>
@@ -288,14 +308,34 @@
                         </div>
                         <div class="page">
                             <form action="selectStat.do" method="post">
-                                共<span>${page.allCount }</span>个表格
+                                <div class="btn-group-sm divcss5-right">
+                                    <button type="button" class="btn btn-default" onclick="pageTest(0)">
+                                        <span class="ti-control-skip-backward"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            onclick="pageTest(${page.currentPage-1})">
+                                        <span class="ti-control-backward"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="">
+                                        <span id="cPage">${page.currentPage+1}</span>/<span
+                                            id="aPage">${page.allPage}</span>
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            onclick="pageTest(${page.currentPage+1})">
+                                        <span class="ti-control-forward"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="">
+                                        <span class="ti-control-skip-forward"/>
+                                    </button>
+                                </div>
+                                <%--共<span>${page.allCount }</span>个表格
                                 <input type="button" value="首页" onclick="pageTest(0)">
                                 <input type="button" value="上一页" onclick="pageTest(${page.currentPage-1})">
                                 <input type="button" value="下一页" onclick="pageTest(${page.currentPage+1})">
                                 第<span>${page.currentPage+1}</span>页
                                 共<span>${page.allPage}</span>页
                                 <input type="text" class="page-input" name="jumpPage" size="4">
-                                <input type="submit" class="page-btn" value="跳转">
+                                <input type="submit" class="page-btn" value="跳转">--%>
                             </form>
                         </div>
                     </div>
