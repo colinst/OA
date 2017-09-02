@@ -64,6 +64,62 @@
             i += 1
         }
 
+        function colspan() {
+
+            var columns = ['及格.a', '及格.b', '不及格.a', '不及格.b', '满分.c']
+            var rowslen = columns[0].length
+            var rows = new Array()
+
+            $("#head").append("<th>用户</th>")
+            $("#head1").append("<th></th>")
+
+            for (var i = 0; i < columns.length; i++) {
+
+                columns[i] = columns[i].split(".")
+
+                $("#head").append("<th>" + columns[i][1] + "</th>")
+                $("#head1").append("<th>" + columns[i][0] + "</th>")
+            }
+
+
+            var arr = [];
+            for (var i = 0; i < columns.length;) {
+                var count = 0;
+                for (var j = i; j < columns.length; j++) {
+                    if (columns[i][0] === columns[j][0]) {
+                        count++;
+                    }
+                }
+                arr.push({
+                    column: columns[i][0],
+                    colspan: count
+                })
+                i += count;
+            }
+
+
+            $("#head1").children().remove()
+            $("#head1").append("<th></th>")
+
+            for (var i = 0; i < columns.length; i++) {
+
+                $("#head1").append("<th colspan='" + arr[i]['colspan'] + "'>'" + arr[i]['column'] + "'</th>")
+            }
+//arr[i]['colspan']
+//arr[i]['column']
+
+            alert(arr[0]['column'] + arr[0]['colspan'])
+            alert(arr[1]['column'] + arr[1]['colspan'])
+            alert(arr[2]['column'] + arr[2]['colspan'])
+
+            /*for (var k = 0; k < arr.length; k++) {
+             console.log(arr[k])
+             }*/
+
+
+        }
+
+
         function showdetil() {
             $("#context2").show()
         }
@@ -425,19 +481,19 @@
                                     <hr>
                                     <div class="text-center">
                                         <div class="row">
-                                            <div class="col-md-3 col-md-offset-1">
+                                            <div class="col-md-3 col-md-offset-1" onclick="colspan()">
                                                 <h5>12<br/>
                                                     <small>已参与</small>
                                                 </h5>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" onclick="$('#view').show()">
                                                 <h5>2GB<br/>
-                                                    <small>已完成</small>
+                                                    <small>预览</small>
                                                 </h5>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" onclick="$('#view').hide()">
                                                 <h5>24,6$<br/>
-                                                    <small>进行中</small>
+                                                    <small>关闭预览</small>
                                                 </h5>
                                             </div>
                                         </div>
@@ -457,6 +513,48 @@
 
                         </div>
                     </form>
+
+                    <%--预览--%>
+                    <div class="col-md-12" id="view" style="display: none">
+                        <div class="card card-plain">
+                            <div class="header">
+
+                                <h4 class="title">模板预览</h4>
+                                <p class="category">您自定义的模板表头将在这里展示</p>
+
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover" id="usertable">
+                                    <thead id="head4"></thead>
+                                    <thead id="head3"></thead>
+                                    <thead id="head2"></thead>
+                                    <thead id="head1"></thead>
+                                    <thead id="head"></thead>
+                                    <tbody id="context">
+                                    <tr>
+                                        <td>用户1</td>
+                                        <td>Dakota Rice</td>
+                                        <td>$36,738</td>
+                                        <td>Niger</td>
+                                        <td>Oud-Turnhout</td>
+                                        <td>Oud-Turnhout</td>
+                                    </tr>
+                                    <tr>
+                                        <td>用户2</td>
+                                        <td>Dakota Rice</td>
+                                        <td>$36,738</td>
+                                        <td>Niger</td>
+                                        <td>Oud-Turnhout</td>
+                                        <td>Oud-Turnhout</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <div class="row"></div>
+
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
