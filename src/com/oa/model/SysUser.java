@@ -1,5 +1,7 @@
 package com.oa.model;
 
+import java.util.List;
+
 public class SysUser {
     private Integer userId;
 
@@ -18,6 +20,8 @@ public class SysUser {
     private String email;
 
     private Integer groupId;
+
+    private List<StatCount> sc;
 
     public Integer getUserId() {
         return userId;
@@ -89,6 +93,14 @@ public class SysUser {
 
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
+    }
+
+    public List<StatCount> getSc() {
+        return sc;
+    }
+
+    public void setSc(List<StatCount> sc) {
+        this.sc = sc;
     }
 
     @Override

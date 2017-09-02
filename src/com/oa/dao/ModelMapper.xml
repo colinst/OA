@@ -25,6 +25,11 @@
         createtime)
         values ( #{modelName,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER},now())
     </insert>
+    <insert id="insertOne" parameterType="com.oa.model.Model" useGeneratedKeys="true" keyProperty="model_id">
+        insert into model (model_name, create_user_id,
+        createtime)
+        values ( #{modelName,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER},now())
+    </insert>
     <insert id="insertSelective" parameterType="com.oa.model.Model">
         insert into model
         <trim prefix="(" suffix=")" suffixOverrides=",">

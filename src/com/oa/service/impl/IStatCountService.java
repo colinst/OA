@@ -19,4 +19,5 @@ public interface IStatCountService {
 
     int addStatCount(List<StatCount> list);
 
+    List<StatCount> selectByUser(StatCount record);
 }

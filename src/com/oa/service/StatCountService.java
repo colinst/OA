@@ -54,6 +54,12 @@ public class StatCountService implements IStatCountService {
         return statCountMapper.addStatCount(list);
     }
 
+    @Override
+    public List<StatCount> selectByUser(StatCount record) {
+        return statCountMapper.selectByUser(record);
+    }
+
+
     public StatMapper getStatMapper() {
         return statMapper;
     }

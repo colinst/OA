@@ -164,7 +164,7 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">你有一下几条测评需要填写</h4>
+                                <h4 class="title"></h4>
                                 <p class="category">${message}</p>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -185,8 +185,8 @@
                                         <c:forEach items="${users}" var="temp" varStatus="t">
                                             <tr align="center">
                                                 <td>${temp.userName}</td>
-                                                <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                                    <td></td>
+                                                <c:forEach items="${temp.sc}" var="temps" varStatus="t">
+                                                    <td>${temps.count}</td>
                                                 </c:forEach>
                                             </tr>
                                         </c:forEach>
