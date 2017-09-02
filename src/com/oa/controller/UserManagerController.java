@@ -104,15 +104,15 @@ public class UserManagerController {
         SysUser user = service.getUser(login);
 
         if (user != null) {
-            session.setAttribute("user", user);
+            session.setAttribute("user", user);//成功跳转到首页
             resp.sendRedirect("http://localhost:8080/index.html");
-        } else {
+        } else {                                    //不然跳转到登录页重新登录
             resp.sendRedirect("http://localhost:8080/login.html");
         }
         return null;
     }
 
-    //获得session的ID
+    /*//获得session的ID
     @ResponseBody
     @RequestMapping(value = "/getid.do", produces = "text/plain;charset=utf8")
     public String getId(HttpSession session) {
@@ -121,7 +121,7 @@ public class UserManagerController {
         SysUser user = (SysUser) obj;
 
         return JSONArray.toJSONString(user);
-    }
+    }*/
 
 
     public UserManagerService getService() {
