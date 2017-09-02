@@ -74,6 +74,7 @@ public class ModelConeroller {
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
         // List<SysUser> su = userManagerService.selectAll();
+        request.setAttribute("length", model.getList().size() + 1);
         request.setAttribute("users", userManagerService.selectAll());
         return "/model/use.jsp";
     }
@@ -88,6 +89,7 @@ public class ModelConeroller {
         for (ModelColumn modelColumn : mc) {
             mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
         }
+
         model.setMc(mc);
         model.setList(mcn);
         request.setAttribute("modelName", model.getModelName());
