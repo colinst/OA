@@ -1,15 +1,18 @@
 function show() {
     /*$('#show').css('display','block');*/
-    var a3 = document.getElementById("custom");
+    var a3 = document.getElementById("context2");
     a3.style.display = "inherit";
     var a1 = document.getElementById("model");
     a1.style.display = "none";
+    var a4 = document.getElementById("context2")
+    a4.style.display = "inherit";
 }
 function hide() {
-    var a1 = document.getElementById("custom");
+    var a1 = document.getElementById("context2");
     a1.style.display = "none";
     var a3 = document.getElementById("model");
     a3.style.display = "inherit";
+    $("#context2").hide()
 
 }
 function pageTest(obj) {

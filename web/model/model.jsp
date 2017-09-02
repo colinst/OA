@@ -49,6 +49,28 @@
         /* css注释：对divcss5-right设置float:right即可让对象靠右浮动 */
     </style>
 
+    <script type="text/javascript">
+
+        var i = 0
+
+        function getColumn() {
+
+            var columnname = $("#columnname").val()
+            /*var content=document.getElementById(ci);
+             body.innerHTML+=
+             */
+            $("#content1").append("<div class='col-md-4'><div class='form-group'><label id='list[" + i + "].columnName'>" + columnname + "</label><input name='list[" + i + "].columnName' type='text' class='form-control border-input' value='" + columnname + "'></div></div>")
+
+            i += 1
+        }
+
+        function showdetil() {
+            $("#context2").show()
+        }
+        function hidedetil() {
+            $("#context2").hide()
+        }
+    </script>
 
 </head>
 <body>
@@ -169,82 +191,86 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+
                     <div class="col-md-12" id="custom">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">自定义表格</h4>
-                                <p class="category">您可以自定义表格或者<a onclick="hide()">使用已有表格</a></p>
+                                <p class="category">您可以自定义表格或者<a onclick="hide();hidedetil()">使用已有表格</a></p>
                             </div>
+
                             <div class="content table-responsive table-full-width">
-                                <form action="insertModel.do" method="post" id="use_table">
+
+                                <%--<table class="table table-striped">
+                                    <thead>
+                                    <th>表名字</th>
+                                    <th>内容1</th>
+                                    <th>内容2</th>
+                                    <th>内容3</th>
+                                    <th>内容4</th>
+                                    <th>内容5</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><input type="text" class="form-control border-input"
+                                                   placeholder="表名" value="" name="modelName"></td>
+                                        <td><input type="text" class="form-control border-input"
+                                                   placeholder="内容" value="" name="list[0].columnName"></td>
+                                        <td><input type="text" class="form-control border-input"
+                                                   placeholder="内容" value="" name="list[1].columnName"></td>
+                                        <td><input type="text" class="form-control border-input"
+                                                   placeholder="内容" value="" name="list[2].columnName"></td>
+                                        <td><input type="text" class="form-control border-input"
+                                                   placeholder="内容" value="" name="list[3].columnName"></td>
+                                        <td><input type="text" class="form-control border-input"
+                                                   placeholder="内容" value="" name="list[4].columnName"></td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <div class="content" id="content">
                                     <table class="table table-striped">
                                         <thead>
-                                        <th>表名字</th>
-                                        <th>内容1</th>
-                                        <th>内容2</th>
-                                        <th>内容3</th>
-                                        <th>内容4</th>
-                                        <th>内容5</th>
+                                        <th>内容6</th>
+                                        <th>内容7</th>
+                                        <th>内容8</th>
+                                        <th>内容9</th>
+                                        <th>内容10</th>
+                                        <th>内容11</th>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td><input type="text" class="form-control border-input"
-                                                       placeholder="表名" value="" name="modelName"></td>
+                                                       placeholder="内容" value="" name="list[5].columnName"></td>
                                             <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[0].columnName"></td>
+                                                       placeholder="内容" value="" name="list[6].columnName"></td>
                                             <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[1].columnName"></td>
+                                                       placeholder="内容" value="" name="list[7].columnName"></td>
                                             <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[2].columnName"></td>
+                                                       placeholder="内容" value="" name="list[8].columnName"></td>
                                             <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[3].columnName"></td>
+                                                       placeholder="内容" value="" name="list[9].columnName"></td>
                                             <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[4].columnName"></td>
+                                                       placeholder="内容" value="" name="list[10].columnName"></td>
 
                                         </tr>
 
                                         </tbody>
                                     </table>
 
-                                    <div class="content" id="content">
-                                        <table class="table table-striped">
-                                            <thead>
-                                            <th>内容6</th>
-                                            <th>内容7</th>
-                                            <th>内容8</th>
-                                            <th>内容9</th>
-                                            <th>内容10</th>
-                                            <th>内容11</th>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td><input type="text" class="form-control border-input"
-                                                           placeholder="内容" value="" name="list[5].columnName"></td>
-                                                <td><input type="text" class="form-control border-input"
-                                                           placeholder="内容" value="" name="list[6].columnName"></td>
-                                                <td><input type="text" class="form-control border-input"
-                                                           placeholder="内容" value="" name="list[7].columnName"></td>
-                                                <td><input type="text" class="form-control border-input"
-                                                           placeholder="内容" value="" name="list[8].columnName"></td>
-                                                <td><input type="text" class="form-control border-input"
-                                                           placeholder="内容" value="" name="list[9].columnName"></td>
-                                                <td><input type="text" class="form-control border-input"
-                                                           placeholder="内容" value="" name="list[10].columnName"></td>
 
-                                            </tr>
-
-                                            </tbody>
-                                        </table>
+                                </div>
+                                <div id="table_1">
+                                    <h4><a class="use" href="#" name="submit"
+                                           onclick="document.getElementById('use_table').submit();return false">使用</a>
+                                        <span id="add"><a onclick="add()">增加内容</a></span></h4>
+                                </div>--%>
 
 
-                                    </div>
-                                    <div id="table_1">
-                                        <h4><a class="use" href="#" name="submit"
-                                               onclick="document.getElementById('use_table').submit();return false">使用</a>
-                                            <span id="add"><a onclick="add()">增加内容</a></span></h4>
-                                    </div>
 
-                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -254,7 +280,7 @@
                         <div class="card card-plain">
                             <div class="header">
                                 <h4 class="title">表格模板</h4>
-                                <p class="category">您可以使用以下表格或者<a onclick="show()">自定义表格</a>
+                                <p class="category">您可以使用以下表格或者<a onclick="show();showdetil()">自定义表格</a>
                                 <h3 id="message"><%--&nbsp;   &nbsp;   &nbsp;   &nbsp;--%>${message}</h3></p>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -332,7 +358,105 @@
                             </form>
                         </div>
                     </div>
+                    <form action="insertModel.do" method="post" id="use_table">
+                        <div id="context2" style="display: none">
 
+                            <div class="col-lg-4 col-md-5">
+                                <div class="card card-user">
+                                    <%--<div class="image">
+                                        <img src=../assets/img/background.jpg" alt="..."/>
+                                    </div>--%>
+                                    <div class="content">
+
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="form-group">
+                                                    <label>模板名称</label>
+                                                    <input name="modelName" type="text"
+                                                           class="form-control border-input"
+                                                           placeholder="groupname" value="添加名称">
+                                                </div>
+                                            </div>
+                                            <%--<span class="ti-control-backward"/>--%>
+                                            <div class="col-md-4">
+                                                <div class="/">
+                                                    <label>.</label>
+                                                    <button type="submit" class="btn btn-info btn-default">提交模板</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label>添加分组</label>
+                                                    <input id="groupname" name="userName" type="text"
+                                                           class="form-control border-input"
+                                                           placeholder="groupname" value="默认组名">
+                                                </div>
+                                            </div>
+                                            <%--<span class="ti-control-backward"/>--%>
+                                            <div class="col-md-3">
+                                                <div class="/">
+                                                    <label>.</label>
+                                                    <button type="button" class="btn btn-default">添加</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label>添加单列</label>
+                                                    <input id="columnname" name="userName" type="text"
+                                                           class="form-control border-input"
+                                                           placeholder="columnname" value="列名">
+                                                </div>
+                                            </div>
+                                            <%--<span class="ti-control-backward"/>--%>
+                                            <div class="col-md-3">
+                                                <div class="/">
+                                                    <label>.</label>
+                                                    <button type="button" class="btn btn-default" onclick="getColumn()">
+                                                        添加
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-1">
+                                                <h5>12<br/>
+                                                    <small>已参与</small>
+                                                </h5>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>2GB<br/>
+                                                    <small>已完成</small>
+                                                </h5>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h5>24,6$<br/>
+                                                    <small>进行中</small>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-8 col-md-7">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">详细信息</h4>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div id="content1" class="content"></div>
+                            </div>
+
+                        </div>
+                    </form>
 
                 </div>
             </div>
