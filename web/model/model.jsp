@@ -56,70 +56,114 @@
         function getColumn() {
 
             var columnname = $("#columnname").val()
-            /*var content=document.getElementById(ci);
-             body.innerHTML+=
-             */
-            $("#content1").append("<div class='col-md-4'><div class='form-group'><label id='list[" + i + "].columnName'>" + columnname + "</label><input name='list[" + i + "].columnName' type='text' class='form-control border-input' value='" + columnname + "'></div></div>")
+            $("#content1").append("<div class='col-md-4' name='外部div' ><div class='form-group' name='内部div' ><label id='list[" + i + "].columnName'>" + columnname + "</label><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class='ti-close' onclick='delColumn(this)'></span><input name='list[" + i + "].columnName' type='text' class='form-control border-input' value='" + columnname + "'></div></div>")
 
             i += 1
         }
 
+        //渲染表头
         function colspan() {
 
-            var columns = ['及格.a', '及格.b', '不及格.a', '不及格.b', '满分.c']
-            var rowslen = columns[0].length
-            var rows = new Array()
+            makeSame()
+            var columns = getTNames()
 
-            $("#head").append("<th>用户</th>")
-            $("#head1").append("<th></th>")
+            //所有表头行id
+            var heads = ["#head", "#head1", "#head2", "#head3", "#head4", "#head5", "#head6", "#head7", "#head8", "#head9", "#head10"]
 
+            var rowsn = columns[0].split(".").length
+
+            //第一行渲染
+            $(heads[0]).children().remove()
+            $(heads[0]).append("<th>用户</th>")
             for (var i = 0; i < columns.length; i++) {
 
                 columns[i] = columns[i].split(".")
-
-                $("#head").append("<th>" + columns[i][1] + "</th>")
-                $("#head1").append("<th>" + columns[i][0] + "</th>")
+                $(heads[0]).append("<th>" + columns[i][rowsn - 1] + "</th>")
             }
 
+            //其他行渲染
+            //循环 （所有行-1）次
+            for (var k = 0; k < rowsn - 1; k++) {
 
-            var arr = [];
-            for (var i = 0; i < columns.length;) {
-                var count = 0;
-                for (var j = i; j < columns.length; j++) {
-                    if (columns[i][0] === columns[j][0]) {
-                        count++;
+                //得到表头
+                var arr = []//一行内表头对象合集
+                for (var i = 0; i < columns.length;) {
+                    var count = 0;
+                    for (var j = i; j < columns.length; j++) {
+                        if (columns[i][rowsn - 2 - k] === columns[j][rowsn - 2 - k]) {
+                            count++;
+                        }
                     }
+                    arr.push({
+                        column: columns[i][rowsn - 2 - k],
+                        number: count
+                    })
+                    i += count;
                 }
-                arr.push({
-                    column: columns[i][0],
-                    colspan: count
-                })
-                i += count;
+
+                //渲染
+                $(heads[k + 1]).children().remove()
+                $(heads[k + 1]).append("<th></th>")
+                for (var i = 0; i < arr.length; i++) {
+
+                    $(heads[k + 1]).append("<th colspan='" + arr[i]['number'] + "'>" + arr[i]['column'] + "</th>")
+                }
+
+                //清空
+                arr = null
             }
 
+            $('#view').show()
+        }
 
-            $("#head1").children().remove()
-            $("#head1").append("<th></th>")
+        //得到表头全名数组
+        function getTNames() {
 
-            for (var i = 0; i < columns.length; i++) {
+            var tnames = []
 
-                $("#head1").append("<th colspan='" + arr[i]['colspan'] + "'>'" + arr[i]['column'] + "'</th>")
+            for (var m = 0; m < i; m++) {
+
+                var fallname = 'list[' + m + '].columnName'
+                var tname = document.getElementsByName(fallname)[0].value
+
+                tnames.push(tname)
             }
-//arr[i]['colspan']
-//arr[i]['column']
 
-            alert(arr[0]['column'] + arr[0]['colspan'])
-            alert(arr[1]['column'] + arr[1]['colspan'])
-            alert(arr[2]['column'] + arr[2]['colspan'])
+            //表名数组去空值
+            for (var n = 0; n < tnames.length; n++) {
 
-            /*for (var k = 0; k < arr.length; k++) {
-             console.log(arr[k])
-             }*/
+                if (tnames[n] == "" || tnames[n] == null) {
+                    tnames.splice(n, 1);
+                    n = n - 1;
+                }
+            }
 
+            return tnames
+        }
+
+        //使得编辑区表头和lable名一致
+        function makeSame() {
+
+            var chridens = $("#content1").children()
+
+            for (var m = 0; m < chridens.length; m++) {
+
+                var label = chridens[m].childNodes[0].childNodes[0]
+                var input = chridens[m].childNodes[0].childNodes[3]
+
+                label.innerText = input.value
+            }
+        }
+
+        //删除当前列
+        function delColumn(obj) {
+
+            i = i - 1
+            obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode)
 
         }
 
-
+        //显示隐藏该部分
         function showdetil() {
             $("#context2").show()
         }
@@ -256,77 +300,6 @@
                             </div>
 
                             <div class="content table-responsive table-full-width">
-
-                                <%--<table class="table table-striped">
-                                    <thead>
-                                    <th>表名字</th>
-                                    <th>内容1</th>
-                                    <th>内容2</th>
-                                    <th>内容3</th>
-                                    <th>内容4</th>
-                                    <th>内容5</th>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="text" class="form-control border-input"
-                                                   placeholder="表名" value="" name="modelName"></td>
-                                        <td><input type="text" class="form-control border-input"
-                                                   placeholder="内容" value="" name="list[0].columnName"></td>
-                                        <td><input type="text" class="form-control border-input"
-                                                   placeholder="内容" value="" name="list[1].columnName"></td>
-                                        <td><input type="text" class="form-control border-input"
-                                                   placeholder="内容" value="" name="list[2].columnName"></td>
-                                        <td><input type="text" class="form-control border-input"
-                                                   placeholder="内容" value="" name="list[3].columnName"></td>
-                                        <td><input type="text" class="form-control border-input"
-                                                   placeholder="内容" value="" name="list[4].columnName"></td>
-
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-
-                                <div class="content" id="content">
-                                    <table class="table table-striped">
-                                        <thead>
-                                        <th>内容6</th>
-                                        <th>内容7</th>
-                                        <th>内容8</th>
-                                        <th>内容9</th>
-                                        <th>内容10</th>
-                                        <th>内容11</th>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[5].columnName"></td>
-                                            <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[6].columnName"></td>
-                                            <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[7].columnName"></td>
-                                            <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[8].columnName"></td>
-                                            <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[9].columnName"></td>
-                                            <td><input type="text" class="form-control border-input"
-                                                       placeholder="内容" value="" name="list[10].columnName"></td>
-
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                                <div id="table_1">
-                                    <h4><a class="use" href="#" name="submit"
-                                           onclick="document.getElementById('use_table').submit();return false">使用</a>
-                                        <span id="add"><a onclick="add()">增加内容</a></span></h4>
-                                </div>--%>
-
-
-
-
                             </div>
                         </div>
                     </div>
@@ -403,14 +376,7 @@
                                         <span class="ti-control-skip-forward"/>
                                     </button>
                                 </div>
-                                <%--共<span>${page.allCount }</span>个表格
-                                <input type="button" value="首页" onclick="pageTest(0)">
-                                <input type="button" value="上一页" onclick="pageTest(${page.currentPage-1})">
-                                <input type="button" value="下一页" onclick="pageTest(${page.currentPage+1})">
-                                第<span>${page.currentPage+1}</span>页
-                                共<span>${page.allPage}</span>页
-                                <input type="text" class="page-input" name="jumpPage" size="4">
-                                <input type="submit" class="page-btn" value="跳转">--%>
+
                             </form>
                         </div>
                     </div>
@@ -447,7 +413,7 @@
                                                     <label>添加分组</label>
                                                     <input id="groupname" name="userName" type="text"
                                                            class="form-control border-input"
-                                                           placeholder="groupname" value="默认组名">
+                                                           placeholder="待完善" value="" disabled>
                                                 </div>
                                             </div>
                                             <%--<span class="ti-control-backward"/>--%>
@@ -481,18 +447,18 @@
                                     <hr>
                                     <div class="text-center">
                                         <div class="row">
-                                            <div class="col-md-3 col-md-offset-1" onclick="colspan()">
-                                                <h5>12<br/>
-                                                    <small>已参与</small>
+                                            <div class="col-md-3 col-md-offset-1" onclick="makeSame()">
+                                                <h5>/<br/>
+                                                    <small>测试</small>
                                                 </h5>
                                             </div>
-                                            <div class="col-md-4" onclick="$('#view').show()">
-                                                <h5>2GB<br/>
-                                                    <small>预览</small>
+                                            <div class="col-md-4" onclick="colspan()">
+                                                <h5>预览<br/>
+                                                    <small>预览表格</small>
                                                 </h5>
                                             </div>
                                             <div class="col-md-3" onclick="$('#view').hide()">
-                                                <h5>24,6$<br/>
+                                                <h5>关闭<br/>
                                                     <small>关闭预览</small>
                                                 </h5>
                                             </div>
@@ -508,7 +474,9 @@
                                     </div>
                                     <hr>
                                 </div>
-                                <div id="content1" class="content"></div>
+                                <div id="content1" class="content" onclick="makeSame()">
+
+                                </div>
                             </div>
 
                         </div>
@@ -525,6 +493,12 @@
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover" id="usertable">
+                                    <thead id="head10"></thead>
+                                    <thead id="head9"></thead>
+                                    <thead id="head8"></thead>
+                                    <thead id="head7"></thead>
+                                    <thead id="head6"></thead>
+                                    <thead id="head5"></thead>
                                     <thead id="head4"></thead>
                                     <thead id="head3"></thead>
                                     <thead id="head2"></thead>
@@ -533,19 +507,19 @@
                                     <tbody id="context">
                                     <tr>
                                         <td>用户1</td>
-                                        <td>Dakota Rice</td>
                                         <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                        <td>Oud-Turnhout</td>
+                                        <td>$36,738</td>
+                                        <td>$36,738</td>
+                                        <td>$36,738</td>
+                                        <td>$36,738</td>
                                     </tr>
                                     <tr>
                                         <td>用户2</td>
-                                        <td>Dakota Rice</td>
                                         <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                        <td>Oud-Turnhout</td>
+                                        <td>$36,738</td>
+                                        <td>$36,738</td>
+                                        <td>$36,738</td>
+                                        <td>O$36,738</td>
                                     </tr>
 
                                     </tbody>
@@ -583,8 +557,7 @@
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    Copyright &copy; 2017.Company name All rights reserved.<a target="_blank"
-                                                                              href="/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    Copyright &copy; 2017.Company name All rights reserved.
                 </div>
             </div>
         </footer>
