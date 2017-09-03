@@ -52,7 +52,7 @@ class StringSameCount {
     private int counter;
 
     public StringSameCount() {
-        map = new HashMap<String, Integer>();
+        map = new LinkedHashMap<String, Integer>();
     }
 
     public void hashInsert(String string) {

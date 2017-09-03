@@ -106,6 +106,7 @@ public class ModelConeroller {
         new GetClassUtil().setMcnsName(mcn);
         model.setList(mcn);
         request.setAttribute("cus", cus);
+
         request.setAttribute("m", m);
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);

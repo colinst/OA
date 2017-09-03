@@ -60,7 +60,7 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="../index.jsp">
                         <i class="ti-home"></i>
                         <p>首页</p>
@@ -78,7 +78,7 @@
                         <p>模板管理</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/model/selectStat.do">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
