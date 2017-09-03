@@ -36,6 +36,7 @@ public class ModelConeroller {
     private IStatService statService;
     @Resource
     private IStatCountService statCountService;
+
     @RequestMapping("/selectModel.do")
     public String selectModel(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
         Page page = new Page(modelService.selectCount());
@@ -77,6 +78,7 @@ public class ModelConeroller {
         return "/model/use.jsp";
     }
 
+    //使用表格
     @RequestMapping("/useModel.do")
     public String useModel(Model model, HttpServletRequest request, HttpSession session) {
 
@@ -90,15 +92,38 @@ public class ModelConeroller {
         model.setList(mcn);
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
-        request.setAttribute("user", userManagerService.selectAll());
+        request.setAttribute("users", userManagerService.selectAll());
+        request.setAttribute("length", mcn.size() + 1);
         return "/model/use.jsp";
     }
 
+    //发起统计
     @RequestMapping("/statModel.do")
     public String statModel(Model model, HttpServletRequest request, HttpSession session) {
-
+        String str = model.getTemp();
         model = modelService.selectByPrimaryKey(model.getModelId());
+        model.setTemp(str);
+        if (model.getTemp() == "") {
+            request.setAttribute("message", "表名不能为空");
+            return "selectModel.do";
+        }
+        String[] sub = request.getParameterValues("subBox");
+        if (sub == null) {
+            request.setAttribute("message", "未选择人员请重新发布！");
+            return "selectModel.do";
+        }
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
+        if (model.getModelName() != model.getTemp() || model.getType() == 1) {
+            model.setModelName(model.getTemp());
+            int a = modelService.insertOne(model);
+
+            model.setModelId(modelService.selectId());
+            for (int i = 0; i < mc.size(); i++) {
+                mc.get(i).setModelId(model.getModelId());
+
+            }
+            modelColumnService.addModelAndColumn(mc);
+        }
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
         for (ModelColumn modelColumn : mc) {
             mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
@@ -106,7 +131,7 @@ public class ModelConeroller {
         model.setMc(mc);
         model.setList(mcn);
         List<Stat> stats = new ArrayList<Stat>();
-        String[] sub = request.getParameterValues("subBox");
+
         int[] ints = new int[sub.length];
         for (int i = 0; i < sub.length; i++) {
 
@@ -143,6 +168,7 @@ public class ModelConeroller {
         return "/model/statmodel.jsp";
     }
 
+    //查看统计情况
     @RequestMapping("/statistics.do")
     public String statMessage(Model model, HttpServletRequest request, HttpSession session) {
 
@@ -158,7 +184,20 @@ public class ModelConeroller {
         for (Stat stat : stats) {
             users.add(userManagerService.selectByPrimaryKey(stat.getUserId()));
         }
+        for (int i = 0; i < users.size(); i++) {
+            StatCount sc = new StatCount();
+            sc.setModelId(model.getModelId());
+            sc.setUserId(users.get(i).getUserId());
+            List<StatCount> scs = statCountService.selectByUser(sc);
+            if (scs.size() == 0) {
+                for (int j = 0; j < mcn.size(); j++) {
+                    sc.setCount("");
+                    scs.add(sc);
+                }
+            }
+            users.get(i).setSc(scs);
 
+        }
 
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
@@ -229,5 +268,6 @@ public class ModelConeroller {
         request.setAttribute("message", "提交成功！");
         return "selectInstat.do";
     }
+
 
 }

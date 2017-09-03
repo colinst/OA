@@ -29,4 +29,6 @@ public interface IModelService {
     List<Model> selectStatPageSplit(Page page);
 
     int selectStatCount(Model record);
+
+    int insertOne(Model record);
 }

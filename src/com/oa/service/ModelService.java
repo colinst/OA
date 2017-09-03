@@ -119,6 +119,11 @@ public class ModelService implements IModelService {
         return modelMapper.selectStatCount(record);
     }
 
+    @Override
+    public int insertOne(Model record) {
+        return modelMapper.insertOne(record);
+    }
+
     public ModelMapper getModelMapper() {
         return modelMapper;
     }

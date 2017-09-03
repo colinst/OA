@@ -15,7 +15,7 @@ public class Model {
 
     private List<ModelColumnName> list;
     private List<ModelColumn> mc;
-
+    private String temp;
     public Integer getModelId() {
         return modelId;
     }
@@ -70,5 +70,13 @@ public class Model {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getTemp() {
+        return temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
     }
 }

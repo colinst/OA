@@ -20,4 +20,6 @@ public interface StatCountMapper {
 
     int addStatCount(List<StatCount> list);
 
+    List<StatCount> selectByUser(StatCount record);
+
 }

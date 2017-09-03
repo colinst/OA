@@ -164,20 +164,25 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">${modelName} <a onclick="stat()">发起统计</a></h4>
+                                <h4 class="title"><a onclick="stat()">发起统计</a></h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content table-responsive table-full-width">
-                                <table class="table table-hover" border="1" cellspacing="0">
-                                    <thead>
-                                    <th><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
-                                    </th>
-                                    <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                        <th>${temp.columnName}</th>
-                                    </c:forEach>
-                                    </thead>
-                                    <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
+                                <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
+                                    <table class="table table-hover" border="1" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="${length}" style="text-align:center"><input
+                                                    value="${modelName}" name="temp"></th>
+                                        </tr>
+                                        </thead>
+
                                         <tbody>
+                                        <td><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
+                                        </td>
+                                        <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                            <td>${temp.columnName}</td>
+                                        </c:forEach>
                                         <c:forEach items="${users}" var="temp" varStatus="t">
                                             <tr>
                                                 <td><input id="a" type="checkbox" name="subBox"
@@ -188,9 +193,9 @@
                                             </tr>
                                         </c:forEach>
                                         </tbody>
-                                    </form>
-                                </table>
 
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>

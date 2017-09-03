@@ -10,6 +10,8 @@ public interface ModelMapper {
 
     int insert(Model record);
 
+    int insertOne(Model record);
+
     int insertSelective(Model record);
 
     Model selectByPrimaryKey(Integer modelId);
