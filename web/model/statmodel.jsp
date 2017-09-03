@@ -63,50 +63,50 @@
 
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text">
+                <a href="../index.jsp" class="simple-text">
                     数据统计系统
                 </a>
             </div>
 
             <ul class="nav">
                 <li>
-                    <a href="../index.html">
+                    <a href="../index.jsp">
                         <i class="ti-home"></i>
                         <p>首页</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../users.html">
+                    <a href="../users.jsp">
                         <i class="ti-user"></i>
                         <p>用户管理</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="selectModel.do">
+                <li>
+                    <a href="/model/selectModel.do">
                         <i class="ti-view-list-alt"></i>
                         <p>模板管理</p>
                     </a>
                 </li>
-                <li>
-                    <a href="selectStat.do">
+                <li class="active">
+                    <a href="/model/selectStat.do">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../userdata.html">
+                    <a href="../userdata.jsp">
                         <i class="ti-id-badge"></i>
                         <p>个人资料</p>
                     </a>
                 </li>
                 <li>
-                    <a href="selectInstat.do">
+                    <a href="/model/selectInstat.do">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../notice.html">
+                    <a href="../notice.jsp">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
                     </a>
@@ -120,6 +120,7 @@
             </ul>
         </div>
     </div>
+
     <div class="main-panel">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -130,16 +131,10 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Model Manager</a>
+                    <a class="navbar-brand" href="#">Home</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-                                <p>管理员</p>
-                            </a>
-                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-bell"></i>
@@ -148,16 +143,21 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Another notification</a></li>
+                                <li><a href="#">消息 1</a></li>
+                                <li><a href="#">消息 2</a></li>
+                                <li><a href="#">消息 3</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="ti-settings"></i>
-                                <p>设置</p>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="ti-panel"></i>
+                                <p>${user.userName}</p>
+                                <b class="caret"></b>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="userdata.jsp">个人信息</a></li>
+                                <li><a href="#">退出</a></li>
+                            </ul>
                         </li>
                     </ul>
 
