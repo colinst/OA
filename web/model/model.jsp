@@ -338,14 +338,15 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group-sm">
-                                                    <button type="button" class="btn btn-default">
-                                                        修改
-                                                    </button>
+                                                        <%--<button type="button" class="btn btn-default">
+                                                            修改
+                                                        </button>--%>
                                                     <button type="button" class="btn btn-default">
                                                         <a href="useModel.do?modelId=${temp.modelId}&modelName=${temp.modelName}">使用</a>
                                                     </button>
                                                     <button type="button" class="btn btn-default">
-                                                        删除
+                                                        <a href="javascript:if(confirm('确实要删除吗?'))location='delModel.do?modelId=${temp.modelId}'">删除</a>
+
                                                     </button>
                                                 </div>
                                             </td>

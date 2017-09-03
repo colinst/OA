@@ -72,13 +72,13 @@
                         <p>用户管理</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="selectModel.do">
                         <i class="ti-view-list-alt"></i>
                         <p>模板管理</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="selectStat.do">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
@@ -167,7 +167,8 @@
                                 <h4 class="title"><a onclick="stat()">发起统计</a></h4>
                                 <p class="category"></p>
                             </div>
-                            <div class="content table-responsive table-full-width">
+                            <div class="content table-responsive table-full-width"
+                                 style="position:absolute; height:400px;width: 1000px; overflow:auto">
                                 <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
                                     <table class="table table-hover" border="1" cellspacing="0">
                                         <thead>
@@ -178,11 +179,21 @@
                                         </thead>
 
                                         <tbody>
-                                        <td><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
-                                        </td>
-                                        <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                            <td>${temp.columnName}</td>
-                                        </c:forEach>
+
+                                        <tr>
+                                            <td></td>
+                                            <c:forEach items="${cus}" var="temp" varStatus="t">
+                                                <td colspan="${temp.num}">${temp.name}</td>
+                                            </c:forEach>
+
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
+                                            </td>
+                                            <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                                <td>${temp.columnName}</td>
+                                            </c:forEach>
+                                        </tr>
                                         <c:forEach items="${users}" var="temp" varStatus="t">
                                             <tr>
                                                 <td><input id="a" type="checkbox" name="subBox"

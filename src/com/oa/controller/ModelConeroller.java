@@ -5,7 +5,9 @@ import com.oa.model.*;
 import com.oa.service.ModelColumnNameService;
 import com.oa.service.ModelService;
 import com.oa.service.impl.*;
+import com.oa.util.ClassUtil;
 import com.oa.util.DateFormatUtil;
+import com.oa.util.GetClassUtil;
 import com.oa.util.PageControlUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +39,14 @@ public class ModelConeroller {
     @Resource
     private IStatCountService statCountService;
 
+    //模板管理
     @RequestMapping("/selectModel.do")
     public String selectModel(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
+        SysUser user = (SysUser) session.getAttribute("user");
+        Model model = new Model();
+        model.setCreateUserId(user.getUserId());
         Page page = new Page(modelService.selectCount());
+        page.setModel(model);
         PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
 
         List<Model> list = modelService.selectPageSplit(page);
@@ -48,6 +55,7 @@ public class ModelConeroller {
         return "/model/model.jsp";
     }
 
+    //自定义模板
     @RequestMapping("/insertModel.do")
     public String insertModel(Model model, HttpServletRequest request, HttpSession session) {
         //if()
@@ -83,7 +91,8 @@ public class ModelConeroller {
     @RequestMapping("/useModel.do")
     public String useModel(Model model, HttpServletRequest request, HttpSession session) {
 
-
+        SysUser user = (SysUser) session.getAttribute("user");
+        SysUser sysUser = userManagerService.selectByPrimaryKey(user.getUserId());
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
         for (ModelColumn modelColumn : mc) {
@@ -91,17 +100,37 @@ public class ModelConeroller {
         }
 
         model.setMc(mc);
+
+        Model m = modelService.selectByPrimaryKey(model.getModelId());
+        List<ClassUtil> cus = new GetClassUtil().getClassUtil(mcn);
+        new GetClassUtil().setMcnsName(mcn);
         model.setList(mcn);
+        request.setAttribute("cus", cus);
+        request.setAttribute("m", m);
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
         request.setAttribute("users", userManagerService.selectAll());
         request.setAttribute("length", mcn.size() + 1);
+        request.setAttribute("sysuser", sysUser);
+
         return "/model/use.jsp";
+        //return "/model/used.jsp";
+    }
+
+    // 删除表格
+    @RequestMapping("/delModel.do")
+    public String delModel(Model model, HttpServletRequest request, HttpSession session) {
+
+        modelService.deleteByPrimaryKey(model.getModelId());
+        request.setAttribute("message", "删除成功");
+
+        return "selectModel.do";
     }
 
     //发起统计
     @RequestMapping("/statModel.do")
     public String statModel(Model model, HttpServletRequest request, HttpSession session) {
+        SysUser user = (SysUser) session.getAttribute("user");
         String str = model.getTemp();
         model = modelService.selectByPrimaryKey(model.getModelId());
         model.setTemp(str);
@@ -117,6 +146,7 @@ public class ModelConeroller {
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         if (model.getModelName() != model.getTemp() || model.getType() == 1) {
             model.setModelName(model.getTemp());
+            model.setCreateUserId(user.getUserId());
             int a = modelService.insertOne(model);
 
             model.setModelId(modelService.selectId());
@@ -125,6 +155,7 @@ public class ModelConeroller {
 
             }
             modelColumnService.addModelAndColumn(mc);
+
         }
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
         for (ModelColumn modelColumn : mc) {
@@ -180,7 +211,12 @@ public class ModelConeroller {
             mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
         }
         model.setMc(mc);
+
+        List<ClassUtil> cus = new GetClassUtil().getClassUtil(mcn);
+        new GetClassUtil().setMcnsName(mcn);
         model.setList(mcn);
+        request.setAttribute("cus", cus);
+
         List<SysUser> users = new ArrayList<SysUser>();
         List<Stat> stats = statService.selectByStatId(model.getModelId());
         for (Stat stat : stats) {
@@ -208,6 +244,7 @@ public class ModelConeroller {
         return "/model/statistics.jsp";
     }
 
+    //参与统计
     @RequestMapping("/selectInstat.do")
     public String selectInstat(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
 
@@ -216,8 +253,8 @@ public class ModelConeroller {
 
         List<Stat> stats = statService.selectByUserId(user.getUserId());
         List<Model> models = new ArrayList<Model>();
-        for (Stat stat : stats) {
-            models.add(modelService.selectByPrimaryKey(stat.getStatId()));
+        for (int i = stats.size() - 1; i >= 0; i--) {
+            models.add(modelService.selectByPrimaryKey(stats.get(i).getStatId()));
         }
         Page page = new Page(stats.size());
         PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
@@ -227,6 +264,7 @@ public class ModelConeroller {
         return "/model/instatmodel.jsp";
     }
 
+    //提交统计
     @RequestMapping("/writeInstat.do")
     public String writeInstat(Model model, HttpServletRequest request, HttpSession session) {
 
@@ -237,7 +275,11 @@ public class ModelConeroller {
             mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
         }
         model.setMc(mc);
+
+        List<ClassUtil> cus = new GetClassUtil().getClassUtil(mcn);
+        new GetClassUtil().setMcnsName(mcn);
         model.setList(mcn);
+        request.setAttribute("cus", cus);
 
         request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);

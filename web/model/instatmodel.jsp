@@ -72,7 +72,7 @@
                         <p>用户管理</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="selectModel.do">
                         <i class="ti-view-list-alt"></i>
                         <p>模板管理</p>
@@ -90,7 +90,7 @@
                         <p>个人资料</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="selectInstat.do">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>

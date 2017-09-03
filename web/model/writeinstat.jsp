@@ -78,7 +78,7 @@
                         <p>模板管理</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="selectStat.do">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
@@ -90,7 +90,7 @@
                         <p>个人资料</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="selectInstat.do">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>
@@ -173,18 +173,25 @@
                                     <tr>
                                         <th colspan="${length}" style="text-align:center">${modelName}</th>
                                     </tr>
-                                    <tr align="center">
 
-                                        <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                            <td>${temp.columnName}</td>
-                                        </c:forEach>
-
-                                    </tr>
                                     </thead>
                                     <form action="writeSubmit.do?modelId=${model.modelId}" method="post"
                                           id="writeinstat">
                                         <tbody>
+                                        <tr align="center">
 
+                                            <c:forEach items="${cus}" var="temp" varStatus="t">
+                                                <td colspan="${temp.num}">${temp.name}</td>
+                                            </c:forEach>
+
+                                        </tr>
+                                        <tr align="center">
+
+                                            <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                                <td>${temp.columnName}</td>
+                                            </c:forEach>
+
+                                        </tr>
                                         <tr align="center">
                                             <c:forEach items="${model.list}" var="temp" varStatus="t">
                                                 <td><input type="text" class="form-control border-input"

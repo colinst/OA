@@ -173,15 +173,24 @@
                                     <tr>
                                         <th colspan="${length}" style="text-align:center">${modelName}</th>
                                     </tr>
-                                    <tr align="center">
-                                        <td></td>
-                                        <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                            <td>${temp.columnName}</td>
-                                        </c:forEach>
-                                    </tr>
+
                                     </thead>
                                     <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
                                         <tbody>
+                                        <tr align="center">
+                                            <td></td>
+                                            <c:forEach items="${cus}" var="temp" varStatus="t">
+                                                <td colspan="${temp.num}">${temp.name}</td>
+                                            </c:forEach>
+
+                                        </tr>
+                                        <tr align="center">
+                                            <td></td>
+                                            <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                                <td>${temp.columnName}</td>
+                                            </c:forEach>
+                                        </tr>
+
                                         <c:forEach items="${users}" var="temp" varStatus="t">
                                             <tr align="center">
                                                 <td>${temp.userName}</td>

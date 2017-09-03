@@ -30,7 +30,7 @@ public class ModelService implements IModelService {
 
     @Override
     public int deleteByPrimaryKey(Integer modelId) {
-        return 0;
+        return modelMapper.deleteByPrimaryKey(modelId);
     }
 
     @Override

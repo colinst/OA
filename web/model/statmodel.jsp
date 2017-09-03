@@ -81,13 +81,13 @@
                         <p>用户管理</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="selectModel.do">
                         <i class="ti-view-list-alt"></i>
                         <p>模板管理</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="selectStat.do">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
@@ -280,15 +280,15 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group-sm">
-                                                    <button type="button" class="btn btn-default">
-                                                        修改
-                                                    </button>
+                                                        <%--<button type="button" class="btn btn-default">
+                                                            修改
+                                                        </button>--%>
                                                     <button type="button" class="btn btn-default">
                                                         <a href="statistics.do?modelId=${temp.modelId}&modelName=${temp.modelName}">查看 </a>
                                                     </button>
-                                                    <button type="button" class="btn btn-default">
-                                                        删除
-                                                    </button>
+                                                        <%--<button type="button" class="btn btn-default">
+                                                            删除
+                                                        </button>--%>
                                                 </div>
 
 
