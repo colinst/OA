@@ -56,6 +56,7 @@
         function getColumn() {
 
             console.log()
+            console.log()
 
             var columnname = $("#columnname").val()
             $("#content1").append("<div class='col-md-4' name='外部div' ><div class='form-group' name='内部div' ><label id='list[" + i + "].columnName'>" + columnname + "</label><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class='ti-close' onclick='delColumn(this)'></span><input name='list[" + i + "].columnName' type='text' class='form-control border-input' value='" + columnname + "'></div></div>")
