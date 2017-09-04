@@ -164,11 +164,12 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title"></h4>
+                                <a onclick="getExcel('stat_table')" id="table_1"><h4>————导出</h4></a>
                                 <p class="category">${message}</p>
                             </div>
                             <div class="content table-responsive table-full-width">
-                                <table class="table table-hover" border="1" cellspacing="0">
+
+                                <table class="table table-hover" border="1" cellspacing="0" id="stat_table">
                                     <thead>
                                     <tr>
                                         <th colspan="${length}" style="text-align:center">${modelName}</th>
