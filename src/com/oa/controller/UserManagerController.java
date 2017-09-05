@@ -107,6 +107,8 @@ public class UserManagerController {
             session.setAttribute("user", user);//成功跳转到首页
             resp.sendRedirect("http://localhost:8080/index.jsp");
             //"http://139.196.77.220/OA/index.jsp"
+            //"http://139.196.77.220/OA/index.jsp"
+            //"http://139.196.77.220/OA/login.html"
         } else {                                    //不然跳转到登录页重新登录
             resp.sendRedirect("http://localhost:8080/login.html");
         }
