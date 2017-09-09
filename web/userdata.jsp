@@ -146,7 +146,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="userdata.jsp">个人信息</a></li>
-                                <li><a href="#">退出</a></li>
+                                <li><a href="login.html">退出</a></li>
                             </ul>
                         </li>
                     </ul>
