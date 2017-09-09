@@ -105,9 +105,14 @@ public class UserManagerController {
 
         if (user != null) {
             session.setAttribute("user", user);//成功跳转到首页
-            resp.sendRedirect("http://59.110.162.160/OA/index.jsp");
+            resp.sendRedirect("http://www.colinst.xin/OA/index.jsp");
+            //"http://localhost:8080/OA/index.jsp"
+            //"http://localhost:8080/OA/login.html"
+
+            //"http://www.colinst.xin/OA/index.jsp"
+            //"http://www.colinst.xin/OA/login.html"
         } else {                                    //不然跳转到登录页重新登录
-            resp.sendRedirect("http://59.110.162.160/OA/login.html");
+            resp.sendRedirect("http://www.colinst.xin/OA/login.html");
         }
         return null;
     }
@@ -131,6 +136,4 @@ public class UserManagerController {
     public void setService(UserManagerService service) {
         this.service = service;
     }
-
-
 }
