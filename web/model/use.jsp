@@ -61,25 +61,25 @@
 
             <ul class="nav">
                 <li>
-                    <a href="../index.html">
+                    <a href="../index.jsp">
                         <i class="ti-home"></i>
                         <p>首页</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../users.html">
+                    <a href="../users.jsp">
                         <i class="ti-user"></i>
                         <p>用户管理</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="selectModel.do">
+                    <a href="/OA/model/selectModel.do">
                         <i class="ti-view-list-alt"></i>
                         <p>模板管理</p>
                     </a>
                 </li>
                 <li>
-                    <a href="selectStat.do">
+                    <a href="/OA/model/selectStat.do">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
                     </a>
@@ -91,7 +91,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="selectInstat.do">
+                    <a href="/OA/model/selectInstat.do">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>
                     </a>

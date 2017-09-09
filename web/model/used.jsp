@@ -60,13 +60,13 @@
 
             <ul class="nav">
                 <li>
-                    <a href="index.html">
+                    <a href="../index.jsp">
                         <i class="ti-home"></i>
                         <p>首页</p>
                     </a>
                 </li>
                 <li>
-                    <a href="users.html">
+                    <a href="users.jsp">
                         <i class="ti-user"></i>
                         <p>用户管理</p>
                     </a>

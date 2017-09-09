@@ -105,9 +105,9 @@ public class UserManagerController {
 
         if (user != null) {
             session.setAttribute("user", user);//成功跳转到首页
-            resp.sendRedirect("http://localhost:8080/index.jsp");
+            resp.sendRedirect("http://59.110.162.160/OA/index.jsp");
         } else {                                    //不然跳转到登录页重新登录
-            resp.sendRedirect("http://localhost:8080/login.html");
+            resp.sendRedirect("http://59.110.162.160/OA/login.html");
         }
         return null;
     }
@@ -131,4 +131,6 @@ public class UserManagerController {
     public void setService(UserManagerService service) {
         this.service = service;
     }
+
+
 }
