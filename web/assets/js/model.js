@@ -18,6 +18,15 @@ function pageTest(obj) {
 
     window.location.href = "selectModel.do?currentPage=" + obj;
 }
+function pageTest1(obj) {
+
+    window.location.href = "selectStat.do?currentPage=" + obj;
+}
+function pageTest2(obj) {
+
+    window.location.href = "selectModel.do?currentPage=" + obj;
+}
+
 
 function add() {
     /*$('#show').css('display','block');*/

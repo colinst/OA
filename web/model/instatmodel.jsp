@@ -85,7 +85,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../userdata.html">
+                    <a href="../userdata.jsp">
                         <i class="ti-id-badge"></i>
                         <p>个人资料</p>
                     </a>
@@ -289,9 +289,10 @@
                         <div class="page">
                             <form action="selectStat.do" method="post">
                                 共<span>${page.allCount }</span>个统计
-                                <input type="button" value="首页" onclick="pageTest(0)">
-                                <input type="button" value="上一页" onclick="pageTest(${page.currentPage-1})">
-                                <input type="button" value="下一页" onclick="pageTest(${page.currentPage+1})">
+                                <input type="button" value="首页" onclick="pageTest2(0)">
+                                <input type="button" value="上一页" onclick="pageTest2(${page.currentPage-1})">
+                                <input type="button" value="下一页" onclick="pageTest2(${page.currentPage+1})">
+                                <input type="button" value="末页" onclick="pageTest2(${page.allPage})">
                                 第<span>${page.currentPage+1}</span>页
                                 共<span>${page.allPage}</span>页
                                 <input type="text" class="page-input" name="jumpPage" size="4">

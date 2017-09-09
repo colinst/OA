@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../userdata.html">
+                    <a href="../userdata.jsp">
                         <i class="ti-id-badge"></i>
                         <p>个人资料</p>
                     </a>
@@ -309,11 +309,11 @@
                         <div class="page">
                             <form action="selectStat.do" method="post">
                                 <div class="btn-group-sm divcss5-right">
-                                    <button type="button" class="btn btn-default" onclick="pageTest(0)">
+                                    <button type="button" class="btn btn-default" onclick="pageTest1(0)">
                                         <span class="ti-control-skip-backward"/>
                                     </button>
                                     <button type="button" class="btn btn-default"
-                                            onclick="pageTest(${page.currentPage-1})">
+                                            onclick="pageTest1(${page.currentPage-1})">
                                         <span class="ti-control-backward"/>
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="">
@@ -321,10 +321,10 @@
                                             id="aPage">${page.allPage}</span>
                                     </button>
                                     <button type="button" class="btn btn-default"
-                                            onclick="pageTest(${page.currentPage+1})">
+                                            onclick="pageTest1(${page.currentPage+1})">
                                         <span class="ti-control-forward"/>
                                     </button>
-                                    <button type="button" class="btn btn-default" onclick="">
+                                    <button type="button" class="btn btn-default" onclick="pageTest1(${page.allPage})">
                                         <span class="ti-control-skip-forward"/>
                                     </button>
                                 </div>

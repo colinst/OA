@@ -376,7 +376,7 @@
                                             onclick="pageTest(${page.currentPage+1})">
                                         <span class="ti-control-forward"/>
                                     </button>
-                                    <button type="button" class="btn btn-default" onclick="">
+                                    <button type="button" class="btn btn-default" onclick="pageTest(${page.allPage})">
                                         <span class="ti-control-skip-forward"/>
                                     </button>
                                 </div>

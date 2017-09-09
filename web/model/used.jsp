@@ -84,7 +84,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="userdata.html">
+                    <a href="userdata.jsp">
                         <i class="ti-id-badge"></i>
                         <p>个人资料</p>
                     </a>
