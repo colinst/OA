@@ -71,13 +71,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/model/selectModel.do">
+                    <a href="/OA/model/selectModel.do">
                         <i class="ti-view-list-alt"></i>
                         <p>模板管理</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/model/selectStat.do">
+                    <a href="/OA/model/selectStat.do">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
                     </a>
@@ -90,7 +90,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/model/selectInstat.do">
+                    <a href="/OA/model/selectInstat.do">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>
                     </a>
