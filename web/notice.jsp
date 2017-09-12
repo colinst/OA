@@ -95,18 +95,18 @@
                         <p>参与统计</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="notice.jsp">
-                        <i class="ti-bell"></i>
-                        <p>所有提醒</p>
-                    </a>
-                </li>
-                <li class="active-pro">
-                    <a href="#">
-                        <i class="ti-export"></i>
-                        <p>升级至PRO</p>
-                    </a>
-                </li>
+                <%--  <li class="active">
+                      <a href="notice.jsp">
+                          <i class="ti-bell"></i>
+                          <p>所有提醒</p>
+                      </a>
+                  </li>
+                  <li class="active-pro">
+                      <a href="#">
+                          <i class="ti-export"></i>
+                          <p>升级至PRO</p>
+                      </a>
+                  </li>--%>
             </ul>
         </div>
     </div>
@@ -125,19 +125,19 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-bell"></i>
-                                <p class="notification">3</p>
-                                <p>条提醒</p>
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">消息 1</a></li>
-                                <li><a href="#">消息 2</a></li>
-                                <li><a href="#">消息 3</a></li>
-                            </ul>
-                        </li>
+                        <%-- <li class="dropdown">
+                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                 <i class="ti-bell"></i>
+                                 <p class="notification">3</p>
+                                 <p>条提醒</p>
+                                 <b class="caret"></b>
+                             </a>
+                             <ul class="dropdown-menu">
+                                 <li><a href="#">消息 1</a></li>
+                                 <li><a href="#">消息 2</a></li>
+                                 <li><a href="#">消息 3</a></li>
+                             </ul>
+                         </li>--%>
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-panel"></i>
@@ -280,6 +280,7 @@
                                 Licenses
                             </a>
                         </li>
+
                     </ul>
                 </nav>
                 <div class="copyright pull-right">

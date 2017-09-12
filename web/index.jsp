@@ -97,18 +97,18 @@
             <p>参与统计</p>
           </a>
         </li>
-        <li>
-          <a href="notice.jsp">
-            <i class="ti-bell"></i>
-            <p>所有提醒</p>
-          </a>
-        </li>
-        <li class="active-pro">
-          <a href="#">
-            <i class="ti-export"></i>
-            <p>升级至PRO</p>
-          </a>
-        </li>
+          <%--<li>
+            <a href="notice.jsp">
+              <i class="ti-bell"></i>
+              <p>所有提醒</p>
+            </a>
+          </li>
+          <li class="active-pro">
+            <a href="#">
+              <i class="ti-export"></i>
+              <p>升级至PRO</p>
+            </a>
+          </li>--%>
       </ul>
     </div>
   </div>
@@ -123,23 +123,23 @@
             <span class="icon-bar bar2"></span>
             <span class="icon-bar bar3"></span>
           </button>
-          <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="#">首页</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="ti-bell"></i>
-                <p class="notification">3</p>
-                <p>条提醒</p>
-                <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="#">消息 1</a></li>
-                <li><a href="#">消息 2</a></li>
-                <li><a href="#">消息 3</a></li>
-              </ul>
-            </li>
+              <%--<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="ti-bell"></i>
+                  <p class="notification">3</p>
+                  <p>条提醒</p>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">消息 1</a></li>
+                  <li><a href="#">消息 2</a></li>
+                  <li><a href="#">消息 3</a></li>
+                </ul>
+              </li>--%>
             <li>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="ti-panel"></i>
@@ -156,188 +156,191 @@
         </div>
       </div>
     </nav>
-
-
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-3 col-sm-6">
-            <div class="card">
-              <div class="content">
-                <div class="row">
-                  <div class="col-xs-5">
-                    <div class="icon-big icon-warning text-center">
-                      <i class="ti-server"></i>
-                    </div>
-                  </div>
-                  <div class="col-xs-7">
-                    <div class="numbers">
-                      <p>统计</p>
-                      75%
-                    </div>
-                  </div>
-                </div>
-                <div class="footer">
-                  <hr/>
-                  <div class="stats">
-                    <i class="ti-reload"></i> 模板使用率
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="card">
-              <div class="content">
-                <div class="row">
-                  <div class="col-xs-5">
-                    <div class="icon-big icon-success text-center">
-                      <i class="ti-wallet"></i>
-                    </div>
-                  </div>
-                  <div class="col-xs-7">
-                    <div class="numbers">
-                      <p>最近发布</p>
-                      12
-                    </div>
-                  </div>
-                </div>
-                <div class="footer">
-                  <hr/>
-                  <div class="stats">
-                    <i class="ti-calendar"></i> 最近统计
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="card">
-              <div class="content">
-                <div class="row">
-                  <div class="col-xs-5">
-                    <div class="icon-big icon-danger text-center">
-                      <i class="ti-pulse"></i>
-                    </div>
-                  </div>
-                  <div class="col-xs-7">
-                    <div class="numbers">
-                      <p>返回统计</p>
-                      23
-                    </div>
-                  </div>
-                </div>
-                <div class="footer">
-                  <hr/>
-                  <div class="stats">
-                    <i class="ti-timer"></i> 近一小时内得到统计数目
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <div class="card">
-              <div class="content">
-                <div class="row">
-                  <div class="col-xs-5">
-                    <div class="icon-big icon-info text-center">
-                      <i class="ti-twitter-alt"></i>
-                    </div>
-                  </div>
-                  <div class="col-xs-7">
-                    <div class="numbers">
-                      <p>未完成</p>
-                      15%
-                    </div>
-                  </div>
-                </div>
-                <div class="footer">
-                  <hr/>
-                  <div class="stats">
-                    <i class="ti-reload"></i> 最新统计完成率
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-
-          <div class="col-md-12">
-            <div class="card">
-              <div class="header">
-                <h4 class="title">用户填表统计</h4>
-                <p class="category">24 小时内</p>
-              </div>
-              <div class="content">
-                <div id="chartHours" class="ct-chart"></div>
-                <div class="footer">
-                  <div class="chart-legend">
-                    <i class="fa fa-circle text-info"></i> 部门员工
-                    <i class="fa fa-circle text-danger"></i> 领导办公室
-                    <i class="fa fa-circle text-warning"></i> 部门经理
-                  </div>
-                  <hr>
-                  <div class="stats">
-                    <i class="ti-reload"></i> 3分钟前更新
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card">
-              <div class="header">
-                <h4 class="title">统计情况</h4>
-                <p class="category">当前最新统计的统计结果</p>
-              </div>
-              <div class="content">
-                <div id="chartPreferences" class="ct-chart ct-perfect-fourth">
-
-                </div>
-
-                <div class="footer">
-                  <div class="chart-legend">
-                    <i class="fa fa-circle text-info"></i> 部门员工
-                    <i class="fa fa-circle text-danger"></i> 领导办公室
-                    <i class="fa fa-circle text-warning"></i> 部门经理
-                  </div>
-                  <hr>
-                  <div class="stats">
-                    <i class="ti-timer"></i> 48小时内统计结果
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card ">
-              <div class="header">
-                <h4 class="title">8月统计情况</h4>
-                <p class="category">8月份所有的统计详情</p>
-              </div>
-              <div class="content">
-                <div id="chartActivity" class="ct-chart"></div>
-
-                <div class="footer">
-                  <div class="chart-legend">
-                    <i class="fa fa-circle text-info"></i> 模板使用
-                    <i class="fa fa-circle text-warning"></i> 统计使用
-                  </div>
-                  <hr>
-                  <div class="stats">
-                    <i class="ti-check"></i> 月度统计
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="col-md-12" style="width:1047px;height: 487px;text-align:center">
+          <h2>点击左侧进行操作！</h2>
+          <%--<img src="/OA/assets/img/sky.jpg">--%>
       </div>
-    </div>
+
+      <%--<div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 col-sm-6">
+              <div class="card">
+                <div class="content">
+                  <div class="row">
+                    <div class="col-xs-5">
+                      <div class="icon-big icon-warning text-center">
+                        <i class="ti-server"></i>
+                      </div>
+                    </div>
+                    <div class="col-xs-7">
+                      <div class="numbers">
+                        <p>统计</p>
+                        75%
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer">
+                    <hr/>
+                    <div class="stats">
+                      <i class="ti-reload"></i> 模板使用率
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="card">
+                <div class="content">
+                  <div class="row">
+                    <div class="col-xs-5">
+                      <div class="icon-big icon-success text-center">
+                        <i class="ti-wallet"></i>
+                      </div>
+                    </div>
+                    <div class="col-xs-7">
+                      <div class="numbers">
+                        <p>最近发布</p>
+                        12
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer">
+                    <hr/>
+                    <div class="stats">
+                      <i class="ti-calendar"></i> 最近统计
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="card">
+                <div class="content">
+                  <div class="row">
+                    <div class="col-xs-5">
+                      <div class="icon-big icon-danger text-center">
+                        <i class="ti-pulse"></i>
+                      </div>
+                    </div>
+                    <div class="col-xs-7">
+                      <div class="numbers">
+                        <p>返回统计</p>
+                        23
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer">
+                    <hr/>
+                    <div class="stats">
+                      <i class="ti-timer"></i> 近一小时内得到统计数目
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="card">
+                <div class="content">
+                  <div class="row">
+                    <div class="col-xs-5">
+                      <div class="icon-big icon-info text-center">
+                        <i class="ti-twitter-alt"></i>
+                      </div>
+                    </div>
+                    <div class="col-xs-7">
+                      <div class="numbers">
+                        <p>未完成</p>
+                        15%
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer">
+                    <hr/>
+                    <div class="stats">
+                      <i class="ti-reload"></i> 最新统计完成率
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="card">
+                <div class="header">
+                  <h4 class="title">用户填表统计</h4>
+                  <p class="category">24 小时内</p>
+                </div>
+                <div class="content">
+                  <div id="chartHours" class="ct-chart"></div>
+                  <div class="footer">
+                    <div class="chart-legend">
+                      <i class="fa fa-circle text-info"></i> 部门员工
+                      <i class="fa fa-circle text-danger"></i> 领导办公室
+                      <i class="fa fa-circle text-warning"></i> 部门经理
+                    </div>
+                    <hr>
+                    <div class="stats">
+                      <i class="ti-reload"></i> 3分钟前更新
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="header">
+                  <h4 class="title">统计情况</h4>
+                  <p class="category">当前最新统计的统计结果</p>
+                </div>
+                <div class="content">
+                  <div id="chartPreferences" class="ct-chart ct-perfect-fourth">
+
+                  </div>
+
+                  <div class="footer">
+                    <div class="chart-legend">
+                      <i class="fa fa-circle text-info"></i> 部门员工
+                      <i class="fa fa-circle text-danger"></i> 领导办公室
+                      <i class="fa fa-circle text-warning"></i> 部门经理
+                    </div>
+                    <hr>
+                    <div class="stats">
+                      <i class="ti-timer"></i> 48小时内统计结果
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card ">
+                <div class="header">
+                  <h4 class="title">8月统计情况</h4>
+                  <p class="category">8月份所有的统计详情</p>
+                </div>
+                <div class="content">
+                  <div id="chartActivity" class="ct-chart"></div>
+
+                  <div class="footer">
+                    <div class="chart-legend">
+                      <i class="fa fa-circle text-info"></i> 模板使用
+                      <i class="fa fa-circle text-warning"></i> 统计使用
+                    </div>
+                    <hr>
+                    <div class="stats">
+                      <i class="ti-check"></i> 月度统计
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>--%>
 
 
     <footer class="footer">
@@ -360,6 +363,7 @@
                 Licenses
               </a>
             </li>
+
           </ul>
         </nav>
         <div class="copyright pull-right">

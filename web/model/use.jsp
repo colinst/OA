@@ -121,17 +121,11 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Stat Manager</a>
+                    <a class="navbar-brand" href="#">模板管理</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-                                <p>管理员</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
+                        <%--<li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-bell"></i>
                                 <p class="notification">3</p>
@@ -139,16 +133,21 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Another notification</a></li>
+                                <li><a href="#">消息 1</a></li>
+                                <li><a href="#">消息 2</a></li>
+                                <li><a href="#">消息 3</a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li>
-                            <a href="#">
-                                <i class="ti-settings"></i>
-                                <p>设置</p>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="ti-panel"></i>
+                                <p>${user.userName}</p>
+                                <b class="caret"></b>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="userdata.jsp">个人信息</a></li>
+                                <li><a href="login.html">退出</a></li>
+                            </ul>
                         </li>
                     </ul>
 
@@ -179,23 +178,30 @@
                                         </thead>
 
                                         <tbody>
-
-                                        <tr>
+                                        <c:if test="${flag}">
+                                        <tr align="center">
                                             <td></td>
                                             <c:forEach items="${cus}" var="temp" varStatus="t">
                                                 <td colspan="${temp.num}">${temp.name}</td>
                                             </c:forEach>
 
                                         </tr>
-                                        <tr>
+                                        </c:if>
+                                        <tr align="center">
                                             <td><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
+                                                <select id="status">
+                                                    <option></option>
+                                                    <option value="0">管理员</option>
+                                                    <option value="1">用户</option>
+                                                </select>
                                             </td>
                                             <c:forEach items="${model.list}" var="temp" varStatus="t">
                                                 <td>${temp.columnName}</td>
                                             </c:forEach>
                                         </tr>
+                                        <tbody id="role">
                                         <c:forEach items="${users}" var="temp" varStatus="t">
-                                            <tr>
+                                            <tr align="center">
                                                 <td><input id="a" type="checkbox" name="subBox"
                                                            value="${temp.userId}"/>${temp.userName}</td>
                                                 <c:forEach items="${model.list}" var="temp" varStatus="t">
@@ -203,6 +209,7 @@
                                                 </c:forEach>
                                             </tr>
                                         </c:forEach>
+                                        </tbody>
                                         </tbody>
 
                                     </table>
@@ -223,11 +230,11 @@
 
                         <li>
                             <a href="#">
-                                Creative Tim
+                                Creative Team
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.mycodes.net">
+                            <a href="">
                                 Blog
                             </a>
                         </li>
@@ -236,11 +243,11 @@
                                 Licenses
                             </a>
                         </li>
+                        <%-- <li>富强、民主、文明、和谐、自由、平等、公正、法治、爱国、敬业、诚信、友善</li>--%>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    Copyright &copy; 2017.Company name All rights reserved.<a target="_blank"
-                                                                              href="http://www.mycodes.net/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    Copyright &copy; 2017.Company name All rights reserved.
                 </div>
             </div>
         </footer>

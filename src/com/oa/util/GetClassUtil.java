@@ -19,6 +19,18 @@ public class GetClassUtil {
         }
     }
 
+    public boolean getFlag(List<ModelColumnName> mcns) {
+        boolean flag = false;
+        for (int i = 0; i < mcns.size(); i++) {
+            String[] arr = mcns.get(i).getColumnName().split("\\.");
+            if (arr.length > 1) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
     public List<ClassUtil> getClassUtil(List<ModelColumnName> mcns) {
         List<ClassUtil> cus = new ArrayList<ClassUtil>();
         StringSameCount ssc = new StringSameCount();

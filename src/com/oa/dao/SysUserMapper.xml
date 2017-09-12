@@ -26,6 +26,11 @@
         *
         from sys_user
     </select>
+    <select id="selectByRole" resultMap="BaseResultMap" parameterType="com.oa.model.SysUser">
+        select
+        *
+        from sys_user where role=#{role};
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from sys_user

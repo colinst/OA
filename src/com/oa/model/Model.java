@@ -11,7 +11,16 @@ public class Model {
     private Integer createUserId;
 
     private Date createtime;
-    private Integer type;
+    private int type;
+    private SysUser user;
+
+    public SysUser getUser() {
+        return user;
+    }
+
+    public void setUser(SysUser user) {
+        this.user = user;
+    }
 
     private List<ModelColumnName> list;
     private List<ModelColumn> mc;
@@ -64,11 +73,11 @@ public class Model {
         this.mc = mc;
     }
 
-    public Integer getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(int type) {
         this.type = type;
     }
 

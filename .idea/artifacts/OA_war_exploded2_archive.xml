@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="OA:war exploded2 archive">
-    <output-path>$PROJECT_DIR$/out/artifacts/OA_war_exploded2_archive</output-path>
-    <root id="archive" name="OA_war exploded2 archive.war">
-      <element id="artifact" artifact-name="OA:war exploded2" />
-    </root>
-  </artifact>
-</component>

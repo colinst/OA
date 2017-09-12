@@ -105,7 +105,7 @@
                         <p>参与统计</p>
                     </a>
                 </li>
-                <li>
+                <%--<li>
                     <a href="../notice.jsp">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
@@ -116,7 +116,7 @@
                         <i class="ti-export"></i>
                         <p>升级至PRO</p>
                     </a>
-                </li>
+                </li>--%>
             </ul>
         </div>
     </div>
@@ -130,34 +130,33 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Model Manager</a>
+                    <a class="navbar-brand" href="#">统计管理</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <%-- <li class="dropdown">
+                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                 <i class="ti-bell"></i>
+                                 <p class="notification">3</p>
+                                 <p>条提醒</p>
+                                 <b class="caret"></b>
+                             </a>
+                             <ul class="dropdown-menu">
+                                 <li><a href="#">消息 1</a></li>
+                                 <li><a href="#">消息 2</a></li>
+                                 <li><a href="#">消息 3</a></li>
+                             </ul>
+                         </li>--%>
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-panel"></i>
-                                <p>管理员</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-bell"></i>
-                                <p class="notification">3</p>
-                                <p>条提醒</p>
+                                <p>${user.userName}</p>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Another notification</a></li>
+                                <li><a href="userdata.jsp">个人信息</a></li>
+                                <li><a href="login.html">退出</a></li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="ti-settings"></i>
-                                <p>设置</p>
-                            </a>
                         </li>
                     </ul>
 
@@ -260,32 +259,33 @@
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">
                                     <thead>
-                                    <th>编号</th>
-                                    <th>名称</th>
-                                    <th>创建人员</th>
-                                    <th>创建时间</th>
-                                    <th>操作</th>
+                                    <th style="text-align:center">编号</th>
+                                    <th style="text-align:center">名称</th>
+                                    <th style="text-align:center">创建人员</th>
+                                    <th style="text-align:center">创建时间</th>
+                                    <th style="text-align:center">操作</th>
                                     </thead>
                                     <tbody>
 
                                     <c:forEach items="${page.pageMessage }" var="temp" varStatus="t">
 
-                                        <tr>
+                                        <tr align="center">
 
                                             <td>${temp.modelId}</td>
                                             <td>${temp.modelName }</td>
-                                            <td>${temp.createUserId }</td>
+                                            <td>${temp.user.userName }</td>
                                             <td>
-                                                <fmt:formatDate value="${temp.createtime}" pattern="yyyy-MM-dd"/>
+                                                <fmt:formatDate value="${temp.createtime}"
+                                                                pattern="yyyy-MM-dd HH:mm:ss"/>
                                             </td>
                                             <td>
                                                 <div class="btn-group-sm">
                                                         <%--<button type="button" class="btn btn-default">
                                                             修改
                                                         </button>--%>
-                                                    <button type="button" class="btn btn-default">
+                                                        <%-- <button type="button" class="btn btn-default">--%>
                                                         <a href="statistics.do?modelId=${temp.modelId}&modelName=${temp.modelName}">查看 </a>
-                                                    </button>
+                                                        <%--</button>--%>
                                                         <%--<button type="button" class="btn btn-default">
                                                             删除
                                                         </button>--%>
@@ -308,34 +308,36 @@
                         </div>
                         <div class="page">
                             <form action="selectStat.do" method="post">
-                                <div class="btn-group-sm divcss5-right">
+                                <%--    <div class="btn-group-sm divcss5-right">
                                     <button type="button" class="btn btn-default" onclick="pageTest1(0)">
-                                        <span class="ti-control-skip-backward"/>
-                                    </button>
-                                    <button type="button" class="btn btn-default"
-                                            onclick="pageTest1(${page.currentPage-1})">
-                                        <span class="ti-control-backward"/>
-                                    </button>
-                                    <button type="button" class="btn btn-default" onclick="">
-                                        <span id="cPage">${page.currentPage+1}</span>/<span
-                                            id="aPage">${page.allPage}</span>
-                                    </button>
-                                    <button type="button" class="btn btn-default"
-                                            onclick="pageTest1(${page.currentPage+1})">
-                                        <span class="ti-control-forward"/>
-                                    </button>
-                                    <button type="button" class="btn btn-default" onclick="pageTest1(${page.allPage})">
-                                        <span class="ti-control-skip-forward"/>
-                                    </button>
-                                </div>
-                                <%--共<span>${page.allCount }</span>个表格
-                                <input type="button" value="首页" onclick="pageTest(0)">
-                                <input type="button" value="上一页" onclick="pageTest(${page.currentPage-1})">
-                                <input type="button" value="下一页" onclick="pageTest(${page.currentPage+1})">
+                                          <span class="ti-control-skip-backward"/>
+                                      </button>
+                                      <button type="button" class="btn btn-default"
+                                              onclick="pageTest1(${page.currentPage-1})">
+                                          <span class="ti-control-backward"/>
+                                      </button>
+                                      <button type="button" class="btn btn-default" onclick="">
+                                          <span id="cPage">${page.currentPage+1}</span>/<span
+                                              id="aPage">${page.allPage}</span>
+                                      </button>
+                                      <button type="button" class="btn btn-default"
+                                              onclick="pageTest1(${page.currentPage+1})">
+                                          <span class="ti-control-forward"/>
+                                      </button>
+                                      <button type="button" class="btn btn-default" onclick="pageTest1(${page.allPage})">
+                                          <span class="ti-control-skip-forward"/>
+                                      </button>--%>
+                                共<span>${page.allCount }</span>个统计
+                                <input type="button" value="首页" onclick="pageTest1(0)">
+                                <input type="button" value="上一页" onclick="pageTest1(${page.currentPage-1})">
+                                <input type="button" value="下一页" onclick="pageTest1(${page.currentPage+1})">
+                                <input type="button" value="末页" onclick="pageTest1(${page.allPage})">
                                 第<span>${page.currentPage+1}</span>页
                                 共<span>${page.allPage}</span>页
                                 <input type="text" class="page-input" name="jumpPage" size="4">
-                                <input type="submit" class="page-btn" value="跳转">--%>
+                                <input type="submit" class="page-btn" value="跳转">
+                                <%--</div>--%>
+
                             </form>
                         </div>
                     </div>
@@ -352,11 +354,11 @@
 
                         <li>
                             <a href="#">
-                                Creative Tim
+                                Creative Team
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.mycodes.net">
+                            <a href="">
                                 Blog
                             </a>
                         </li>
@@ -365,11 +367,11 @@
                                 Licenses
                             </a>
                         </li>
+                        <%--<li>富强、民主、文明、和谐、自由、平等、公正、法治、爱国、敬业、诚信、友善</li>--%>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    Copyright &copy; 2017.Company name All rights reserved.<a target="_blank"
-                                                                              href="/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    Copyright &copy; 2017.Company name All rights reserved.
                 </div>
             </div>
         </footer>

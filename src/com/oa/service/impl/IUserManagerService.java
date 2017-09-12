@@ -27,6 +27,8 @@ public interface IUserManagerService {
 
     List selectAll();
 
+    List selectByRole(SysUser record);
+
     List getUsers(Map map);
 
     SysUser getUser(Map map);

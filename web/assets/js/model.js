@@ -24,7 +24,7 @@ function pageTest1(obj) {
 }
 function pageTest2(obj) {
 
-    window.location.href = "selectModel.do?currentPage=" + obj;
+    window.location.href = "selectInstat.do?currentPage=" + obj;
 }
 
 
@@ -149,4 +149,32 @@ var tableToExcel = (function () {
         var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
         window.location.href = uri + base64(format(template, ctx))
     }
-})()
+})
+
+/*$(document).ready(function() {*/
+
+$("select#status").change(function () {
+    var role = $(this).val();
+
+    $.ajax({
+        url: '/OA/model/ajax.do',
+        type: 'post',
+        data: {role: role},
+        dataType: 'json',
+        success: function (data) {
+
+            //清空表格数据
+            $("#role").children().remove();
+            //将数据添加到表格中
+            $.each(data, function (ci, c) { //ci是索引 c是遍历数组的对象
+                $("#role").append("<tr align='center'><td><input id='a' type='checkbox' name='subBox' value='" + c['userId'] + "'/>" + c['userName'] + "</td ><td colspan='30'></td></tr>");
+
+            });
+
+        }
+
+
+    });
+});
+/*
+ }*/

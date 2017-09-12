@@ -1,5 +1,6 @@
 package com.oa.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.oa.dao.ModelColumnMapper;
 import com.oa.model.*;
 import com.oa.service.ModelColumnNameService;
@@ -11,6 +12,7 @@ import com.oa.util.GetClassUtil;
 import com.oa.util.PageControlUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +45,7 @@ public class ModelConeroller {
     @RequestMapping("/selectModel.do")
     public String selectModel(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
         SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
         Model model = new Model();
         model.setCreateUserId(user.getUserId());
         Page page = new Page(modelService.selectCount());
@@ -50,6 +53,9 @@ public class ModelConeroller {
         PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
 
         List<Model> list = modelService.selectPageSplit(page);
+        for (int a = 0; a < list.size(); a++) {
+            list.get(a).setUser(userManagerService.selectByPrimaryKey(list.get(a).getCreateUserId()));
+        }
         page.setPageMessage(list);
         request.setAttribute("page", page);
         return "/model/model.jsp";
@@ -64,6 +70,11 @@ public class ModelConeroller {
             request.setAttribute("message", "表名为空不能使用！");
             return "selectModel.do";
         }
+
+        if (model.getList() == null) {
+            request.setAttribute("message", "表内容为空不能使用！");
+            return "selectModel.do";
+        }
         boolean flag = true;
         for (ModelColumnName mcn : model.getList()) {
             if (mcn.getColumnName() != "") {
@@ -76,15 +87,17 @@ public class ModelConeroller {
             return "selectModel.do";
         }
         SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
         model.setCreateUserId(user.getUserId());
         modelService.insert(model);
         model.setModelId(modelService.selectId());
-        request.setAttribute("modelName", model.getModelName());
+        /*request.setAttribute("modelName", model.getModelName());
         request.setAttribute("model", model);
         // List<SysUser> su = userManagerService.selectAll();
         request.setAttribute("length", model.getList().size() + 1);
         request.setAttribute("users", userManagerService.selectAll());
-        return "/model/use.jsp";
+        return "/model/use.jsp";*/
+        return "selectModel.do";
     }
 
     //使用表格
@@ -92,13 +105,14 @@ public class ModelConeroller {
     public String useModel(Model model, HttpServletRequest request, HttpSession session) {
 
         SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
         SysUser sysUser = userManagerService.selectByPrimaryKey(user.getUserId());
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
         for (ModelColumn modelColumn : mc) {
             mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
         }
-
+        request.setAttribute("flag", new GetClassUtil().getFlag(mcn));
         model.setMc(mc);
 
         Model m = modelService.selectByPrimaryKey(model.getModelId());
@@ -121,17 +135,27 @@ public class ModelConeroller {
     // 删除表格
     @RequestMapping("/delModel.do")
     public String delModel(Model model, HttpServletRequest request, HttpSession session) {
+        Model model1 = modelService.selectByPrimaryKey(model.getModelId());
+        SysUser user = (SysUser) session.getAttribute("user");
+        if (user.getUserId().intValue() != model1.getCreateUserId().intValue()) {
+            request.setAttribute("message", "不能删除其他人创建的表格！");
+            return "selectModel.do";
+        } else if (model1.getType() == 1) {
+            request.setAttribute("message", "已发起统计不能删除！");
+            return "selectModel.do";
+        } else {
+            modelService.deleteByPrimaryKey(model.getModelId());
+            request.setAttribute("message", "删除成功！");
+            return "selectModel.do";
+        }
 
-        modelService.deleteByPrimaryKey(model.getModelId());
-        request.setAttribute("message", "删除成功");
-
-        return "selectModel.do";
     }
 
     //发起统计
     @RequestMapping("/statModel.do")
     public String statModel(Model model, HttpServletRequest request, HttpSession session) {
         SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
         String str = model.getTemp();
         model = modelService.selectByPrimaryKey(model.getModelId());
         model.setTemp(str);
@@ -144,8 +168,14 @@ public class ModelConeroller {
             request.setAttribute("message", "未选择人员请重新发布！");
             return "selectModel.do";
         }
+
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
-        if (model.getModelName() != model.getTemp() || model.getType() == 1) {
+        /*List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
+        for (ModelColumn modelColumn : mc) {
+            mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
+        }*/
+        boolean flag = model.getModelName().equals(model.getTemp());
+        if (!model.getModelName().equals(model.getTemp()) || model.getType() == 1) {
             model.setModelName(model.getTemp());
             model.setCreateUserId(user.getUserId());
             int a = modelService.insertOne(model);
@@ -156,6 +186,7 @@ public class ModelConeroller {
 
             }
             modelColumnService.addModelAndColumn(mc);
+           /* modelColumnNameService.addColumn(mcn);*/
 
         }
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
@@ -181,6 +212,7 @@ public class ModelConeroller {
             stats.add(stat);
         }
         statService.addStats(stats);
+
         request.setAttribute("message", "统计发布成功！");
         modelService.updateType(model);
         return "selectModel.do";
@@ -192,11 +224,15 @@ public class ModelConeroller {
 
         Model model = new Model();
         SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
         model.setCreateUserId(user.getUserId());
         Page page = new Page(modelService.selectStatCount(model));
         PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
         page.setModel(model);
         List<Model> list = modelService.selectStatPageSplit(page);
+        for (int a = 0; a < list.size(); a++) {
+            list.get(a).setUser(userManagerService.selectByPrimaryKey(list.get(a).getCreateUserId()));
+        }
         page.setPageMessage(list);
         request.setAttribute("page", page);
         return "/model/statmodel.jsp";
@@ -205,12 +241,15 @@ public class ModelConeroller {
     //查看统计情况
     @RequestMapping("/statistics.do")
     public String statMessage(Model model, HttpServletRequest request, HttpSession session) {
-
+        SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
         for (ModelColumn modelColumn : mc) {
             mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
         }
+        Boolean flag = new GetClassUtil().getFlag(mcn);
+        request.setAttribute("flag", new GetClassUtil().getFlag(mcn));
         model.setMc(mc);
 
         List<ClassUtil> cus = new GetClassUtil().getClassUtil(mcn);
@@ -251,6 +290,7 @@ public class ModelConeroller {
 
         Model model = new Model();
         SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
 
         List<Stat> stats = statService.selectByUserId(user.getUserId());
         List<Model> models = new ArrayList<Model>();
@@ -260,6 +300,9 @@ public class ModelConeroller {
         Page page = new Page(stats.size());
         PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
         page.setModel(model);
+        for (int a = 0; a < models.size(); a++) {
+            models.get(a).setUser(userManagerService.selectByPrimaryKey(models.get(a).getCreateUserId()));
+        }
         page.setPageMessage(models);
         request.setAttribute("page", page);
         return "/model/instatmodel.jsp";
@@ -268,13 +311,15 @@ public class ModelConeroller {
     //提交统计
     @RequestMapping("/writeInstat.do")
     public String writeInstat(Model model, HttpServletRequest request, HttpSession session) {
-
+        SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
 
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
         List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
         for (ModelColumn modelColumn : mc) {
             mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
         }
+        request.setAttribute("flag", new GetClassUtil().getFlag(mcn));
         model.setMc(mc);
 
         List<ClassUtil> cus = new GetClassUtil().getClassUtil(mcn);
@@ -294,6 +339,7 @@ public class ModelConeroller {
     public String writeSubmit(Model model, HttpServletRequest request, HttpSession session) {
 
         SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
 
         List<ModelColumn> modelColumns = modelColumnService.selectAll(model.getModelId());
         List<StatCount> statCounts = new ArrayList<StatCount>();
@@ -313,6 +359,18 @@ public class ModelConeroller {
         request.setAttribute("message", "提交成功！");
         return "selectInstat.do";
     }
+
+    @RequestMapping(value = "/ajax.do", produces = "text/plain;charset=utf8")
+    @ResponseBody  //返回ajax数据
+    public String ajax(SysUser user) {
+
+        List<SysUser> list = userManagerService.selectByRole(user);
+        //数据转换成JSON格式的字符串
+        String u = JSONArray.toJSONString(list);
+        return u;
+    }
+
+
 
 
 }

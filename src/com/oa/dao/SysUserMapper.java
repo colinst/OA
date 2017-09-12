@@ -20,6 +20,8 @@ public interface SysUserMapper {
 
     List selectAll();
 
+    List selectByRole(SysUser record);
+
     List getUsers(Map map);
 
     SysUser getUser(Map map);

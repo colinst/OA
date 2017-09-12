@@ -57,6 +57,11 @@ public class UserManagerService  implements IUserManagerService {
     }
 
     @Override
+    public List selectByRole(SysUser record) {
+        return sysUserMapper.selectByRole(record);
+    }
+
+    @Override
     public int getCount() {
         return sysUserMapper.getCount();
     }

@@ -96,18 +96,18 @@
                         <p>参与统计</p>
                     </a>
                 </li>
-                <li>
-                    <a href="../notice.jsp">
-                        <i class="ti-bell"></i>
-                        <p>所有提醒</p>
-                    </a>
-                </li>
-                <li class="active-pro">
-                    <a href="#">
-                        <i class="ti-export"></i>
-                        <p>升级至PRO</p>
-                    </a>
-                </li>
+                <%-- <li>
+                     <a href="../notice.jsp">
+                         <i class="ti-bell"></i>
+                         <p>所有提醒</p>
+                     </a>
+                 </li>
+                 <li class="active-pro">
+                     <a href="#">
+                         <i class="ti-export"></i>
+                         <p>升级至PRO</p>
+                     </a>
+                 </li>--%>
             </ul>
         </div>
     </div>
@@ -122,11 +122,11 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Home</a>
+                    <a class="navbar-brand" href="#">统计管理</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
+                        <%--<li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-bell"></i>
                                 <p class="notification">3</p>
@@ -138,7 +138,7 @@
                                 <li><a href="#">消息 2</a></li>
                                 <li><a href="#">消息 3</a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-panel"></i>
@@ -147,7 +147,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="userdata.jsp">个人信息</a></li>
-                                <li><a href="#">退出</a></li>
+                                <li><a href="login.html">退出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -178,13 +178,15 @@
                                     </thead>
                                     <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
                                         <tbody>
-                                        <tr align="center">
-                                            <td></td>
-                                            <c:forEach items="${cus}" var="temp" varStatus="t">
-                                                <td colspan="${temp.num}">${temp.name}</td>
-                                            </c:forEach>
+                                        <c:if test="${flag}">
+                                            <tr align="center">
+                                                <td></td>
+                                                <c:forEach items="${cus}" var="temp" varStatus="t">
+                                                    <td colspan="${temp.num}">${temp.name}</td>
+                                                </c:forEach>
 
-                                        </tr>
+                                            </tr>
+                                        </c:if>
                                         <tr align="center">
                                             <td></td>
                                             <c:forEach items="${model.list}" var="temp" varStatus="t">
@@ -220,11 +222,11 @@
 
                         <li>
                             <a href="#">
-                                Creative Tim
+                                Creative Team
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.mycodes.net">
+                            <a href="">
                                 Blog
                             </a>
                         </li>
@@ -233,6 +235,7 @@
                                 Licenses
                             </a>
                         </li>
+                        <%--<li>富强、民主、文明、和谐、自由、平等、公正、法治、爱国、敬业、诚信、友善</li>--%>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">

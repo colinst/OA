@@ -6,9 +6,10 @@
         <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="create_user_id" jdbcType="INTEGER" property="createUserId"/>
         <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
     </resultMap>
     <sql id="Base_Column_List">
-        model_id, model_name, create_user_id, createtime
+        model_id, model_name, create_user_id, createtime,type
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -17,8 +18,8 @@
         where model_id = #{modelId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from model
-        where model_id = #{modelId,jdbcType=INTEGER}
+        DELETE model,model_column from model,model_column where model.model_id=model_column.model_id
+        and model.model_id = #{modelId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.oa.model.Model" useGeneratedKeys="true" keyProperty="model_id">
         insert into model (model_name, create_user_id,
@@ -103,7 +104,7 @@
     <select id="selectPageSplit" parameterType="com.oa.model.Page" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from model where create_user_id=#{model.createUserId} or create_user_id=2017
+        from model
         order by createtime desc LIMIT #{start},#{count}
     </select>
     <update id="updateType" parameterType="com.oa.model.Model">
@@ -117,6 +118,7 @@
         from model where type=1 and create_user_id=#{model.createUserId}
         order by createtime desc LIMIT #{start},#{count}
     </select>
+    <!-- where create_user_id=#{model.createUserId} or create_user_id=2017-->
 
 
 </mapper>

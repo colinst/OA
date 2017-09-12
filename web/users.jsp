@@ -395,7 +395,7 @@
                         <p>参与统计</p>
                     </a>
                 </li>
-                <li>
+                <%--<li>
                     <a href="notice.jsp">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
@@ -406,7 +406,7 @@
                         <i class="ti-export"></i>
                         <p>升级至PRO</p>
                     </a>
-                </li>
+                </li>--%>
             </ul>
         </div>
     </div>
@@ -421,11 +421,11 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Home</a>
+                    <a class="navbar-brand" href="#">用户管理</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
+                        <%--<li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-bell"></i>
                                 <p class="notification">3</p>
@@ -437,7 +437,7 @@
                                 <li><a href="#">消息 2</a></li>
                                 <li><a href="#">消息 3</a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-panel"></i>
@@ -495,8 +495,9 @@
                                     <th>操作</th>
                                     </thead>
                                     <tbody id="context">
-                                    <tr>
-                                        <td>1</td>
+
+                                    <%--<tr>
+                                        <td></td>
                                         <td>Dakota Rice</td>
                                         <td>$36,738</td>
                                         <td>Niger</td>
@@ -512,61 +513,7 @@
                                                 </button>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                        <td>Oud-Turnhout</td>
-                                        <td>
-                                            <div class="btn-group-sm">
-                                                <button type="button" class="btn btn-default">
-                                                    修改
-                                                </button>
-                                                <button type="button" class="btn btn-default">
-                                                    删除
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                        <td>Oud-Turnhout</td>
-                                        <td>
-                                            <div class="btn-group-sm">
-                                                <button type="button" class="btn btn-default">
-                                                    修改
-                                                </button>
-                                                <button type="button" class="btn btn-default">
-                                                    删除
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                        <td>Oud-Turnhout</td>
-                                        <td>
-                                            <div class="btn-group-sm">
-                                                <button type="button" class="btn btn-default">
-                                                    修改
-                                                </button>
-                                                <button type="button" class="btn btn-default">
-                                                    删除
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    </tr>--%>
                                     </tbody>
                                 </table>
                                 <div class="btn-group-sm divcss5-right">
@@ -760,11 +707,11 @@
                                 Licenses
                             </a>
                         </li>
+                        <%--<li>富强、民主、文明、和谐、自由、平等、公正、法治、爱国、敬业、诚信、友善</li>--%>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    Copyright &copy; 2017.Company name All rights reserved.<a target="_blank"
-                                                                              href="/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    Copyright &copy; 2017.Company name All rights reserved.
                 </div>
             </div>
         </footer>

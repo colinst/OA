@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <title>系统登录页面</title>
 
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
@@ -11,12 +12,15 @@
   <style>
 
     body {
-      background: #e9e9e9;
+        /* background: #e9e9e9;*/
+        background: #B1DADE;
       color: #666666;
+
       font-family: 'RobotoDraft', 'Roboto', sans-serif;
       font-size: 14px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+        margin: 0;
     }
 
     /* Pen Title */
@@ -97,13 +101,13 @@
     }
 
     .form-module .form {
-      display: none;
+        /* display: none;*/
       padding: 40px;
     }
 
-    .form-module .form:nth-child(2) {
-      display: block;
-    }
+    /* .form-module .form:nth-child(2) {
+       display: block;
+     }*/
 
     .form-module h2 {
       margin: 0 0 20px;
@@ -166,7 +170,7 @@
 <body>
 
 <div class="pen-title">
-  <h1>综合评分统计系统</h1><span>群策，助理企业服务</span>
+    <h1>综合评分统计系统</h1><span>群策，助力企业服务</span>
 </div>
 <!-- Form Module-->
 <div class="module form-module">
@@ -177,21 +181,21 @@
   <div class="form">
     <h2>请输入你的账户</h2>
       <form action="/OA/user/login.do" method="post">
-        <input type="text" placeholder="账号" id="account" name="account" value=""/>
-        <input type="password" placeholder="密码" id="password" name="password" value=""/>
+          <input type="text" placeholder="账号" id="account" name="account" value=""/>
+          <input type="password" placeholder="密码" id="password" name="password" value=""/>
       <button type="submit">登录</button>
     </form>
   </div>
-  <div class="form">
-    <h2>Create an account</h2>
-    <form>
-      <input type="text" placeholder="Username"/>
-      <input type="password" placeholder="Password"/>
-      <input type="email" placeholder="Email Address"/>
-      <input type="tel" placeholder="Phone Number"/>
-      <button>Register</button>
-    </form>
-  </div>
+    <!--<div class="form">
+      <h2>Create an account</h2>
+      <form>
+        <input type="text" placeholder="Username"/>
+        <input type="password" placeholder="Password"/>
+        <input type="email" placeholder="Email Address"/>
+        <input type="tel" placeholder="Phone Number"/>
+        <button>Register</button>
+      </form>
+    </div>-->
   <div class="cta"><a href="#">如需注册请联系管理员</a></div>
 </div>
 <script src='assets/js/jquery-1.10.2.js'></script>
