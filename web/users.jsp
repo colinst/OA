@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-    <title></title>
+    <title>用户管理</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="viewport" content="width=device-width"/>
@@ -206,7 +206,7 @@
                 $("#passwordd").hide()
                 $("#password").val(null)
 
-                $("#former").attr("action", "/user/updateSelective.do")
+                $("#former").attr("action", "/OA/user/updateSelective.do")
                 $("#act").text("更新")
             }
         }
@@ -496,7 +496,7 @@
                                     </thead>
                                     <tbody id="context">
 
-                                    <%--<tr>
+                                <%--<tr>
                                         <td></td>
                                         <td>Dakota Rice</td>
                                         <td>$36,738</td>
