@@ -626,7 +626,7 @@
                                                     <%--<input id="role" name="role" type="text"
                                                            class="form-control border-input"
                                                            placeholder="1(用户)0(管理)">--%>
-                                                    <select id="role">
+                                                    <select id="role" class="form-control border-input">
                                                         <option value="1" <c:if test="${user.role =='1'}">selected</c:if> >用户</option>
                                                         <option value="0" <c:if test="${user.role =='0'}">selected</c:if> >管理员</option>
                                                     </select>
