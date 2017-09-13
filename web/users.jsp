@@ -63,7 +63,7 @@
 
                 if (c['role'] == 1) c['role'] = '用户'
                 else if (c['role'] == 0) c['role'] = '管理员'
-                $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getUpinsert(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getUpinsert(" + ci + ")'>修改</button><button type='button' class='btn btn-default' onclick='delUser(" + ci + ")'>删除</button></div></td></tr>");
+                $("#context").append("<tr><td>" + c['userId'] + "</td><td><p onclick='getUpinsert(" + ci + ")'>" + c['account'] + "</p></td><td>" + c['userName'] + "</td><td>" + c['dep'] + "</td><td>" + c['role'] + "</td><td>" + c['number'] + "</td><td><div class='btn-group-sm'><button type='button' class='btn btn-default' onclick='getUpinsert(" + ci + ")'><a href='#former'>修改</a></button><button type='button' class='btn btn-default' onclick='delUser(" + ci + ")'>删除</button></div></td></tr>");
             });
         }
 
@@ -473,7 +473,7 @@
                                 <table class="table table-hover" id="usertable">
                                     <div class="btn-group-sm ">
                                         <button type="button" class="btn btn-default" onclick="getUpinsert(-10)">
-                                            新增
+                                            <a href='#former'>新增</a>
                                         </button>
                                         <button type="button" class="btn btn-default" style="display: none">
                                             打印
