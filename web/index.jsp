@@ -158,63 +158,63 @@
     </nav>
       <div class="col-md-12" style="width:1047px;height: 487px;text-align:center">
           <h2>点击左侧进行操作！</h2>
-          <%--<img src="/OA/assets/img/sky.jpg">--%>
+          <img src="/OA/assets/img/sky.jpg">
       </div>
 
-      <%--<div class="content">
+      <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6" href="#">
               <div class="card">
                 <div class="content">
                   <div class="row">
                     <div class="col-xs-5">
                       <div class="icon-big icon-warning text-center">
-                        <i class="ti-server"></i>
+                        <i class="ti-home"></i>
                       </div>
                     </div>
                     <div class="col-xs-7">
                       <div class="numbers">
-                        <p>统计</p>
-                        75%
+                        <p>首页</p>
+                        ~
                       </div>
                     </div>
                   </div>
                   <div class="footer">
                     <hr/>
                     <div class="stats">
-                      <i class="ti-reload"></i> 模板使用率
+                      <i class="ti-reload"></i> 这里是首页
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6" href="userdata.jsp">
               <div class="card">
                 <div class="content">
                   <div class="row">
                     <div class="col-xs-5">
                       <div class="icon-big icon-success text-center">
-                        <i class="ti-wallet"></i>
+                        <i class="ti-id-badge"></i>
                       </div>
                     </div>
                     <div class="col-xs-7">
                       <div class="numbers">
-                        <p>最近发布</p>
-                        12
+                        <p>个人信息</p>
+                        ~
                       </div>
                     </div>
                   </div>
                   <div class="footer">
                     <hr/>
                     <div class="stats">
-                      <i class="ti-calendar"></i> 最近统计
+                      <i class="ti-calendar"></i> 您可以更改个人资料
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <%--<div class="col-lg-3 col-sm-6">
               <div class="card">
                 <div class="content">
                   <div class="row">
@@ -263,9 +263,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>--%>
           </div>
-          <div class="row">
+          <%--<div class="row">
 
             <div class="col-md-12">
               <div class="card">
@@ -338,9 +338,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>--%>
         </div>
-      </div>--%>
+      </div>
 
 
     <footer class="footer">
