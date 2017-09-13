@@ -78,13 +78,12 @@
             //第一行渲染
             $(heads[0]).children().remove()
             $(heads[0]).append("<th>用户</th>")
-            $(heads[0]).attr("border","1")
-            $(heads[0]).attr("cellspacing","0")
+
 
             for (var i = 0; i < columns.length; i++) {
 
                 columns[i] = columns[i].split(".")
-                $(heads[0]).append("<th align='center'>" + columns[i][rowsn - 1] + "</th>")
+                $(heads[0]).append("<th>" + columns[i][rowsn - 1] + "</th>")
             }
 
             //其他行渲染
@@ -110,11 +109,10 @@
                 //渲染
                 $(heads[k + 1]).children().remove()
                 $(heads[k + 1]).append("<th></th>")
-                $(heads[k+1]).attr("border","1")
-                $(heads[K+1]).attr("cellspacing","0")
+
                 for (var i = 0; i < arr.length; i++) {
 
-                    $(heads[k + 1]).append("<th align='center' colspan='" + arr[i]['number'] + "'>" + arr[i]['column'] + "</th>")
+                    $(heads[k + 1]).append("<th colspan='" + arr[i]['number'] + "'>" + arr[i]['column'] + "</th>")
                 }
 
                 //清空
