@@ -23,4 +23,6 @@ public interface IStatService {
 
     List<Stat> selectByUserId(Integer userId);
 
+    List<Stat> yselectByUserId(Integer userId);//已完成
+
 }

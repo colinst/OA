@@ -62,6 +62,11 @@ public class StatService implements IStatService {
         return statMapper.selectByUserId(userId);
     }
 
+    @Override
+    public List<Stat> yselectByUserId(Integer userId) {
+        return statMapper.yselectByUserId(userId);
+    }
+
     public StatMapper getStatMapper() {
         return statMapper;
     }

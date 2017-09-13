@@ -21,5 +21,7 @@ public interface StatMapper {
 
     List<Stat> selectByStatId(Integer statId);
 
-    List<Stat> selectByUserId(Integer userId);
+    List<Stat> selectByUserId(Integer userId);//未完成
+
+    List<Stat> yselectByUserId(Integer userId);//已完成
 }

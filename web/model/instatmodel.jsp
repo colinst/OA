@@ -146,7 +146,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="userdata.jsp">个人信息</a></li>
-                                <li><a href="/OA/login.html">退出</a></li>
+                                <li><a href="../login.html">退出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -243,8 +243,8 @@
                     <div class="col-md-12" id="model">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">参与统计</h4>
-                                <p class="category">需要您参与以下统计
+                                <h4 class="title"><a href="stat.do">已完成统计</a></h4>
+                                <p class="category"><a href="/OA/model/selectInstat.do">需要您参与以下统计</a>
                                 <h3 id="message"><%--&nbsp;   &nbsp;   &nbsp;   &nbsp;--%>${message}</h3></p>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -272,10 +272,11 @@
                                             <td>
 
 
-                                                <a href="writeInstat.do?modelId=${temp.modelId}&modelName=${temp.modelName}">填写
-                                                </a> <%--<a href="newsdelete?news.newsId=${temp.newsId }" onclick="return window.confirm('你确定要删除该新闻吗')">删除</a>--%>
+                                                <a href="javascript:void(0);location='writeInstat.do?modelId=${temp.modelId}&modelName=${temp.modelName}'">填写</a>
 
-
+                                                    <%--<a href="javascript:void(0);" onclick="js_method1(${temp.modelId},'${temp.modelName}')">填写 </a>
+                                                        <form action="writeInstat.do?modelId=${temp.modelId}&modelName=${temp.modelName}" method="post" id="js_method1"></form>
+                                                        <a onclick="js_method1()">填写</a>--%>
                                             </td>
                                         </tr>
                                     </c:forEach>

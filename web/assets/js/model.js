@@ -58,6 +58,18 @@ function write_submit() {
         document.getElementById('writeinstat').submit();
     }
 }
+/*function js_method(obj1,obj2) {
+ /!*window.location.href="statistics.do?modelId="+obj1+"&modelName="+obj2;*!/
+ document.getElementById('js_method').submit();
+ }
+ function js_method1(obj1,obj2) {
+ /!* window.location.href="writeInstat.do?modelId="+obj1+"&modelName="+obj2;*!/
+ document.getElementById('js_method1').submit();
+ }
+ function js_method2(obj1,obj2) {
+ /!* window.location.href="useModel.do?modelId="+obj1+"&modelName="+obj2;*!/
+ document.getElementById('js_method2').submit();
+ }*/
 
 var isCheckAll = false;
 function swapCheck() {
@@ -149,7 +161,7 @@ var tableToExcel = (function () {
         var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
         window.location.href = uri + base64(format(template, ctx))
     }
-})
+})()
 
 /*$(document).ready(function() {*/
 

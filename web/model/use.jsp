@@ -96,7 +96,7 @@
                         <p>参与统计</p>
                     </a>
                 </li>
-                <li>
+                <%--<li>
                     <a href="../notice.html">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
@@ -107,7 +107,7 @@
                         <i class="ti-export"></i>
                         <p>升级至PRO</p>
                     </a>
-                </li>
+                </li>--%>
             </ul>
         </div>
     </div>
@@ -146,7 +146,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="userdata.jsp">个人信息</a></li>
-                                <li><a href="login.html">退出</a></li>
+                                <li><a href="../login.html">退出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -190,7 +190,7 @@
                                         <tr align="center">
                                             <td><input type="checkbox" id="checkAll" onclick="swapCheck()"/>全选
                                                 <select id="status">
-                                                    <option></option>
+                                                    <option value="2">全部</option>
                                                     <option value="0">管理员</option>
                                                     <option value="1">用户</option>
                                                 </select>

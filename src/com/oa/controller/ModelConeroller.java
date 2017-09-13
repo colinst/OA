@@ -308,6 +308,62 @@ public class ModelConeroller {
         return "/model/instatmodel.jsp";
     }
 
+    //已参与统计
+    @RequestMapping("/stat.do")
+    public String stat(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
+
+        Model model = new Model();
+        SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
+
+        List<Stat> stats = statService.yselectByUserId(user.getUserId());
+        request.setAttribute("stats", stats);
+        List<Model> models = new ArrayList<Model>();
+        for (int i = stats.size() - 1; i >= 0; i--) {
+            models.add(modelService.selectByPrimaryKey(stats.get(i).getStatId()));
+        }
+        Page page = new Page(stats.size());
+        PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
+        page.setModel(model);
+        for (int a = 0; a < models.size(); a++) {
+            models.get(a).setUser(userManagerService.selectByPrimaryKey(models.get(a).getCreateUserId()));
+        }
+        page.setPageMessage(models);
+        request.setAttribute("page", page);
+        return "/model/stat.jsp";
+    }
+
+    //查看统计
+    @RequestMapping("/lstat.do")
+    public String lstat(Model model, HttpServletRequest request, HttpSession session) {
+        SysUser user = (SysUser) session.getAttribute("user");
+        request.setAttribute("user", user);
+
+        List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
+        List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
+        for (ModelColumn modelColumn : mc) {
+            mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
+        }
+        request.setAttribute("flag", new GetClassUtil().getFlag(mcn));
+        model.setMc(mc);
+
+        List<ClassUtil> cus = new GetClassUtil().getClassUtil(mcn);
+        new GetClassUtil().setMcnsName(mcn);
+        model.setList(mcn);
+        StatCount sc = new StatCount();
+        sc.setModelId(model.getModelId());
+        sc.setUserId(user.getUserId());
+        List<StatCount> scs = statCountService.selectByUser(sc);
+        request.setAttribute("scs", scs);
+        request.setAttribute("cus", cus);
+
+        request.setAttribute("modelName", model.getModelName());
+        request.setAttribute("model", model);
+        request.setAttribute("length", mcn.size() + 1);
+
+        return "/model/lstat.jsp";
+    }
+
     //提交统计
     @RequestMapping("/writeInstat.do")
     public String writeInstat(Model model, HttpServletRequest request, HttpSession session) {
@@ -363,8 +419,12 @@ public class ModelConeroller {
     @RequestMapping(value = "/ajax.do", produces = "text/plain;charset=utf8")
     @ResponseBody  //返回ajax数据
     public String ajax(SysUser user) {
-
-        List<SysUser> list = userManagerService.selectByRole(user);
+        List<SysUser> list;
+        if (user.getRole() == 2) {
+            list = userManagerService.selectAll();
+        } else {
+            list = userManagerService.selectByRole(user);
+        }
         //数据转换成JSON格式的字符串
         String u = JSONArray.toJSONString(list);
         return u;

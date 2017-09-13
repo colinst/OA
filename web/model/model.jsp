@@ -281,7 +281,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="userdata.jsp">个人信息</a></li>
-                                <li><a href="/OA/login.html">退出</a></li>
+                                <li><a href="../login.html">退出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -338,19 +338,26 @@
                                                                 pattern="yyyy-MM-dd HH:mm:ss"/>
                                             </td>
                                             <td>
-                                                <div class="btn-group-sm">
-                                                        <%--<button type="button" class="btn btn-default">
-                                                            修改
-                                                        </button>--%>
-                                                        <%-- <button type="button" class="btn btn-default">--%>
-                                                        <a href="useModel.do?modelId=${temp.modelId}&modelName=${temp.modelName}">使用</a>
-                                                        <%-- </button>--%>
-                                                        <%--  <button type="button" class="btn btn-default">--%>
-                                                    &nbsp;&nbsp; <a
-                                                        href="javascript:if(confirm('确实要删除吗?'))location='delModel.do?modelId=${temp.modelId}'">删除</a>
+                                                    <%-- <div class="btn-group-sm">
+                                                             <button type="button" class="btn btn-default">
+                                                                 修改
+                                                             </button>
+                                                              <button type="button" class="btn btn-default">
 
-                                                        <%--  </button>--%>
-                                                </div>
+
+
+                                                                 <a href="javascript:void(0);" onclick="js_method2(${temp.modelId},'${temp.modelName}')">使用 </a>
+                                                            <form action="useModel.do?modelId=${temp.modelId}&modelName=${temp.modelName}" method="post" id="js_method2"></form>
+                                                                 <a onclick="js_method2()">使用 </a>
+                                                              </button>
+                                                               <button type="button" class="btn btn-default">
+
+
+                                                               </button>
+                                                     </div>--%>
+                                                <a href="javascript:void(0);location='useModel.do?modelId=${temp.modelId}&modelName=${temp.modelName}'">使用</a>
+                                                &nbsp;&nbsp; <a
+                                                    href="javascript:if(confirm('确实要删除吗?'))location='delModel.do?modelId=${temp.modelId}'">删除</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

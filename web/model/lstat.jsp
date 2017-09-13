@@ -54,7 +54,7 @@
 
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="../index.jsp" class="simple-text">
+                <a href="#" class="simple-text">
                     数据统计系统
                 </a>
             </div>
@@ -78,7 +78,7 @@
                         <p>模板管理</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="/OA/model/selectStat.do">
                         <i class="ti-panel"></i>
                         <p>统计管理</p>
@@ -90,28 +90,28 @@
                         <p>个人资料</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/OA/model/selectInstat.do">
                         <i class="ti-bar-chart"></i>
                         <p>参与统计</p>
                     </a>
                 </li>
-                <%-- <li>
-                     <a href="../notice.jsp">
-                         <i class="ti-bell"></i>
-                         <p>所有提醒</p>
-                     </a>
-                 </li>
-                 <li class="active-pro">
-                     <a href="#">
-                         <i class="ti-export"></i>
-                         <p>升级至PRO</p>
-                     </a>
-                 </li>--%>
+                <%--<li>
+                    <a href="../notice.html">
+                        <i class="ti-bell"></i>
+                        <p>所有提醒</p>
+                    </a>
+                </li>
+
+                <li class="active-pro">
+                    <a href="#">
+                        <i class="ti-export"></i>
+                        <p>升级至PRO</p>
+                    </a>
+                </li>--%>
             </ul>
         </div>
     </div>
-
     <div class="main-panel">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -122,7 +122,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">统计管理</a>
+                    <a class="navbar-brand" href="#">参与统计</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -151,7 +151,6 @@
                             </ul>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </nav>
@@ -164,46 +163,48 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <a onclick="getExcel('stat_table')" id="table_1"><h4>————导出</h4></a>
-                                <p class="category">${message}</p>
+                                <h4 class="title"><a href="/OA/model/stat.do">已完成统计</a></h4>
+                                <p class="category"><a href="/OA/model/selectInstat.do">需要您参与以下统计</a>
                             </div>
                             <div class="content table-responsive table-full-width">
-
-                                <table class="table table-hover" border="1" cellspacing="0" id="stat_table">
+                                <table class="table table-hover" border="1" cellspacing="0">
                                     <thead>
                                     <tr>
                                         <th colspan="${length}" style="text-align:center">${modelName}</th>
                                     </tr>
 
                                     </thead>
-                                    <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">
-                                        <tbody>
-                                        <c:if test="${flag}">
-                                            <tr align="center">
-                                                <td></td>
-                                                <c:forEach items="${cus}" var="temp" varStatus="t">
-                                                    <td colspan="${temp.num}">${temp.name}</td>
-                                                </c:forEach>
-
-                                            </tr>
-                                        </c:if>
+                                    <%--<form action="stat.do?" method="post"
+                                          id="writeinstat1">--%>
+                                    <tbody>
+                                    <c:if test="${flag}">
                                         <tr align="center">
-                                            <td></td>
-                                            <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                                <td>${temp.columnName}</td>
-                                            </c:forEach>
-                                        </tr>
 
-                                        <c:forEach items="${users}" var="temp" varStatus="t">
-                                            <tr align="center">
-                                                <td>${temp.userName}</td>
-                                                <c:forEach items="${temp.sc}" var="temps" varStatus="t">
-                                                    <td>${temps.count}</td>
-                                                </c:forEach>
-                                            </tr>
+                                            <c:forEach items="${cus}" var="temp" varStatus="t">
+                                                <td colspan="${temp.num}">${temp.name}</td>
+                                            </c:forEach>
+
+                                        </tr>
+                                    </c:if>
+                                    <tr align="center">
+
+                                        <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                            <td>${temp.columnName}</td>
                                         </c:forEach>
-                                        </tbody>
-                                    </form>
+
+                                    </tr>
+                                    <tr align="center">
+                                        <c:forEach items="${scs}" var="temp" varStatus="t">
+                                            <td>${temp.count}</td>
+                                        </c:forEach>
+                                    </tr>
+                                    <%-- <tr align="right">
+                                         <td colspan="${length}"><a href="/OA/model/stat.do">————返回&nbsp; &nbsp;
+                                             &nbsp; &nbsp;</a></td>
+                                     </tr>--%>
+
+                                    </tbody>
+                                    <%-- </form>--%>
                                 </table>
 
                             </div>
