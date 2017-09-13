@@ -189,7 +189,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-sm-6" href="userdata.jsp">
+            <div class="col-lg-3 col-sm-6" href="userdata.jsp" >
               <div class="card">
                 <div class="content">
                   <div class="row">

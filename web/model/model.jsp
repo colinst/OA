@@ -79,7 +79,6 @@
             $(heads[0]).children().remove()
             $(heads[0]).append("<th>用户</th>")
 
-
             for (var i = 0; i < columns.length; i++) {
 
                 columns[i] = columns[i].split(".")
