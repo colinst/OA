@@ -200,7 +200,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        <%--<div class="card">
                             <div class="header">
                                 <h4 class="title">Team Members</h4>
                             </div>
@@ -268,7 +268,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                     <div class="col-lg-8 col-md-7">
                         <div class="card">
@@ -277,7 +277,7 @@
                             </div>
                             <div class="content">
 
-                                <form id="former" action="" method="post">
+                                <form id="former" action="/OA/user/updateSelective.do" method="post">
                                     <div class="row">
 
                                         <div class="col-md-3">
@@ -313,7 +313,9 @@
                                                 <label>权限</label>
                                                 <input id="role" name="role" type="text"
                                                        class="form-control border-input"
-                                                       placeholder="1(用户)0(管理)">
+                                                       <c:if test="${user.role =='1'}"> value="用户" </c:if>
+                                                       <c:if test="${user.role =='0'}"> value="管理员" </c:if>
+                                                        disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-4">

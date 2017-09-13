@@ -475,10 +475,10 @@
                                         <button type="button" class="btn btn-default" onclick="getUpinsert(-10)">
                                             新增
                                         </button>
-                                        <button type="button" class="btn btn-default">
+                                        <button type="button" class="btn btn-default" style="display: none">
                                             打印
                                         </button>
-                                        <button type="button" class="btn btn-default">
+                                        <button type="button" class="btn btn-default" style="display: none">
                                             导入
                                         </button>
                                         <button type="button" class="btn btn-default" onclick="getExcel('usertable')">
@@ -623,9 +623,13 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>权限</label>
-                                                    <input id="role" name="role" type="text"
+                                                    <%--<input id="role" name="role" type="text"
                                                            class="form-control border-input"
-                                                           placeholder="1(用户)0(管理)">
+                                                           placeholder="1(用户)0(管理)">--%>
+                                                    <select id="role">
+                                                        <option value="1" <c:if test="${user.role =='1'}">selected</c:if> >用户</option>
+                                                        <option value="0" <c:if test="${user.role =='0'}">selected</c:if> >管理员</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
