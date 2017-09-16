@@ -14,13 +14,6 @@ public class Model {
     private int type;
     private SysUser user;
 
-    public SysUser getUser() {
-        return user;
-    }
-
-    public void setUser(SysUser user) {
-        this.user = user;
-    }
 
     private List<ModelColumnName> list;
     private List<ModelColumn> mc;
@@ -88,4 +81,13 @@ public class Model {
     public void setTemp(String temp) {
         this.temp = temp;
     }
+
+    public SysUser getUser() {
+        return user;
+    }
+
+    public void setUser(SysUser user) {
+        this.user = user;
+    }
+
 }

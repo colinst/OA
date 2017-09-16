@@ -17,6 +17,12 @@
         from model
         where model_id = #{modelId,jdbcType=INTEGER}
     </select>
+    <select id="selectByPrimaryTName" parameterType="com.oa.model.Model" resultType="int">
+        select
+        count(*)
+        from model
+        where model_name = #{modelName,jdbcType=INTEGER}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         DELETE model,model_column from model,model_column where model.model_id=model_column.model_id
         and model.model_id = #{modelId,jdbcType=INTEGER}
@@ -89,7 +95,14 @@
 
     </select>
     <select id="selectStatCount" resultType="int" parameterType="com.oa.model.Model">
-        select count(*) from model where type=1 and create_user_id=#{createUserId}
+        select count(*) from model
+        <where>
+            <if test="createUserId!=null">
+                and create_user_id=#{createUserId}
+            </if>
+            and type=1
+        </where>
+
 
     </select>
     <select id="selectId" resultType="int">
@@ -115,10 +128,42 @@
     <select id="selectStatPageSplit" parameterType="com.oa.model.Page" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from model where type=1 and create_user_id=#{model.createUserId}
+        from model
+        <where>
+            <if test="model.createUserId!=null">
+                and create_user_id=#{model.createUserId}
+            </if>
+            and type=1
+        </where>
+
         order by createtime desc LIMIT #{start},#{count}
     </select>
     <!-- where create_user_id=#{model.createUserId} or create_user_id=2017-->
+
+    <select id="selectByPrimaryKeys" parameterType="java.lang.Integer" resultMap="rm">
+
+        select * from model m,model_column mc,model_column_name mcn where m.model_id=mc.model_id and
+        mc.column_id=mcn.column_id and m.model_id=#{modelId}
+
+    </select>
+    <resultMap type="com.oa.model.Model" id="rm">
+
+        <id column="model_id" jdbcType="INTEGER" property="modelId"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+
+        <collection property="mc" ofType="com.oa.model.ModelColumn">
+            <id column="model_id" jdbcType="INTEGER" property="modelId"/>
+            <result column="column_id" jdbcType="INTEGER" property="columnId"/>
+        </collection>
+        <collection property="list" ofType="com.oa.model.ModelColumnName">
+            <id column="column_id" jdbcType="INTEGER" property="columnId"/>
+            <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+        </collection>
+
+    </resultMap>
 
 
 </mapper>

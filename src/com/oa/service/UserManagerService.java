@@ -2,6 +2,7 @@ package com.oa.service;
 
 
 import com.oa.dao.SysUserMapper;
+import com.oa.model.Stat;
 import com.oa.model.SysUser;
 import com.oa.service.impl.IUserManagerService;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,11 @@ public class UserManagerService  implements IUserManagerService {
     @Override
     public int getCount() {
         return sysUserMapper.getCount();
+    }
+
+    @Override
+    public SysUser selectBykey(Stat stat) {
+        return sysUserMapper.selectBykey(stat);
     }
 
     @Override

@@ -40,7 +40,38 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/themify-icons.css" rel="stylesheet">
     <link href="../assets/css/model.css" rel="stylesheet">
+    <%-- <script type="text/javascript">
+         window.onload=function(){
+             var num=document.getElementById("num").innerHTML;
+             var modelId=document.getElementById("modelId").innerHTML;
+             if(num==8){
+                 $.ajax({
+                     url: '/OA/model/loading.do',
+                     type: 'post',
+                     data: {modelId: modelId},
+                     dataType: 'json',
+                     success: function (data) {
 
+                         $.each(data.pageMessage,function(ci,c){ //ci是索引 c是遍历数组的对象
+                             $("#stat_table").append("<tr onClick='selectItem(this)' onMouseOver='OMO1(event)' onDblClick='choice("+(ci+1)+")' align='center'><td>&nbsp;</td><td>"+c['productCode']+"</td><td>"+c['name']+"</td><td>"+c['unitName']+"</td><td>"+c['price']+"</td></tr>");
+
+                         });
+                     }
+
+
+                 });
+
+
+             }
+
+
+
+
+
+         }
+
+
+     </script>--%>
 
 </head>
 <body>
@@ -163,10 +194,14 @@
                 <div class="row">
 
                     <div class="col-md-12">
+                        <a onclick="getExcel('stat_table')" id="table_1"><h4>————导出</h4></a>
                         <div class="card card-plain">
                             <div class="header">
-                                <a onclick="getExcel('stat_table')" id="table_2"><h4>————导出</h4></a>
+
                                 <%--<p class="category">${message}</p>--%>
+                                <span style="display: none" id="num">${num}</span>
+                                <span style="display: none" id="modelId">${model.modelId}</span>
+
                             </div>
                             <div class="content table-responsive table-full-width"
                                  style="position:absolute; height:400px;width: 1000px; overflow:auto">
@@ -179,34 +214,31 @@
 
                                     </thead>
                                     <%-- <form action="statModel.do?modelId=${model.modelId}" method="post" id="sys_stat">--%>
-                                        <tbody>
-                                            <tr align="center">
-                                                <td></td>
-                                                <c:forEach items="${cus}" var="temp" varStatus="t">
-                                                    <td colspan="${temp.num}">${temp.name}</td>
-                                                </c:forEach>
-                                            </tr>
-                                        <tr align="center">
-                                            <td></td>
-                                            <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                                <td>${temp.columnName}</td>
-                                            </c:forEach>
-                                        </tr>
-                                            <c:forEach items="${users}" var="temp" varStatus="t">
-                                            <tr align="center">
-                                                <td>${temp.userName}</td>
-                                                <c:forEach items="${temp.sc}" var="temps" varStatus="t">
-                                                    <td>${temps.count}</td>
-                                                </c:forEach>
-
-                                                <c:if test="${fn:length(temp.sc)==0}">
-                                                    <c:forEach items="${model.list}" var="temp" varStatus="t">
-                                                        <td></td>
-                                                    </c:forEach>
-
-                                                </c:if>
-                                            </tr>
+                                    <tbody>
+                                    <tr align="center">
+                                        <td></td>
+                                        <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                            <td>${temp.columnName}</td>
                                         </c:forEach>
+                                    </tr>
+                                    <c:forEach items="${users}" var="temp" varStatus="t">
+                                        <tr align="center">
+                                            <td>${temp.userName}</td>
+                                            <c:forEach items="${temp.sc}" var="temps" varStatus="t">
+                                                <td>${temps.count}</td>
+                                            </c:forEach>
+
+                                            <c:if test="${fn:length(temp.sc)==0}">
+                                                <c:forEach items="${model.list}" var="temp" varStatus="t">
+                                                    <td></td>
+                                                </c:forEach>
+                                            </c:if>
+                                        </tr>
+                                    </c:forEach>
+
+
+                                    </tbody>
+                                    <%--</form>--%>
                                 </table>
 
                             </div>

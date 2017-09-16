@@ -1,6 +1,7 @@
 package com.oa.service.impl;
 
 
+import com.oa.model.Stat;
 import com.oa.model.SysUser;
 
 import java.util.List;
@@ -34,6 +35,8 @@ public interface IUserManagerService {
     SysUser getUser(Map map);
 
     int getCount();
+
+    SysUser selectBykey(Stat stat);//一对多查询
 
 
 }

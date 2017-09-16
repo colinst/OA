@@ -156,10 +156,10 @@
         </div>
       </div>
     </nav>
-      <div class="col-md-12" style="width:1047px;height: 487px;text-align:center">
+      <%--<div class="col-md-12" style="width:1047px;height: 487px;text-align:center">
           <h2>点击左侧进行操作！</h2>
           <img src="/OA/assets/img/sky.jpg">
-      </div>
+      </div>--%>
 
       <div class="content">
         <div class="container-fluid">

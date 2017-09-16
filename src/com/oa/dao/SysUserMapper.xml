@@ -160,4 +160,33 @@
         WHERE account = #{account,jdbcType=VARCHAR}
               AND password = #{password,jdbcType=VARCHAR}
     </select>
+
+
+    <select id="selectBykey" parameterType="com.oa.model.Stat" resultMap="rm">
+
+        select t.*,s.column_id,s.count from (select * from sys_user where user_id=#{userId})t left join (select * from
+        stat_count where user_id=#{userId} and model_id=#{statId}) s on t.user_id=s.user_id
+
+    </select>
+    <resultMap type="com.oa.model.SysUser" id="rm">
+
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="dep" jdbcType="VARCHAR" property="dep"/>
+        <result column="role" jdbcType="INTEGER" property="role"/>
+        <result column="number" jdbcType="VARCHAR" property="number"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="group_id" jdbcType="INTEGER" property="groupId"/>
+
+        <collection property="sc" ofType="com.oa.model.StatCount">
+            <!--<id column="model_id" jdbcType="INTEGER" property="modelId"/>
+            <result column="user_id" jdbcType="INTEGER" property="userId"/>-->
+            <result column="column_id" jdbcType="INTEGER" property="columnId"/>
+            <result column="count" jdbcType="VARCHAR" property="count"/>
+            <!--<result column="count_id" jdbcType="INTEGER" property="countId"/>-->
+        </collection>
+    </resultMap>
+
 </mapper>

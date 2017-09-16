@@ -420,14 +420,17 @@
                                                     <label>模板名称</label>
                                                     <input name="modelName" type="text"
                                                            class="form-control border-input"
-                                                           placeholder="groupname" value="添加名称">
+                                                           placeholder="groupname" value="添加名称" id="changeTname"/>
                                                 </div>
                                             </div>
                                             <%--<span class="ti-control-backward"/>--%>
+
                                             <div class="col-md-4">
                                                 <div class="/">
                                                     <label>.</label>
-                                                    <button type="submit" class="btn btn-info btn-default">提交模板</button>
+                                                    <button type="submit" class="btn btn-info btn-default"
+                                                            id="ajaxbutton">提交模板
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -494,7 +497,9 @@
                             <div class="col-lg-8 col-md-7">
                                 <div class="card">
                                     <div class="header">
-                                        <h4 class="title">详细信息</h4>
+                                        <h4 class="title">详细信息:<span id="ajaxmessage" style="display:none"><h5
+                                                class="title" style="color:red">表名已存在!</h5></span></h4>
+
                                     </div>
                                     <hr>
                                 </div>

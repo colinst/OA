@@ -31,4 +31,8 @@ public interface ModelMapper {
     List<Model> selectStatPageSplit(Page page);
 
     int selectStatCount(Model record);
+
+    int selectByPrimaryTName(Model record);
+
+    Model selectByPrimaryKeys(Integer modelId);//一对多
 }

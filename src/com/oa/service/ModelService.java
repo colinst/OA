@@ -124,6 +124,17 @@ public class ModelService implements IModelService {
         return modelMapper.insertOne(record);
     }
 
+    @Override
+    public int selectByPrimaryTName(Model record) {
+        return modelMapper.selectByPrimaryTName(record);
+    }
+
+    @Override
+    public Model selectByPrimaryKeys(Integer modelId) {
+        return modelMapper.selectByPrimaryKeys(modelId);
+    }
+
+
     public ModelMapper getModelMapper() {
         return modelMapper;
     }

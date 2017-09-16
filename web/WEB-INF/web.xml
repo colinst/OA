@@ -37,7 +37,14 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--编码过滤结束-->
-
+    <!-- 编码过滤结束-->
+    <filter>
+        <filter-name>RequestFilter</filter-name>
+        <filter-class>com.oa.util.RequestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RequestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

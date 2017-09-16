@@ -163,8 +163,8 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title"><a href="/OA/model/stat.do">已完成统计</a></h4>
-                                <p class="category"><a href="/OA/model/selectInstat.do">需要您参与以下统计</a>
+                                <h4 class="title"><a href="/OA/model/stat.do">已参与的统计</a></h4>
+                                <p class="category"><a href="/OA/model/selectInstat.do">需要您的参与完成以下统计</a>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover" border="1" cellspacing="0">

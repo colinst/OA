@@ -66,11 +66,11 @@ public class ModelConeroller {
     public String insertModel(Model model, HttpServletRequest request, HttpSession session) {
         //if()
         //session.getAttribute("username");List<ModelColumnName> list,
+
         if (model.getModelName() == "") {
             request.setAttribute("message", "表名为空不能使用！");
             return "selectModel.do";
         }
-
         if (model.getList() == null) {
             request.setAttribute("message", "表内容为空不能使用！");
             return "selectModel.do";
@@ -159,23 +159,27 @@ public class ModelConeroller {
         String str = model.getTemp();
         model = modelService.selectByPrimaryKey(model.getModelId());
         model.setTemp(str);
+        if (model.getModelName().equals(model.getTemp()) && model.getCreateUserId().intValue() == user.getUserId().intValue() && model.getType() == 1) {
+            request.setAttribute("message", "该表已存在!");
+            return "selectModel.do";
+        }
+        if (model.getModelName().equals(model.getTemp()) && model.getCreateUserId().intValue() != user.getUserId().intValue()) {
+            request.setAttribute("message", "该表已存在!");
+            return "selectModel.do";
+        }
         if (model.getTemp() == "") {
-            request.setAttribute("message", "表名不能为空");
+            request.setAttribute("message", "表名不能为空!");
             return "selectModel.do";
         }
         String[] sub = request.getParameterValues("subBox");
         if (sub == null) {
-            request.setAttribute("message", "未选择人员请重新发布！");
+            request.setAttribute("message", "未选择人员请重新发布!");
             return "selectModel.do";
         }
 
         List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
-        /*List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
-        for (ModelColumn modelColumn : mc) {
-            mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
-        }*/
-        boolean flag = model.getModelName().equals(model.getTemp());
-        if (!model.getModelName().equals(model.getTemp()) || model.getType() == 1) {
+
+        if (!model.getModelName().equals(model.getTemp())) {
             model.setModelName(model.getTemp());
             model.setCreateUserId(user.getUserId());
             int a = modelService.insertOne(model);
@@ -218,14 +222,16 @@ public class ModelConeroller {
         return "selectModel.do";
     }
 
-
+    //查询统计
     @RequestMapping("/selectStat.do")
     public String selectStat(String currentPage, String jumpPage, HttpServletRequest request, HttpSession session) {
 
         Model model = new Model();
         SysUser user = (SysUser) session.getAttribute("user");
         request.setAttribute("user", user);
-        model.setCreateUserId(user.getUserId());
+        if (user.getRole().intValue() == 1) {
+            model.setCreateUserId(user.getUserId());
+        }
         Page page = new Page(modelService.selectStatCount(model));
         PageControlUtil.setCurrentpage(page, currentPage, jumpPage);
         page.setModel(model);
@@ -243,45 +249,45 @@ public class ModelConeroller {
     public String statMessage(Model model, HttpServletRequest request, HttpSession session) {
         SysUser user = (SysUser) session.getAttribute("user");
         request.setAttribute("user", user);
-        List<ModelColumn> mc = modelColumnService.selectAll(model.getModelId());
-        List<ModelColumnName> mcn = new ArrayList<ModelColumnName>();
-        for (ModelColumn modelColumn : mc) {
-            mcn.add(modelColumnNameService.selectByPrimaryKey(modelColumn.getColumnId()));
-        }
-        Boolean flag = new GetClassUtil().getFlag(mcn);
-        request.setAttribute("flag", new GetClassUtil().getFlag(mcn));
-        model.setMc(mc);
-
-        List<ClassUtil> cus = new GetClassUtil().getClassUtil(mcn);
-        new GetClassUtil().setMcnsName(mcn);
-        model.setList(mcn);
-        request.setAttribute("cus", cus);
-
-        List<SysUser> users = new ArrayList<SysUser>();
-        List<Stat> stats = statService.selectByStatId(model.getModelId());
-        for (Stat stat : stats) {
-            users.add(userManagerService.selectByPrimaryKey(stat.getUserId()));
-        }
-        for (int i = 0; i < users.size(); i++) {
-            StatCount sc = new StatCount();
-            sc.setModelId(model.getModelId());
-            sc.setUserId(users.get(i).getUserId());
-            List<StatCount> scs = statCountService.selectByUser(sc);
-            if (scs.size() == 0) {
-                for (int j = 0; j < mcn.size(); j++) {
-                    sc.setCount("");
-                    scs.add(sc);
-                }
+        Model model1 = modelService.selectByPrimaryKeys(model.getModelId());
+        List<ModelColumnName> mcn = model1.getList();
+        //Boolean flag = new GetClassUtil().getFlag(mcn);
+        if (new GetClassUtil().getFlag(mcn)) {
+            List<ClassUtil> cus = new GetClassUtil().getClassUtil(mcn);
+            new GetClassUtil().setMcnsName(mcn);
+            model.setList(mcn);
+            request.setAttribute("cus", cus);
+            List<SysUser> users = new ArrayList<SysUser>();
+            List<Stat> stats = statService.selectByStatId(model.getModelId());
+            for (Stat stat : stats) {
+                users.add(userManagerService.selectBykey(stat));
             }
-            users.get(i).setSc(scs);
+            request.setAttribute("model", model);
+            request.setAttribute("users", users);
+            request.setAttribute("length", mcn.size() + 1);
+            return "/model/statistics.jsp";
+        } else {
+            List<SysUser> users = new ArrayList<SysUser>();
+            List<Stat> stats = statService.selectByStatId(model.getModelId());
+            int count = 0;
+            for (Stat stat : stats) {
+                count++;
+                if (count == 101) {
+                    request.setAttribute("num", count);
+                    break;
+                }
+                users.add(userManagerService.selectBykey(stat));
 
+
+            }
+            model.setList(mcn);
+            request.setAttribute("model", model);
+            request.setAttribute("users", users);
+            request.setAttribute("length", mcn.size() + 1);
+            return "/model/statistics_1.jsp";
         }
 
-        request.setAttribute("modelName", model.getModelName());
-        request.setAttribute("model", model);
-        request.setAttribute("users", users);
-        request.setAttribute("length", mcn.size() + 1);
-        return "/model/statistics.jsp";
+
     }
 
     //参与统计
@@ -427,6 +433,14 @@ public class ModelConeroller {
         }
         //数据转换成JSON格式的字符串
         String u = JSONArray.toJSONString(list);
+        return u;
+    }
+
+    @RequestMapping(value = "/tNameajax.do", produces = "text/plain;charset=utf8")
+    @ResponseBody  //返回ajax数据
+    public String tNameajax(Model model) {
+
+        String u = JSONArray.toJSONString(modelService.selectByPrimaryTName(model));
         return u;
     }
 

@@ -188,5 +188,33 @@ $("select#status").change(function () {
 
     });
 });
+
+$("input#changeTname").change(function () {
+    var modelName = $(this).val();
+    /* var modelName = document.getElementById("changeTname").value();*/
+    $.ajax({
+        url: '/OA/model/tNameajax.do',
+        type: 'post',
+        data: {modelName: modelName},
+        dataType: 'json',
+        success: function (data) {
+            if (data > 0) {
+                /* document.getElementById("ajaxmessage").innerHTML="表名已存在";*/
+                document.getElementById("ajaxmessage").style.display = '';
+                document.getElementById('ajaxbutton').disabled = 'disabled';
+            } else {
+                document.getElementById("ajaxmessage").style.display = 'none';
+                document.getElementById('ajaxbutton').disabled = '';
+            }
+
+        }
+
+
+    });
+
+});
+
+
+
 /*
  }*/

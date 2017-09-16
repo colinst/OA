@@ -31,4 +31,8 @@ public interface IModelService {
     int selectStatCount(Model record);
 
     int insertOne(Model record);
+
+    int selectByPrimaryTName(Model record);
+
+    Model selectByPrimaryKeys(Integer modelId);//一对多
 }
