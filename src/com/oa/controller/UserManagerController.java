@@ -34,6 +34,7 @@ public class UserManagerController {
     @RequestMapping("/insert.do")
     public String addUser(SysUser user) {
         System.out.println(user + "_" + service.insert(user));
+
         return "done.jsp";
     }
 
