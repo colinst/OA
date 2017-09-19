@@ -109,7 +109,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="notice.jsp">
+                    <a href="../notice.jsp">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
                     </a>
