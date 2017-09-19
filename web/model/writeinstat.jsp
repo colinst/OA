@@ -66,24 +66,27 @@
                         <p>首页</p>
                     </a>
                 </li>
-                <li>
-                    <a href="../users.jsp">
-                        <i class="ti-user"></i>
-                        <p>用户管理</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/OA/model/selectModel.do">
-                        <i class="ti-view-list-alt"></i>
-                        <p>模板管理</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/OA/model/selectStat.do">
-                        <i class="ti-panel"></i>
-                        <p>统计管理</p>
-                    </a>
-                </li>
+                <%--当权限为0时显示这些模块，否则不显示--%>
+                <c:if test="${user.role =='0'}">
+                    <li >
+                        <a href="../users.jsp">
+                            <i class="ti-user"></i>
+                            <p>用户管理</p>
+                        </a>
+                    </li>
+                    <li >
+                        <a href="/OA/model/selectModel.do">
+                            <i class="ti-view-list-alt"></i>
+                            <p>模板管理</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/OA/model/selectStat.do">
+                            <i class="ti-panel"></i>
+                            <p>统计管理</p>
+                        </a>
+                    </li>
+                </c:if>
                 <li>
                     <a href="../userdata.jsp">
                         <i class="ti-id-badge"></i>
@@ -96,19 +99,18 @@
                         <p>参与统计</p>
                     </a>
                 </li>
-                <%--<li>
-                    <a href="../notice.html">
+                <li>
+                    <a href="notice.jsp">
                         <i class="ti-bell"></i>
                         <p>所有提醒</p>
                     </a>
                 </li>
-
                 <li class="active-pro">
                     <a href="#">
                         <i class="ti-export"></i>
-                        <p>升级至PRO</p>
+                        <p>联系我们</p>
                     </a>
-                </li>--%>
+                </li>
             </ul>
         </div>
     </div>
