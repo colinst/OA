@@ -190,7 +190,9 @@
                 $("#passwordd").show()
                 $("#password").val(123)
 
-                $("#former").attr("action", "/user/insertSelective.do")
+                $("#former").attr("action", "")
+                $("#act").attr("onclick","addUser()")
+
                 $("#act").text("增加")
             } else {
 
@@ -208,6 +210,7 @@
 
                 $("#former").attr("action", "/OA/user/updateSelective.do")
                 $("#act").text("更新")
+                $("#act").attr("onclick","")
             }
         }
 
@@ -232,6 +235,34 @@
             });
 
         }
+
+        //新增用户
+        function addUser() {
+
+            $('#uid').empty()
+            alert($('#role').val())
+            alert($('#role').valueOf())
+            alert($('#role').valueOf())
+            alert($('#role').valueOf())
+
+            $.ajax({
+                url: 'user/insert.do',
+                type: 'post',
+                data: $('#former').serialize(),
+                dataType: 'json',
+                success: function (result) {
+
+                    if (result == '1') {
+                        alert("添加用户成功");
+                        myfun()
+                    }
+                    else                alert("添加用户失败，请检查输入内容")
+                }
+            });
+
+
+        }
+
     </script>
     <!--工具栏js-->
     <script type="text/javascript">
@@ -672,7 +703,7 @@
                                             </div>
                                         </div>
                                         <div class="row" style="display: none">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" id="uid">
                                                 <input id="userId" name="userId" type="text" class="/"
                                                        style="display: none"
                                                        placeholder="userId" value="0000">
@@ -680,7 +711,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-info btn-fill btn-wd" id="act">更新
+                                            <button type="submit" class="btn btn-info btn-fill btn-wd" id="act" >更新
                                             </button>
                                         </div>
                                         <div class="clearfix"></div>

@@ -31,11 +31,12 @@ public class UserManagerController {
     private UserManagerService service;
 
     //增加用户
-    @RequestMapping("/insert.do")
+    @ResponseBody
+    @RequestMapping(value = "/insert.do", produces = "text/plain;charset=utf8")
     public String addUser(SysUser user) {
         System.out.println(user + "_" + service.insert(user));
 
-        return "done.jsp";
+        return "1";
     }
 
     //获得所有用户
