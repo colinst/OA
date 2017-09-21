@@ -34,8 +34,8 @@ public class UserManagerController {
     @ResponseBody
     @RequestMapping(value = "/insert.do", produces = "text/plain;charset=utf8")
     public String addUser(SysUser user) {
+        user.setRole(1);
         System.out.println(user + "_" + service.insert(user));
-
         return "1";
     }
 
@@ -50,11 +50,14 @@ public class UserManagerController {
     }
 
     //增加用户（可选属性）
-    @RequestMapping("/insertSelective.do")
+    @ResponseBody
+    @RequestMapping(value = "/insertSelective.do", produces = "text/plain;charset=utf8")
     public String insertUser(SysUser user) {
-
+        user.setUserId(null);
+        user.setRole(1);
+        System.out.println(user);
         System.out.println(user + "增加_" + service.insertSelective(user));
-        return "done.jsp";
+        return "1";
     }
 
     //更新用户（有变化则更新）

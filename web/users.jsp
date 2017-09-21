@@ -239,14 +239,8 @@
         //新增用户
         function addUser() {
 
-            $('#uid').empty()
-            alert($('#role').val())
-            alert($('#role').valueOf())
-            alert($('#role').valueOf())
-            alert($('#role').valueOf())
-
             $.ajax({
-                url: 'user/insert.do',
+                url: 'user/insertSelective.do',
                 type: 'post',
                 data: $('#former').serialize(),
                 dataType: 'json',
