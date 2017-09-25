@@ -32,6 +32,36 @@
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet"/>
+    <style>
+        /*import&export Btn Css*/
+        .import-btn {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .import-btn .file_input {
+            width: 44px; /*因为file-input在部分浏览器中会自带一个输入框，需要双击才可以点击上传,放大后将其定位到div外面就好啦*/
+            height: 28px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            -moz-opacity: 0;
+            -ms-opacity: 0;
+            -webkit-opacity: 0;
+            opacity: 0; /*css属性——opcity不透明度，取值0-1*/
+            filter: alpha(opacity=0); /*兼容IE8及以下--filter属性是IE特有的，它还有很多其它滤镜效果，而filter: alpha(opacity=0); 兼容IE8及以下的IE浏览器(如果你的电脑IE是8以下的版本，使用某些效果是可能会有一个允许ActiveX的提示,注意点一下就ok啦)*/
+            cursor: pointer;
+        }
+
+        .export-btn {
+            position: relative;
+            z-index: 2
+        }
+
+    </style>
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -69,7 +99,7 @@
 
         //获得分页list
         function getPage(op) {
-            $("#context2").hide()
+            $("#myModal").modal('hide')
 
             //-1（上一页）     1（下一页）      0（首页）   2（末页）
             var number = 6//每页显示数量
@@ -175,7 +205,7 @@
         function getUpinsert(o) {
 
             //修改传值
-            $("#context2").show()
+            $("#myModal").modal('show')
 
             if (o == -10) {
 
@@ -506,13 +536,19 @@
                                         <button type="button" class="btn btn-default" style="display: none">
                                             打印
                                         </button>
-                                        <button type="button" class="btn btn-default" style="display: none">
+                                        <!--                                         <button type="button" class="btn btn-default">
+                                                                                    导入
+                                                                                </button> -->
+                                        <div class="btn btn-default import-btn">
                                             导入
-                                        </button>
-                                        <button type="button" class="btn btn-default" onclick="getExcel('usertable')">
+                                            <input type="file" name="xlfile" id="xlf" class="file_input">
+                                        </div>
+                                        <button type="button" class="btn btn-default export-btn"
+                                                onclick="getExcel('usertable')">
                                             导出
                                         </button>
                                     </div>
+                                    <div id="out"></div>
                                     <thead>
                                     <th>ID</th>
                                     <th>账号</th>
@@ -566,154 +602,6 @@
                             </div>
                         </div>
                     </div>
-                    <div id="context2" style="display: none;">
-                        <div class="col-lg-4 col-md-5">
-                            <div class="card card-user">
-                                <div class="image">
-                                    <img src="assets/img/background.jpg" alt="..."/>
-                                </div>
-                                <div class="content">
-                                    <div class="author">
-                                        <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..."/>
-                                        <h4 class="title"><span id="userNamee">Chet Faker</span><br/>
-                                            <a href="#">
-                                                <small>@chetfaker</small>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <p class="description text-center">
-                                        "I like the way you work it <br>
-                                        No diggity <br>
-                                        I wanna bag it up"
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="text-center">
-                                    <div class="row">
-                                        <div class="col-md-3 col-md-offset-1">
-                                            <h5>12<br/>
-                                                <small>已参与</small>
-                                            </h5>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <h5>2GB<br/>
-                                                <small>已完成</small>
-                                            </h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h5>24,6$<br/>
-                                                <small>进行中</small>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-8 col-md-7">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">详细信息</h4>
-                                </div>
-                                <div class="content">
-
-                                    <form id="former" action="" method="post">
-                                        <div class="row">
-
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>姓名</label>
-                                                    <input id="userName" name="userName" type="text"
-                                                           class="form-control border-input"
-                                                           placeholder="userId" value="Creative Code Inc.">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>账号</label>
-                                                    <input id="account" name="account" type="text"
-                                                           class="form-control border-input"
-                                                           placeholder="account" value="michael23">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">邮箱</label>
-                                                    <input id="email" name="email" type="email"
-                                                           class="form-control border-input"
-                                                           placeholder="Email">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>权限</label>
-                                                    <%--<input id="role" name="role" type="text"
-                                                           class="form-control border-input"
-                                                           placeholder="1(用户)0(管理)">--%>
-                                                    <select id="role" class="form-control border-input">
-                                                        <option value="1" <c:if test="${user.role =='1'}">selected</c:if> >用户</option>
-                                                        <option value="0" <c:if test="${user.role =='0'}">selected</c:if> >管理员</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>部门</label>
-                                                    <input id="dep" name="dep" type="text"
-                                                           class="form-control border-input"
-                                                           placeholder="dep">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label>手机</label>
-                                                    <input id="number" name="number" type="text"
-                                                           class="form-control border-input"
-                                                           placeholder="number">
-                                                </div>
-                                                <div class="form-group" id="passwordd" style="display: none">
-                                                    <label>密码</label>
-                                                    <input id="password" name="password" type="text"
-                                                           class="form-control border-input"
-                                                           placeholder="userId">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>标签</label>
-                                                    <textarea id="groupId" name="groupId" rows="4"
-                                                              class="form-control border-input"
-                                                              placeholder="Here can be your description"
-                                                              value="Mike"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="display: none">
-                                            <div class="col-md-3" id="uid">
-                                                <input id="userId" name="userId" type="text" class="/"
-                                                       style="display: none"
-                                                       placeholder="userId" value="0000">
-
-                                            </div>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-info btn-fill btn-wd" id="act" >更新
-                                            </button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -752,6 +640,178 @@
     </div>
 </div>
 
+<!--                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+            </div>
+            <div class="modal-body">在这里添加一些文本</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">提交更改</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog" style="width: 850px;">
+        <div class="modal-content btn-simple row">
+            <div class="col-lg-4 col-md-5">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="assets/img/background.jpg" alt="..."/>
+                    </div>
+                    <div class="content">
+                        <div class="author">
+                            <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..."/>
+                            <h4 class="title"><span id="userNamee">Chet Faker</span><br/>
+                                <a href="#">
+                                    <small>@chetfaker</small>
+                                </a>
+                            </h4>
+                        </div>
+                        <p class="description text-center">
+                            "I like the way you work it <br>
+                            No diggity <br>
+                            I wanna bag it up"
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-1">
+                                <h5>12<br/>
+                                    <small>已参与</small>
+                                </h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h5>2GB<br/>
+                                    <small>已完成</small>
+                                </h5>
+                            </div>
+                            <div class="col-md-3">
+                                <h5>24,6$<br/>
+                                    <small>进行中</small>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">详细信息</h4>
+                    </div>
+                    <div class="content">
+
+                        <form id="former" action="" method="post">
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>姓名</label>
+                                        <input id="userName" name="userName" type="text"
+                                               class="form-control border-input"
+                                               placeholder="userId" value="Creative Code Inc.">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>账号</label>
+                                        <input id="account" name="account" type="text"
+                                               class="form-control border-input"
+                                               placeholder="account" value="michael23">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">邮箱</label>
+                                        <input id="email" name="email" type="email"
+                                               class="form-control border-input"
+                                               placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>权限</label>
+                                        <%--<input id="role" name="role" type="text"
+                                               class="form-control border-input"
+                                               placeholder="1(用户)0(管理)">--%>
+                                        <select id="role" class="form-control border-input">
+                                            <option value="1"
+                                                    <c:if test="${user.role =='1'}">selected</c:if> >用户
+                                            </option>
+                                            <option value="0"
+                                                    <c:if test="${user.role =='0'}">selected</c:if> >管理员
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>部门</label>
+                                        <input id="dep" name="dep" type="text"
+                                               class="form-control border-input"
+                                               placeholder="dep">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>手机</label>
+                                        <input id="number" name="number" type="text"
+                                               class="form-control border-input"
+                                               placeholder="number">
+                                    </div>
+                                    <div class="form-group" id="passwordd" style="display: none">
+                                        <label>密码</label>
+                                        <input id="password" name="password" type="text"
+                                               class="form-control border-input"
+                                               placeholder="userId">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>标签</label>
+                                        <textarea id="groupId" name="groupId" rows="4"
+                                                  class="form-control border-input"
+                                                  placeholder="Here can be your description"
+                                                  value="Mike"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="display: none">
+                                <div class="col-md-3" id="uid">
+                                    <input id="userId" name="userId" type="text" class="/"
+                                           style="display: none"
+                                           placeholder="userId" value="0000">
+
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-info btn-fill btn-wd" id="act">更新
+                                </button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 
@@ -776,6 +836,85 @@
 
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
+
+<!-- Import-excel -->
+<script src="assets/js/xlsx/xlsx.js"></script>
+<script>
+    $(function () {
+        /**
+         * change xlsx -- beg
+         **/
+        var X = XLSX;
+        var XW = {
+            /* worker message */
+            msg: 'xlsx',
+            /* worker scripts */
+            worker: 'assets/js/xlsx/xlsxworker.js'
+        };
+        var process_wb = (function () {
+            var OUT = document.getElementById('out');
+            var to_json = function to_json(workbook) {
+                var result = {};
+                workbook.SheetNames.forEach(function (sheetName) {
+                    var roa = X.utils.sheet_to_json(workbook.Sheets[sheetName]);
+                    if (roa.length) result[sheetName] = roa;
+                });
+                return JSON.stringify(result, 2, 2);
+            };
+
+            return function process_wb(wb) {
+                var output = to_json(wb);
+
+                // outPut
+                alert(output);
+                // OUT.innerText = output;
+            };
+        })();
+
+        var do_file = (function () {
+            var rABS = true;
+            var xw = function xw(data, cb) {
+                var worker = new Worker(XW.worker);
+                worker.onmessage = function (e) {
+                    switch (e.data.t) {
+                        case 'ready':
+                            break;
+                        case 'e':
+                            console.error(e.data.d);
+                            alert('仅支持Excel文件导入，请重新选择');
+                            break;
+                        case XW.msg:
+                            cb(JSON.parse(e.data.d));
+                            break;
+                    }
+                };
+                worker.postMessage({d: data, b: rABS ? 'binary' : 'array'});
+            };
+
+            return function do_file(files) {
+                var f = files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    xw(e.target.result, process_wb);
+                };
+                reader.readAsBinaryString(f);
+            };
+        })();
+
+        (function () {
+            var xlf = document.getElementById('xlf');
+            if (!xlf.addEventListener) return;
+
+            function handleFile(e) {
+                do_file(e.target.files);
+            }
+
+            xlf.addEventListener('change', handleFile, false);
+        })();
+
+        // change xlsx -- end
+    })
+</script>
 
 
 </html>
