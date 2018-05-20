@@ -13,6 +13,7 @@ public class Stat {
 
     private Integer type;
 
+
     public Integer getStatId() {
         return statId;
     }

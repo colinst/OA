@@ -90,6 +90,7 @@
             for (var k = 0; k < rowsn - 1; k++) {
 
                 //得到表头
+
                 var arr = []//一行内表头对象合集
                 for (var i = 0; i < columns.length;) {
                     var count = 0;

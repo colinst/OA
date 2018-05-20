@@ -20,8 +20,10 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <!-- 数据驱动 -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!--<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
         <!-- 数据库的连接 -->
-        <property name="url" value="jdbc:mysql://rm-uf6y70f8z4zrabhvro.mysql.rds.aliyuncs.com:3306/oa"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/oa?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8&amp;useSSL=false"/>
         <!-- 账号 -->
         <property name="username" value="root"/>
         <!-- 密码 -->

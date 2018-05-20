@@ -11,6 +11,7 @@ public class StatCount {
 
     private Integer countId;
 
+
     public Integer getModelId() {
         return modelId;
     }
