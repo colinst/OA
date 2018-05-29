@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2018-05-21 01:17:38
+Date: 2018-05-30 01:00:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -71,27 +71,32 @@ CREATE TABLE `model` (
   `createtime` varchar(20) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`model_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of model
 -- ----------------------------
 INSERT INTO `model` VALUES ('8', '高通订单统计', '1', '2018-05-21 00:12:49', null);
+INSERT INTO `model` VALUES ('10', '模板1', '1', '2018-05-30 00:33:33', null);
+INSERT INTO `model` VALUES ('12', '模板3', '1', '2018-05-30 00:45:16', '1');
 
 -- ----------------------------
 -- Table structure for model_column
 -- ----------------------------
 DROP TABLE IF EXISTS `model_column`;
 CREATE TABLE `model_column` (
-  `model_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `model_id` int(11) DEFAULT NULL,
   `column_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`model_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of model_column
 -- ----------------------------
-INSERT INTO `model_column` VALUES ('8', '1');
+INSERT INTO `model_column` VALUES ('1', '12', '8');
+INSERT INTO `model_column` VALUES ('2', '12', '9');
+INSERT INTO `model_column` VALUES ('3', '12', '10');
 
 -- ----------------------------
 -- Table structure for model_column_name
@@ -101,30 +106,57 @@ CREATE TABLE `model_column_name` (
   `column_Id` int(11) NOT NULL AUTO_INCREMENT,
   `column_name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`column_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of model_column_name
 -- ----------------------------
 INSERT INTO `model_column_name` VALUES ('1', '魅族');
+INSERT INTO `model_column_name` VALUES ('4', 'java');
+INSERT INTO `model_column_name` VALUES ('8', '21');
+INSERT INTO `model_column_name` VALUES ('9', '22');
+INSERT INTO `model_column_name` VALUES ('10', '23');
 
 -- ----------------------------
 -- Table structure for stat
 -- ----------------------------
 DROP TABLE IF EXISTS `stat`;
 CREATE TABLE `stat` (
-  `stat_id` int(20) NOT NULL AUTO_INCREMENT,
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `stat_id` int(20) DEFAULT NULL,
   `stat_name` varchar(20) DEFAULT NULL,
   `user_id` int(20) DEFAULT NULL,
   `create_user_id` int(20) DEFAULT NULL,
   `createtime` varchar(20) DEFAULT NULL,
   `type` int(20) DEFAULT NULL,
-  PRIMARY KEY (`stat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of stat
 -- ----------------------------
+INSERT INTO `stat` VALUES ('1', '12', '模板3', '1', '1', '2018-05-30', '1');
+
+-- ----------------------------
+-- Table structure for stat_count
+-- ----------------------------
+DROP TABLE IF EXISTS `stat_count`;
+CREATE TABLE `stat_count` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `model_id` int(20) DEFAULT NULL,
+  `user_id` int(20) DEFAULT NULL,
+  `column_id` int(20) DEFAULT NULL,
+  `count` varchar(20) DEFAULT NULL,
+  `count_id` int(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of stat_count
+-- ----------------------------
+INSERT INTO `stat_count` VALUES ('1', '12', '1', '8', 'A', null);
+INSERT INTO `stat_count` VALUES ('2', '12', '1', '9', 'B', null);
+INSERT INTO `stat_count` VALUES ('3', '12', '1', '10', 'C', null);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -215,19 +247,6 @@ CREATE TABLE `user` (
 
 -- ----------------------------
 -- Records of user
--- ----------------------------
-
--- ----------------------------
--- Table structure for 高通订单一期
--- ----------------------------
-DROP TABLE IF EXISTS `高通订单一期`;
-CREATE TABLE `高通订单一期` (
-  `厂家编号` int(11) DEFAULT NULL,
-  `厂家名称` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- ----------------------------
--- Records of 高通订单一期
 -- ----------------------------
 DROP TRIGGER IF EXISTS `user_insert_774684005`;
 DELIMITER ;;

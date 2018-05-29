@@ -11,20 +11,20 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from model_column
+        from model_column2
         where model_id = #{modelId,jdbcType=INTEGER}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from model_column
+        delete from model_column2
         where model_id = #{modelId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.oa.model.ModelColumn">
-        insert into model_column (model_id, column_id)
+        insert into model_column2 (model_id, column_id)
         values (#{modelId,jdbcType=INTEGER}, #{columnId,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.oa.model.ModelColumn">
-        insert into model_column
+        insert into model_column2
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="modelId != null">
                 model_id,
@@ -43,7 +43,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.ModelColumn">
-        update model_column
+        update model_column2
         <set>
             <if test="columnId != null">
                 column_id = #{columnId,jdbcType=INTEGER},
@@ -52,12 +52,12 @@
         where model_id = #{modelId,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.oa.model.ModelColumn">
-        update model_column
+        update model_column2
         set column_id = #{columnId,jdbcType=INTEGER}
         where model_id = #{modelId,jdbcType=INTEGER}
     </update>
     <insert id="addModelAndColumn">
-        insert into model_column (model_id, column_id)
+        insert into model_column2 (model_id, column_id)
         values
         <foreach collection="list" separator="," item="temp">
 
@@ -67,7 +67,7 @@
     <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from model_column
+        from model_column2
         where model_id = #{modelId,jdbcType=INTEGER}
     </select>
 

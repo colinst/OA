@@ -142,7 +142,7 @@
 
     <select id="selectByPrimaryKeys" parameterType="java.lang.Integer" resultMap="rm">
 
-        select * from model m,model_column mc,model_column_name mcn where m.model_id=mc.model_id and
+        select * from model m,model_column2 mc,model_column_name mcn where m.model_id=mc.model_id and
         mc.column_id=mcn.column_id and m.model_id=#{modelId}
 
     </select>

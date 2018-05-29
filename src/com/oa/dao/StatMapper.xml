@@ -15,15 +15,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from stat
+        from stat2
         where stat_id = #{statId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from stat
+        delete from stat2
         where stat_id = #{statId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.oa.model.Stat">
-        insert into stat (stat_id, stat_name, user_id,
+        insert into stat2 (stat_id, stat_name, user_id,
         create_user_id, createtime, type
         )
         values (#{statId,jdbcType=INTEGER}, #{statName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
@@ -31,7 +31,7 @@
         )
     </insert>
     <insert id="insertSelective" parameterType="com.oa.model.Stat">
-        insert into stat
+        insert into stat2
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="statId != null">
                 stat_id,
@@ -74,7 +74,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.oa.model.Stat">
-        update stat
+        update stat2
         <set>
             <if test="statName != null">
                 stat_name = #{statName,jdbcType=VARCHAR},
@@ -95,7 +95,7 @@
         where stat_id = #{statId,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.oa.model.Stat">
-        update stat
+        update stat2
         set
         type = 1
         where stat_id = #{statId,jdbcType=INTEGER} and user_id = #{userId,jdbcType=INTEGER}
@@ -110,7 +110,7 @@
         where stat_id = #{statId,jdbcType=INTEGER}
     </update>-->
     <insert id="addStats">
-        insert into stat (stat_id, stat_name, user_id,
+        insert into stat2 (stat_id, stat_name, user_id,
         create_user_id, createtime, type
         )
         values
@@ -125,19 +125,19 @@
     <select id="selectByStatId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from stat
+        from stat2
         where stat_id = #{statId,jdbcType=INTEGER}
     </select>
     <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from stat
+        from stat2
         where user_id = #{userId,jdbcType=INTEGER} and TYPE =0
     </select>
     <select id="yselectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from stat
+        from stat2
         where user_id = #{userId,jdbcType=INTEGER} and TYPE =1
     </select>
 </mapper>
