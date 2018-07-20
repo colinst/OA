@@ -144,4 +144,10 @@ public class UserManagerController {
     public void setService(UserManagerService service) {
         this.service = service;
     }
+
+
+    /**
+     * http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.tar.gz
+     * http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.rpm
+     * */
 }
